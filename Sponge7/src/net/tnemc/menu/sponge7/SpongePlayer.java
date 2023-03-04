@@ -1,17 +1,21 @@
-package net.tnemc.menu.bukkit;
+package net.tnemc.menu.sponge7;
 
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
-import org.bukkit.OfflinePlayer;
+import org.spongepowered.api.entity.living.player.User;
+import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.text.Text;
 
 import java.util.UUID;
 
-public class BukkitPlayer implements MenuPlayer {
+public class SpongePlayer implements MenuPlayer {
 
-  private OfflinePlayer player;
+  final User user;
+  final Plugin plugin;//because sponge requires this for a lot of useless things.
 
-  public BukkitPlayer(OfflinePlayer player) {
-    this.player = player;
+  public SpongePlayer(User user, Plugin plugin) {
+    this.user = user;
+    this.plugin = plugin;
   }
 
   /**
@@ -21,7 +25,7 @@ public class BukkitPlayer implements MenuPlayer {
    */
   @Override
   public UUID identifier() {
-    return player.getUniqueId();
+    return user.getUniqueId();
   }
 
   /**
@@ -30,8 +34,8 @@ public class BukkitPlayer implements MenuPlayer {
    * @return The {@link PlayerInventory} for this player.
    */
   @Override
-  public BukkitInventory inventory() {
-    return new BukkitInventory(identifier());
+  public SpongeInventory inventory() {
+    return new SpongeInventory(user.getUniqueId(), plugin);
   }
 
   /**
@@ -43,10 +47,7 @@ public class BukkitPlayer implements MenuPlayer {
    */
   @Override
   public boolean hasPermission(String permission) {
-    if(player.getPlayer() != null) {
-      return player.getPlayer().hasPermission(permission);
-    }
-    return false;
+    return user.hasPermission(permission);
   }
 
   /**
@@ -56,8 +57,8 @@ public class BukkitPlayer implements MenuPlayer {
    */
   @Override
   public void message(String message) {
-    if(player.getPlayer() != null) {
-      player.getPlayer().sendMessage(message);
+    if(user.getPlayer().isPresent()) {
+      user.getPlayer().get().sendMessage(Text.of(message));
     }
   }
 }

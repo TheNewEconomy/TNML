@@ -1,22 +1,23 @@
-package net.tnemc.menu.bukkit;
+package net.tnemc.menu.sponge8;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import net.tnemc.menu.core.icon.Icon;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
-public class BukkitInventory implements PlayerInventory<Inventory> {
+public class SpongeInventory implements PlayerInventory<Inventory> {
 
   private final UUID id;
 
-  public BukkitInventory(UUID id) {
+  public SpongeInventory(UUID id) {
     this.id = id;
   }
 
@@ -40,11 +41,17 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public Inventory build(Menu menu, int page) {
-    Inventory inventory = Bukkit.createInventory(null, menu.getSize(), menu.getTitle());
+    Inventory inventory = Inventory.builder().slots(menu.getSize() * 9).build();
+
+    //TODO: inventory title? where did it go?
 
     for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons().entrySet()) {
 
-      inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
+      final int y = entry.getKey() / 9;
+      final int x = (entry.getKey() % 9);
+
+
+      //TODO: set item to slot sponge 8 nuked everything.
     }
 
     return inventory;
@@ -57,20 +64,27 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public void openInventory(Inventory inventory) {
-    final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
-    if(player.getPlayer() != null) {
-      player.getPlayer().openInventory(inventory);
-    }
+    final Optional<Player> player = Sponge.getServer().getPlayer(id);
+
+    player.ifPresent(value->value.openInventory(inventory));
   }
 
   /**
-   * Used to update the inventory the player is in with a new item for a specific slot.
+   * Used to update the menu the player is in with a new item for a specific slot.
    *
    * @param slot The slot to update.
    * @param item The item to update the specified slot with.
    */
   @Override
   public void updateInventory(int slot, AbstractItemStack<?> item) {
+    final Optional<Player> player = Sponge.getServer().getPlayer(id);
+    if(player.isPresent()) {
 
+      final int y = slot / 9;
+      final int x = (slot % 9);
+
+      player.get().getInventory().query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(x, y)))
+          .set((ItemStack)item.locale());
+    }
   }
 }

@@ -108,5 +108,5 @@ public interface PlayerInventory<INV> {
    * @param slot The slot to update.
    * @param item The item to update the specified slot with.
    */
-  void updateMenu(int slot, AbstractItemStack<?> item);
+  void updateInventory(int slot, AbstractItemStack<?> item);
 }

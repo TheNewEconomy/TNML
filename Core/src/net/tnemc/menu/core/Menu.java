@@ -65,7 +65,7 @@ public class Menu {
   }
 
   public void update(MenuPlayer player, int slot, AbstractItemStack<?> item) {
-    player.inventory().updateMenu(slot, item);
+    player.inventory().updateInventory(slot, item);
   }
 
   public boolean onClick(ActionType type, MenuPlayer provider, int page, int slot) {

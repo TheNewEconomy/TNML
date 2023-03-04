@@ -8,3 +8,5 @@
 /Sponge7/target
 /Sponge8/target
 *.iml
+/Core/dependency-reduced-pom.xml
+/Bukkit/dependency-reduced-pom.xml
