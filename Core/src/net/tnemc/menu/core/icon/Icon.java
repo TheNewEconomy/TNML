@@ -53,9 +53,6 @@ public class Icon implements ConstraintHolder {
   public Icon(int slot, AbstractItemStack<?> item) {
     this.slot = slot;
     this.item = item;
-
-    addConstraint(IconStringConstraints.ICON_MESSAGE, "");
-    addConstraint(IconStringConstraints.ICON_PERMISSION, "");
   }
 
   public int getSlot() {
@@ -94,6 +91,11 @@ public class Icon implements ConstraintHolder {
 
   public boolean onClick(ActionType type, MenuPlayer player, Menu menu, Page page) {
 
+    final String permission = getConstraint(IconStringConstraints.ICON_PERMISSION);
+    if(!permission.equalsIgnoreCase("") && !player.hasPermission(permission)) {
+      return true;
+    }
+
     for(IconAction action : actions) {
 
       if(action.type().equals(ActionType.ANY) || action.type().name().equalsIgnoreCase(type.name())) {
@@ -107,6 +109,11 @@ public class Icon implements ConstraintHolder {
 
     if(click != null) {
       click.accept(new IconClickCallback(type, menu, page, player, this));
+    }
+
+    final String message = getConstraint(IconStringConstraints.ICON_MESSAGE);
+    if(!message.equalsIgnoreCase("")) {
+      player.message(message);
     }
 
     return true;

@@ -29,6 +29,7 @@ public interface StringConstraint extends Constraint<String> {
 
   @Override
   default String convert(final String value) {
+    if(value == null) return defaultValue();
     return value;
   }
 

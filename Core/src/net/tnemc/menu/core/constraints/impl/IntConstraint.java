@@ -29,6 +29,7 @@ public interface IntConstraint extends Constraint<Integer> {
 
   @Override
   default Integer convert(final String value) {
+    if(value == null) return defaultValue();
     try {
       return Integer.parseInt(value);
     } catch(Exception ignore) {

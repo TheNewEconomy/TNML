@@ -29,6 +29,7 @@ public interface DoubleConstraint extends Constraint<Double> {
 
   @Override
   default Double convert(final String value) {
+    if(value == null) return defaultValue();
     try {
       return Double.parseDouble(value);
     } catch(Exception ignore) {

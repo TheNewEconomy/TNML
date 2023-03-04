@@ -29,6 +29,7 @@ public interface BoolConstraint extends Constraint<Boolean> {
 
   @Override
   default Boolean convert(final String value) {
+    if(value == null) return defaultValue();
     try {
       return Boolean.parseBoolean(value);
     } catch(Exception ignore) {
