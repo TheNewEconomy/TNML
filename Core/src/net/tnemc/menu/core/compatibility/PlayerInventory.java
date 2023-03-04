@@ -24,6 +24,9 @@ public interface PlayerInventory<INV> {
 
   /**
    * Builds an inventory object from a menu.
+   *
+   * @param menu The menu to build.
+   *
    * @return The built inventory.
    */
   default INV build(final Menu menu) {
@@ -32,17 +35,13 @@ public interface PlayerInventory<INV> {
 
   /**
    * Builds an inventory object from a menu.
+   *
+   * @param menu The menu to build.
+   * @param page The page to use during the build.
+   *
    * @return The built inventory.
    */
   INV build(final Menu menu, int page);
-
-  /**
-   * Used to get an inventory object.
-   *
-   * @param ender True if the ender chest object should be returned, otherwise false.
-   * @return The inventory object.
-   */
-  INV getInventory(boolean ender);
 
   /**
    * Used to open the provided inventory for this player.
