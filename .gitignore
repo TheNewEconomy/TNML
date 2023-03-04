@@ -1,0 +1,10 @@
+/Bukkit/target/
+/Bukkit/Bukkit.iml
+/target/
+/.idea/
+/Core/target/
+/Core/Core.iml
+/Core/TNIL-Core.iml
+/Sponge7/target
+/Sponge8/target
+*.iml

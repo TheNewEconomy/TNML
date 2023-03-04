@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.tnemc</groupId>
+    <artifactId>TNML</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>The New Menu Library</name>
+
+    <modules>
+
+        <module>Core</module>
+        <module>Bukkit</module>
+        <module>Sponge7</module>
+        <module>Sponge8</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
+        <maven.source.version>3.2.0</maven.source.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <organization>
+        <name>The New Economy</name>
+        <url>https://tnemc.net</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>creatorfromhell</id>
+            <name>Daniel "creatorfromhell" Vidmar</name>
+            <email>daniel.viddy@gmail.com</email>
+            <url>https://cfh.dev</url>
+            <organization>The New Economy</organization>
+            <organizationUrl>https://tnemc.net</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>America/New_York</timezone>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
