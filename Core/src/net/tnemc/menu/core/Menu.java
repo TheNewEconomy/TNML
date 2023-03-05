@@ -40,9 +40,7 @@ public class Menu {
   protected final ConcurrentSkipListMap<Integer, Page> pages = new ConcurrentSkipListMap<>();
 
   protected String name;
-
   protected String title;
-
   protected int size;
 
   protected boolean readOnly = true;

@@ -46,7 +46,6 @@ public class Icon implements ConstraintHolder {
   protected final List<IconAction> actions = new LinkedList<>();
 
   protected int slot;
-
   protected AbstractItemStack<?> item;
 
   //Callbacks

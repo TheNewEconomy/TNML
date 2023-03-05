@@ -19,7 +19,6 @@ public class IconBuilder {
   private final List<IconAction> actions = new LinkedList<>();
 
   private int slot;
-
   private AbstractItemStack<?> item;
 
   //Callbacks

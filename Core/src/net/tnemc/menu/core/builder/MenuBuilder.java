@@ -13,9 +13,7 @@ public class MenuBuilder {
   private final ConcurrentSkipListMap<Integer, Page> pages = new ConcurrentSkipListMap<>();
 
   private String name;
-
   private String title;
-
   private int size;
 
   //Callbacks

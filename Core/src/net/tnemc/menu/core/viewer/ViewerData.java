@@ -33,9 +33,7 @@ public class ViewerData {
   private final Map<String, Object> data = new HashMap<>();
 
   private UUID viewer;
-
   private String menu;
-
   private int page = 1;
 
   public ViewerData(UUID viewer, final String menu) {
