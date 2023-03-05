@@ -47,7 +47,8 @@ public class MenuManager {
     instance = this;
   }
 
-  public boolean onClick(final String menu, ActionType type, MenuPlayer player, int page, int slot) {
+  public boolean onClick(String menu, ActionType type, MenuPlayer player, int page, int slot) {
+
     if(!menus.containsKey(menu) || !inMenu(player.identifier())) {
       return false;
     }
