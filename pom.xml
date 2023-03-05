@@ -16,6 +16,7 @@
         <module>Bukkit</module>
         <module>Sponge7</module>
         <module>Sponge8</module>
+        <module>Minestom</module>
     </modules>
 
     <properties>
