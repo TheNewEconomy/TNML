@@ -30,8 +30,8 @@ import java.util.UUID;
 
 public class SpongePlayer implements MenuPlayer {
 
-  final User user;
-  final Plugin plugin;//because sponge requires this for a lot of useless things.
+  protected final User user;
+  protected final Plugin plugin;//because sponge requires this for a lot of useless things.
 
   public SpongePlayer(User user, Plugin plugin) {
     this.user = user;

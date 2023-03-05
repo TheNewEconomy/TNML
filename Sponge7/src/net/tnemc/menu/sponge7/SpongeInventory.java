@@ -41,8 +41,8 @@ import java.util.UUID;
 
 public class SpongeInventory implements PlayerInventory<Inventory> {
 
-  private final UUID id;
-  private final Plugin plugin;//because sponge requires this for a lot of useless things.
+  protected final UUID id;
+  protected final Plugin plugin;//because sponge requires this for a lot of useless things.
 
   public SpongeInventory(UUID id, Plugin plugin) {
     this.id = id;
