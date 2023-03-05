@@ -5,7 +5,8 @@
 
 A library used by The New Economy for custom inventory-based menus. The New Menu Library grants developers
 the ability to write their custom menus once, and run it across multiple Minecraft platforms. Check below for
-platform support.
+platform support. Please note this library depends on The New Item Library so verify that the platform is supported
+there too.
 
 ## Documentation
 
