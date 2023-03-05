@@ -59,7 +59,7 @@ Sponge API Version 7 Dependency:
 ```XML
 <dependency>
     <groupId>net.tnemc</groupId>
-    <artifactId>TNML-Sponge7</artifactId>
+    <artifactId>TNML-Sponge-API-7</artifactId>
     <version>1.0-SNAPSHOT</version>
     <scope>compile</scope>
 </dependency>
@@ -72,7 +72,7 @@ Sponge API Version 8+ Dependency:
 ```XML
 <dependency>
     <groupId>net.tnemc</groupId>
-    <artifactId>TNML-Sponge</artifactId>
+    <artifactId>TNML-Sponge-API-8</artifactId>
     <version>1.0-SNAPSHOT</version>
     <scope>compile</scope>
 </dependency>
