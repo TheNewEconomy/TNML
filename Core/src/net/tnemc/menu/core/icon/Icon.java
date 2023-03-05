@@ -24,7 +24,7 @@ import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.callbacks.icon.IconClickCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.constraints.ConstraintHolder;
-import net.tnemc.menu.core.constraints.impl.StringConstraint;
+import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -118,32 +118,5 @@ public class Icon implements ConstraintHolder {
     }
 
     return true;
-  }
-}
-
-enum IconStringConstraints implements StringConstraint {
-
-  ICON_PERMISSION {
-    @Override
-    public String identifier() {
-      return "ICON_PERMISSION";
-    }
-
-    @Override
-    public String defaultValue() {
-      return "";
-    }
-  },
-  ICON_MESSAGE {
-
-    @Override
-    public String identifier() {
-      return "ICON_MESSAGE";
-    }
-
-    @Override
-    public String defaultValue() {
-      return "";
-    }
   }
 }
