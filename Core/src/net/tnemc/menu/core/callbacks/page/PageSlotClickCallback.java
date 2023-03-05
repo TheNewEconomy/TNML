@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.callbacks.page;
+
 /*
  * The New Economy
  * Copyright (C) 2022 Daniel "creatorfromhell" Vidmar
@@ -33,9 +34,13 @@ import java.util.Optional;
 public class PageSlotClickCallback extends PageCallback {
 
   protected final Menu menu;
+
   protected final Page page;
+
   protected final MenuPlayer player;
+
   protected final ActionType type;
+
   protected final int slot;
 
   public PageSlotClickCallback(Menu menu, Page page, ActionType type, MenuPlayer player) {

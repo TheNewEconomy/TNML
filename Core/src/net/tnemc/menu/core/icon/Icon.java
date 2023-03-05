@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.icon;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -45,6 +46,7 @@ public class Icon implements ConstraintHolder {
   protected final List<IconAction> actions = new LinkedList<>();
 
   protected int slot;
+
   protected AbstractItemStack<?> item;
 
   //Callbacks

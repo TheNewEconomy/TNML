@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.callbacks.menu;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -30,6 +31,7 @@ import net.tnemc.menu.core.compatibility.MenuPlayer;
 public class MenuOpenCallback extends MenuCallback {
 
   protected final Page page;
+
   protected final MenuPlayer player;
 
   public MenuOpenCallback(Menu menu, Page page, MenuPlayer player) {

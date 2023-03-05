@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.constraints;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -29,11 +30,11 @@ public interface ConstraintHolder {
 
   Map<String, String> constraints();
 
-  default <TYPE> void addConstraint(Constraint<TYPE> constraint, TYPE value) {
+  default <T> void addConstraint(Constraint<T> constraint, T value) {
     constraints().put(constraint.identifier(), constraint.asString(value));
   }
 
-  default <TYPE> TYPE getConstraint(Constraint<TYPE> constraint) {
+  default <T> T getConstraint(Constraint<T> constraint) {
     return constraint.convert(constraints().get(constraint.identifier()));
   }
 

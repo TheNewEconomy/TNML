@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.callbacks.icon;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -32,9 +33,13 @@ import net.tnemc.menu.core.icon.Icon;
 public class IconClickCallback extends IconCallback {
 
   protected final ActionType type;
+
   protected final Menu menu;
+
   protected final Page page;
+
   protected final MenuPlayer player;
+
   protected final Icon icon;
 
   public IconClickCallback(ActionType type, Menu menu, Page page, MenuPlayer player, Icon icon) {

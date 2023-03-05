@@ -10,11 +10,11 @@ import java.util.UUID;
 /**
  * A class that acts as a bridge between various inventory objects on different server software providers.
  *
- * @param <INV> Represents the platform's Inventory object.
+ * @param <I> Represents the platform's Inventory object.
  * @author creatorfromhell
  * @since 1.0.0
  */
-public interface PlayerInventory<INV> {
+public interface PlayerInventory<I> {
 
   /**
    * The player associated with this inventory provider.
@@ -29,7 +29,7 @@ public interface PlayerInventory<INV> {
    *
    * @return The built inventory.
    */
-  default INV build(final Menu menu) {
+  default I build(final Menu menu) {
     return build(menu, 1);
   }
 
@@ -41,14 +41,14 @@ public interface PlayerInventory<INV> {
    *
    * @return The built inventory.
    */
-  INV build(final Menu menu, int page);
+  I build(final Menu menu, int page);
 
   /**
    * Used to open the provided inventory for this player.
    *
    * @param inventory The inventory to open.
    */
-  void openInventory(final INV inventory);
+  void openInventory(final I inventory);
 
   /**
    * Used to determine if this player is inside of a {@link Menu}

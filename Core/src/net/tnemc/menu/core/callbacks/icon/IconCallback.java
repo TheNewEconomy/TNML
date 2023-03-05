@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.callbacks.icon;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar

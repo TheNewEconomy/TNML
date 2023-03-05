@@ -1,4 +1,5 @@
 package net.tnemc.menu.core;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -39,23 +40,29 @@ public class Menu {
   protected final ConcurrentSkipListMap<Integer, Page> pages = new ConcurrentSkipListMap<>();
 
   protected String name;
+
   protected String title;
+
   protected int size;
+
   protected boolean readOnly = true;
 
   protected int page;
 
   //Callbacks
   protected Consumer<MenuOpenCallback> open;
+
   protected Consumer<MenuCloseCallback> close;
 
   public Menu(String name, String title, int size) {
     this.name = name;
     this.title = title;
-    if(size % 9 > 0) {
-      size = size + (size % 9);
+    
+    int workingSize = size;
+    if(workingSize % 9 > 0) {
+      workingSize = workingSize + (workingSize % 9);
     }
-    this.size = Math.min(size, 45);
+    this.size = Math.min(workingSize, 45);
 
     this.page = 1;
   }

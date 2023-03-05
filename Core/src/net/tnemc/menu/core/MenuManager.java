@@ -1,4 +1,5 @@
 package net.tnemc.menu.core;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -36,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MenuManager {
 
   private final Map<String, Menu> menus = new HashMap<>();
+
   private final ConcurrentHashMap<UUID, ViewerData> data = new ConcurrentHashMap<>();
 
   private static MenuManager instance;

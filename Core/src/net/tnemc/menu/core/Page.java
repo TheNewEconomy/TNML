@@ -1,4 +1,5 @@
 package net.tnemc.menu.core;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -55,11 +56,8 @@ public class Page {
       result = icons.get(slot).onClick(type, player, menu, this);
     }
 
-    if(result) {
-
-      if(click != null) {
-        click.accept(new PageSlotClickCallback(menu, this, type, player, slot));
-      }
+    if(result && click != null) {
+      click.accept(new PageSlotClickCallback(menu, this, type, player, slot));
     }
 
     return result;

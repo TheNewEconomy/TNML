@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.viewer;
+
 /*
  * The New Economy
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -30,7 +31,9 @@ import java.util.UUID;
 public class ViewerData {
 
   private final Map<String, Object> data = new HashMap<>();
+
   private UUID viewer;
+
   private String menu;
 
   private int page = 1;
