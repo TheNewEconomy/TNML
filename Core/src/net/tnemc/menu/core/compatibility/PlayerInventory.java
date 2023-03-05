@@ -95,11 +95,7 @@ public interface PlayerInventory<INV> {
 
     final Optional<Menu> menuObj = MenuManager.instance().getMenu(menu);
 
-    if(menuObj.isPresent()) {
-
-      openInventory(build(menuObj.get(), page));
-      MenuManager.instance().updateViewer(player(), menu, page);
-    }
+    menuObj.ifPresent(value->openMenu(value, page));
   }
 
   /**

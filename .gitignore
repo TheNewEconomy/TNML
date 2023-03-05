@@ -10,3 +10,5 @@
 *.iml
 /Core/dependency-reduced-pom.xml
 /Bukkit/dependency-reduced-pom.xml
+/Sponge7/dependency-reduced-pom.xml
+/Sponge8/dependency-reduced-pom.xml

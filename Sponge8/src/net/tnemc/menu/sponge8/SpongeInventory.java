@@ -1,13 +1,18 @@
 package net.tnemc.menu.sponge8;
 
+import net.kyori.adventure.text.Component;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import net.tnemc.menu.core.icon.Icon;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.server.ServerPlayer;
+import org.spongepowered.api.item.inventory.ContainerTypes;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.menu.InventoryMenu;
+import org.spongepowered.api.item.inventory.type.ViewableInventory;
 
 import java.util.Map;
 import java.util.Optional;
@@ -40,21 +45,43 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    * @return The built inventory.
    */
   @Override
-  public Inventory build(Menu menu, int page) {
-    Inventory inventory = Inventory.builder().slots(menu.getSize() * 9).build();
+  public ViewableInventory build(Menu menu, int page) {
+    ViewableInventory inventory = ViewableInventory.builder().type(ContainerTypes.GENERIC_9X6).completeStructure().build();
 
-    //TODO: inventory title? where did it go?
+    //TODO: convert container type.
 
     for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons().entrySet()) {
 
-      final int y = entry.getKey() / 9;
-      final int x = (entry.getKey() % 9);
-
-
-      //TODO: set item to slot sponge 8 nuked everything.
+      inventory.offer(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
     }
 
     return inventory;
+  }
+
+  /**
+   * Used to open the provided menu for this player on the specified page.
+   *
+   * @param menu The menu to open.
+   * @param page The page to open.
+   */
+  @Override
+  public void openMenu(Menu menu, int page) {
+
+    InventoryMenu invMenu = InventoryMenu.of(build(menu, page));
+    invMenu.setTitle(Component.text(menu.getTitle()));
+    //invMenu.registerClick();
+    //invMenu.registerClose();
+
+    final Optional<ServerPlayer> player = Sponge.server().player(id);
+    if(player.isPresent()) {
+      invMenu.open(player.get());
+    }
+
+
+    openInventory(build(menu, page));
+
+
+    MenuManager.instance().updateViewer(player(), menu.getName(), page);
   }
 
   /**
@@ -64,7 +91,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public void openInventory(Inventory inventory) {
-    final Optional<Player> player = Sponge.getServer().getPlayer(id);
+    final Optional<ServerPlayer> player = Sponge.server().player(id);
 
     player.ifPresent(value->value.openInventory(inventory));
   }
@@ -77,14 +104,8 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public void updateInventory(int slot, AbstractItemStack<?> item) {
-    final Optional<Player> player = Sponge.getServer().getPlayer(id);
-    if(player.isPresent()) {
+    final Optional<ServerPlayer> player = Sponge.server().player(id);
 
-      final int y = slot / 9;
-      final int x = (slot % 9);
-
-      player.get().getInventory().query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(x, y)))
-          .set((ItemStack)item.locale());
-    }
+    player.ifPresent(serverPlayer->serverPlayer.inventory().offer(slot, (ItemStack)item.locale()));
   }
 }
