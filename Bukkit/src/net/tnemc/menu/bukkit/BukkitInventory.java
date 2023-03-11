@@ -22,6 +22,7 @@ package net.tnemc.menu.bukkit;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import net.tnemc.menu.core.icon.Icon;
 import org.bukkit.Bukkit;
@@ -59,10 +60,10 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
    * @return The built inventory.
    */
   @Override
-  public Inventory build(Menu menu, int page) {
+  public Inventory build(final MenuPlayer player, Menu menu, int page) {
     Inventory inventory = Bukkit.createInventory(null, menu.getSize(), menu.getTitle());
 
-    for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons().entrySet()) {
+    for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
 
       inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
     }

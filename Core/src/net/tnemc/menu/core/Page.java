@@ -25,6 +25,8 @@ import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
@@ -37,7 +39,7 @@ import java.util.function.Consumer;
  */
 public class Page {
 
-  protected final ConcurrentHashMap<Integer, Icon> icons = new ConcurrentHashMap<>();
+  protected final Map<Integer, Icon> icons = new HashMap<>();
 
   protected Consumer<PageSlotClickCallback> click;
 
@@ -47,7 +49,11 @@ public class Page {
     this.id = id;
   }
 
-  public ConcurrentHashMap<Integer, Icon> getIcons() {
+  public Map<Integer, Icon> getIcons() {
+    return icons;
+  }
+
+  public Map<Integer, Icon> getIcons(final MenuPlayer player) {
     return icons;
   }
 

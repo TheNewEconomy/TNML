@@ -68,7 +68,7 @@ public class Menu {
   }
 
   public void build(MenuPlayer player) {
-    player.inventory().openMenu(this);
+    player.inventory().openMenu(player, this);
   }
 
   public void update(MenuPlayer player, int slot, AbstractItemStack<?> item) {

@@ -73,6 +73,6 @@ public class SwitchPageAction implements IconAction {
    */
   @Override
   public void onPerform(Menu menu, Page page, MenuPlayer player, Icon icon) {
-    player.inventory().openMenu(menu, this.page);
+    player.inventory().openMenu(player, menu, this.page);
   }
 }

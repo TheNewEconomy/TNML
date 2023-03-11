@@ -49,8 +49,8 @@ public interface PlayerInventory<I> {
    *
    * @return The built inventory.
    */
-  default I build(final Menu menu) {
-    return build(menu, 1);
+  default I build(final MenuPlayer player, final Menu menu) {
+    return build(player, menu, 1);
   }
 
   /**
@@ -61,7 +61,7 @@ public interface PlayerInventory<I> {
    *
    * @return The built inventory.
    */
-  I build(final Menu menu, int page);
+  I build(final MenuPlayer player, final Menu menu, int page);
 
   /**
    * Used to open the provided inventory for this player.
@@ -83,8 +83,8 @@ public interface PlayerInventory<I> {
    * Used to open the provided menu for this player.
    * @param menu The menu to open.
    */
-  default void openMenu(final Menu menu) {
-    openMenu(menu, 1);
+  default void openMenu(final MenuPlayer player, final Menu menu) {
+    openMenu(player, menu, 1);
   }
 
   /**
@@ -92,9 +92,9 @@ public interface PlayerInventory<I> {
    * @param menu The menu to open.
    * @param page The page to open.
    */
-  default void openMenu(final Menu menu, final int page) {
+  default void openMenu(final MenuPlayer player, final Menu menu, final int page) {
 
-    openInventory(build(menu, page));
+    openInventory(build(player, menu, page));
     MenuManager.instance().updateViewer(player(), menu.getName(), page);
   }
 
@@ -102,8 +102,8 @@ public interface PlayerInventory<I> {
    * Used to open the provided menu for this player.
    * @param menu The menu to open.
    */
-  default void openMenu(final String menu) {
-    openMenu(menu, 1);
+  default void openMenu(final MenuPlayer player, final String menu) {
+    openMenu(player, menu, 1);
   }
 
   /**
@@ -111,11 +111,11 @@ public interface PlayerInventory<I> {
    * @param menu The menu to open.
    * @param page The page to open.
    */
-  default void openMenu(final String menu, final int page) {
+  default void openMenu(final MenuPlayer player, final String menu, final int page) {
 
     final Optional<Menu> menuObj = MenuManager.instance().getMenu(menu);
 
-    menuObj.ifPresent(value->openMenu(value, page));
+    menuObj.ifPresent(value->openMenu(player, value, page));
   }
 
   /**
