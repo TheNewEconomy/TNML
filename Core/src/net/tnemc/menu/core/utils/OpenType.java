@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.callbacks.page;
+package net.tnemc.menu.core.utils;
 
 /*
  * The New Menu Library
@@ -20,34 +20,19 @@ package net.tnemc.menu.core.callbacks.page;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.Page;
-import net.tnemc.menu.core.compatibility.MenuPlayer;
-import net.tnemc.menu.core.utils.CloseType;
 
 /**
- * Represents a callback, which is called when a page is closed in a menu. This could be due to a
- * switch, or due to the menu closing.
+ * Represents the various close types for a {@link Menu}, or {@link Page}.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class PageCloseCallback extends PageCallback {
+public enum OpenType {
+  OPEN,
 
-  protected final MenuPlayer player;
+  MENU_SWITCH,
 
-  protected final CloseType type;
-
-  public PageCloseCallback(Page page, MenuPlayer player, CloseType type) {
-    super(page);
-    this.player = player;
-    this.type = type;
-  }
-
-  public MenuPlayer getPlayer() {
-    return player;
-  }
-
-  public CloseType getType() {
-    return type;
-  }
+  PAGE_SWITCH
 }

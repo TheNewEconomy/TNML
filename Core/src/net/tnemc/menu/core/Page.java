@@ -20,14 +20,15 @@ package net.tnemc.menu.core;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.callbacks.page.PageCloseCallback;
 import net.tnemc.menu.core.callbacks.page.PageSlotClickCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.utils.CloseType;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 /**
@@ -42,6 +43,8 @@ public class Page {
   protected final Map<Integer, Icon> icons = new HashMap<>();
 
   protected Consumer<PageSlotClickCallback> click;
+
+  protected Consumer<PageCloseCallback> close;
 
   private int id;
 
@@ -71,6 +74,20 @@ public class Page {
     return result;
   }
 
+  public void onClose(MenuPlayer player, CloseType type) {
+
+    if(close != null) {
+      close.accept(new PageCloseCallback(this, player, type));
+    }
+  }
+
+  public void onOpen(MenuPlayer player, CloseType type) {
+
+    if(close != null) {
+      close.accept(new PageCloseCallback(this, player, type));
+    }
+  }
+
   public int getId() {
     return id;
   }
@@ -85,5 +102,13 @@ public class Page {
 
   public void setClick(Consumer<PageSlotClickCallback> click) {
     this.click = click;
+  }
+
+  public Consumer<PageCloseCallback> getClose() {
+    return close;
+  }
+
+  public void setClose(Consumer<PageCloseCallback> close) {
+    this.close = close;
   }
 }

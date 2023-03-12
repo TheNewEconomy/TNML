@@ -1,4 +1,4 @@
-package net.tnemc.menu.bukkit;
+package net.tnemc.menu.minestom.consumers;
 
 /*
  * The New Menu Library
@@ -20,31 +20,32 @@ package net.tnemc.menu.bukkit;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.minestom.server.event.inventory.InventoryPreClickEvent;
+import net.minestom.server.inventory.click.ClickType;
 import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.compatibility.InventoryClickHandler;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.viewer.ViewerData;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import net.tnemc.menu.minestom.MinestomPlayer;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
-public class BukkitInventoryClickListener implements Listener {
+public class MinestomClickConsumer implements Consumer<InventoryPreClickEvent> {
 
-  @EventHandler(priority = EventPriority.HIGHEST)
-  public void onClick(final InventoryClickEvent event) {
-    final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getWhoClicked());
+  /**
+   * Performs this operation on the given argument.
+   *
+   * @param event the input argument
+   */
+  @Override
+  public void accept(InventoryPreClickEvent event) {
+    final MinestomPlayer player = new MinestomPlayer(event.getPlayer());
 
     final Optional<ViewerData> data = MenuManager.instance().getViewer(player.identifier());
     if(player.inventory().inMenu() && data.isPresent()) {
-
-      final boolean cancel = new InventoryClickHandler().handle(convertClick(event.getClick()),
-                                                                player, event.getSlot()
-      );
+      final boolean cancel = new InventoryClickHandler().handle(convertClick(event.getClickType()),
+                                                                player, event.getSlot());
 
       if(cancel) {
         event.setCancelled(true);
@@ -54,15 +55,11 @@ public class BukkitInventoryClickListener implements Listener {
 
   private ActionType convertClick(ClickType click) {
     return switch(click) {
-      case SHIFT_LEFT -> ActionType.LEFT_SHIFT;
-      case RIGHT -> ActionType.RIGHT_CLICK;
-      case SHIFT_RIGHT -> ActionType.RIGHT_SHIFT;
-      case MIDDLE -> ActionType.SCROLL_CLICK;
+      case SHIFT_CLICK -> ActionType.LEFT_SHIFT;
+      case RIGHT_CLICK -> ActionType.RIGHT_CLICK;
       case DOUBLE_CLICK -> ActionType.DOUBLE_CLICK;
       case DROP -> ActionType.DROP;
-      case CONTROL_DROP -> ActionType.DROP_CTRL;
-      case SWAP_OFFHAND -> ActionType.OFFHAND_SWAP;
-      case NUMBER_KEY -> ActionType.NUMBER;
+      case CHANGE_HELD -> ActionType.OFFHAND_SWAP;
       default -> ActionType.LEFT_CLICK;
     };
   }

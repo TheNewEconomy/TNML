@@ -22,6 +22,7 @@ package net.tnemc.menu.core;
 
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
+import net.tnemc.menu.core.utils.CloseType;
 import net.tnemc.menu.core.viewer.ViewerData;
 
 import java.util.HashMap;
@@ -56,6 +57,17 @@ public class MenuManager {
     }
 
     return menus.get(menu).onClick(type, player, page, slot);
+  }
+
+  public void onClose(String menu, MenuPlayer player, int page, CloseType type) {
+
+    if(!menus.containsKey(menu) || !inMenu(player.identifier())) {
+      return;
+    }
+
+    menus.get(menu).onClose(player, page, type);
+
+    removeViewer(player.identifier());
   }
 
   public void addMenu(final Menu menu) {

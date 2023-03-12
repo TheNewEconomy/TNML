@@ -25,6 +25,7 @@ import net.tnemc.menu.core.callbacks.menu.MenuCloseCallback;
 import net.tnemc.menu.core.callbacks.menu.MenuOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
+import net.tnemc.menu.core.utils.CloseType;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -75,11 +76,21 @@ public class Menu {
     player.inventory().updateInventory(slot, item);
   }
 
-  public boolean onClick(ActionType type, MenuPlayer provider, int page, int slot) {
+  public boolean onClick(ActionType type, MenuPlayer player, int page, int slot) {
     if(pages.containsKey(page)) {
-      return pages.get(page).onClick(type, provider, this, slot);
+      return pages.get(page).onClick(type, player, this, slot);
     }
     return false;
+  }
+
+  public void onClose(MenuPlayer player, int page, CloseType type) {
+    if(pages.containsKey(page)) {
+      pages.get(page).onClose(player, type);
+    }
+
+    if(close != null) {
+      close.accept(new MenuCloseCallback(this, pages.get(page), player, type));
+    }
   }
 
   public Map<Integer, Page> getPages() {

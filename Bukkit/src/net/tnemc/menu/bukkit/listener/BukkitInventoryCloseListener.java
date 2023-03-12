@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.callbacks.page;
+package net.tnemc.menu.bukkit.listener;
 
 /*
  * The New Menu Library
@@ -20,34 +20,28 @@ package net.tnemc.menu.core.callbacks.page;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.Page;
-import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.bukkit.BukkitPlayer;
+import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.utils.CloseType;
+import net.tnemc.menu.core.viewer.ViewerData;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 
-/**
- * Represents a callback, which is called when a page is closed in a menu. This could be due to a
- * switch, or due to the menu closing.
- *
- * @author creatorfromhell
- * @since 1.0.0.0
- */
-public class PageCloseCallback extends PageCallback {
+import java.util.Optional;
 
-  protected final MenuPlayer player;
+public class BukkitInventoryCloseListener implements Listener {
 
-  protected final CloseType type;
+  @EventHandler(priority = EventPriority.HIGHEST)
+  public void onClick(final InventoryCloseEvent event) {
+    final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer());
 
-  public PageCloseCallback(Page page, MenuPlayer player, CloseType type) {
-    super(page);
-    this.player = player;
-    this.type = type;
-  }
+    final Optional<ViewerData> data = MenuManager.instance().getViewer(player.identifier());
+    if(data.isPresent()) {
 
-  public MenuPlayer getPlayer() {
-    return player;
-  }
-
-  public CloseType getType() {
-    return type;
+      MenuManager.instance().onClose(data.get().getMenu(), player, data.get().getPage(), CloseType.CLOSE);
+    }
   }
 }

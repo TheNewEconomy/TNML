@@ -1,4 +1,4 @@
-package net.tnemc.menu.sponge7;
+package net.tnemc.menu.sponge7.listeners;
 
 /*
  * The New Menu Library
@@ -24,6 +24,7 @@ import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.compatibility.InventoryClickHandler;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.viewer.ViewerData;
+import net.tnemc.menu.sponge7.SpongePlayer;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.filter.cause.First;

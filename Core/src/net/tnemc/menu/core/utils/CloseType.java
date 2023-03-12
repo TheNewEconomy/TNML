@@ -21,16 +21,22 @@ package net.tnemc.menu.core.utils;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
 
 /**
- * Represents the various close types for a {@link Menu}.
+ * Represents the various close types for a {@link Menu}, or {@link Page}.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
 public enum CloseType {
   CLOSE,
+
   //If a menu needs to be temporarily closed. This doesn't remove the player from being a viewer. This
   //could be for something such as requiring a text chat.
-  TEMPORARY
+  TEMPORARY,
+
+  MENU_SWITCH,
+
+  PAGE_SWITCH
 }
