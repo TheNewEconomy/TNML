@@ -41,6 +41,17 @@ public class DataAction implements IconAction {
 
   protected final Map<String, Object> data = new ConcurrentHashMap<>();
 
+  public DataAction() {
+  }
+
+  public DataAction(final String key, final Object data) {
+    this.data.put(key, data);
+  }
+
+  public DataAction(Map<String, Object> data) {
+    this.data.putAll(data);
+  }
+
   /**
    * The action type that belongs to this icon action.
    *
@@ -72,5 +83,9 @@ public class DataAction implements IconAction {
   @Override
   public void onPerform(Menu menu, Page page, MenuPlayer player, Icon icon) {
     MenuManager.instance().appendViewerData(player.identifier(), data);
+  }
+
+  public Map<String, Object> getData() {
+    return data;
   }
 }
