@@ -20,7 +20,7 @@ package net.tnemc.menu.core.callbacks.page;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 
 /**

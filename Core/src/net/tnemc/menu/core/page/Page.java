@@ -1,4 +1,4 @@
-package net.tnemc.menu.core;
+package net.tnemc.menu.core.page;
 
 /*
  * The New Menu Library
@@ -20,6 +20,7 @@ package net.tnemc.menu.core;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.callbacks.page.PageCloseCallback;
 import net.tnemc.menu.core.callbacks.page.PageSlotClickCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;

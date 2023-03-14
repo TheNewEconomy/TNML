@@ -21,7 +21,7 @@ package net.tnemc.menu.core.utils;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.page.Page;
 
 /**
  * Represents the various close types for a {@link Menu}, or {@link Page}.

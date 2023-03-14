@@ -25,6 +25,7 @@ import net.tnemc.menu.core.callbacks.menu.MenuCloseCallback;
 import net.tnemc.menu.core.callbacks.menu.MenuOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
+import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.utils.CloseType;
 
 import java.util.Map;

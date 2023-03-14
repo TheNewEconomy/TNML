@@ -22,7 +22,7 @@ package net.tnemc.menu.core.icon.action;
 
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;

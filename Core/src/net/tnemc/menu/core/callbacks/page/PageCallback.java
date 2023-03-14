@@ -20,10 +20,10 @@ package net.tnemc.menu.core.callbacks.page;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.page.Page;
 
 /**
- * Represents a callback, which is related to a {@link net.tnemc.menu.core.Page}.
+ * Represents a callback, which is related to a {@link Page}.
  *
  * @author creatorfromhell
  * @since 1.0.0.0

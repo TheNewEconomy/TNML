@@ -52,22 +52,18 @@ public class MenuManager {
 
   public boolean onClick(String menu, ActionType type, MenuPlayer player, int page, int slot) {
 
-    if(!menus.containsKey(menu) || !inMenu(player.identifier())) {
-      return false;
+    if(!menus.containsKey(menu) || !data.containsKey(player.identifier())) {
+      return menus.get(menu).onClick(type, player, page, slot);
     }
 
-    return menus.get(menu).onClick(type, player, page, slot);
+    return false;
   }
 
   public void onClose(String menu, MenuPlayer player, int page, CloseType type) {
 
-    if(!menus.containsKey(menu) || !inMenu(player.identifier())) {
-      return;
+    if(menus.containsKey(menu) && data.containsKey(player.identifier())) {
+      menus.get(menu).onClose(player, page, type);
     }
-
-    menus.get(menu).onClose(player, page, type);
-
-    removeViewer(player.identifier());
   }
 
   public void addMenu(final Menu menu) {

@@ -43,5 +43,8 @@ public class BukkitInventoryCloseListener implements Listener {
 
       MenuManager.instance().onClose(data.get().getMenu(), player, data.get().getPage(), CloseType.CLOSE);
     }
+
+
+    MenuManager.instance().removeViewer(player.identifier());
   }
 }

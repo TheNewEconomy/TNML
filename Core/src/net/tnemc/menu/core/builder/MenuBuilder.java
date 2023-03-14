@@ -21,7 +21,7 @@ package net.tnemc.menu.core.builder;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.callbacks.menu.MenuCloseCallback;
 import net.tnemc.menu.core.callbacks.menu.MenuOpenCallback;
 
