@@ -21,10 +21,10 @@ package net.tnemc.menu.core.callbacks.icon;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.page.Page;
 
 /**
  * Represents a callback, which is called when an {@link Icon} is clicked.

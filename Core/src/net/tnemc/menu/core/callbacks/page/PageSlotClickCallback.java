@@ -21,9 +21,9 @@ package net.tnemc.menu.core.callbacks.page;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
+import net.tnemc.menu.core.page.Page;
 
 import java.util.Optional;
 

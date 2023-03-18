@@ -23,28 +23,21 @@ package net.tnemc.menu.bukkit.listener;
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.utils.CloseType;
-import net.tnemc.menu.core.viewer.ViewerData;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
-import java.util.Optional;
-
 public class BukkitInventoryCloseListener implements Listener {
 
   @EventHandler(priority = EventPriority.HIGHEST)
-  public void onClick(final InventoryCloseEvent event) {
+  public void onClose(final InventoryCloseEvent event) {
+
     final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer());
+    if(MenuManager.instance().inMenu(player.identifier())) {
 
-    final Optional<ViewerData> data = MenuManager.instance().getViewer(player.identifier());
-    if(data.isPresent()) {
-
-      MenuManager.instance().onClose(data.get().getMenu(), player, data.get().getPage(), CloseType.CLOSE);
+      MenuManager.instance().onClose(player, CloseType.CLOSE);
     }
-
-
-    MenuManager.instance().removeViewer(player.identifier());
   }
 }

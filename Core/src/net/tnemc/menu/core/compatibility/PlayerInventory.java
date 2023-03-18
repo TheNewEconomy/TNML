@@ -81,6 +81,7 @@ public interface PlayerInventory<I> {
 
   /**
    * Used to open the provided menu for this player.
+   * @param player The menu player.
    * @param menu The menu to open.
    */
   default void openMenu(final MenuPlayer player, final Menu menu) {
@@ -89,6 +90,7 @@ public interface PlayerInventory<I> {
 
   /**
    * Used to open the provided menu for this player on the specified page.
+   * @param player The menu player.
    * @param menu The menu to open.
    * @param page The page to open.
    */
@@ -100,6 +102,7 @@ public interface PlayerInventory<I> {
 
   /**
    * Used to open the provided menu for this player.
+   * @param player The menu player.
    * @param menu The menu to open.
    */
   default void openMenu(final MenuPlayer player, final String menu) {
@@ -108,6 +111,7 @@ public interface PlayerInventory<I> {
 
   /**
    * Used to open the provided menu for this player on the specified page.
+   * @param player The menu player.
    * @param menu The menu to open.
    * @param page The page to open.
    */
@@ -116,6 +120,17 @@ public interface PlayerInventory<I> {
     final Optional<Menu> menuObj = MenuManager.instance().getMenu(menu);
 
     menuObj.ifPresent(value->openMenu(player, value, page));
+  }
+
+  /**
+   * Used to resume a player back into a menu after a temporary pause.
+   *
+   * @param player The menu player.
+   * @param menu The menu to open.
+   * @param page The page to open.
+   */
+  default void resume(final MenuPlayer player, final String menu, final int page) {
+
   }
 
   /**

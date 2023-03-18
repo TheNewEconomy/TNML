@@ -20,8 +20,8 @@ package net.tnemc.menu.core.callbacks.page;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.page.Page;
 
 /**
  * Represents a callback, which is called when a page is opened in a menu. This could be due to a

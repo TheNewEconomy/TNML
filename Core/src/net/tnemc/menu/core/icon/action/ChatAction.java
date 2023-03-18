@@ -21,30 +21,35 @@ package net.tnemc.menu.core.icon.action;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.MenuManager;
+import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.IconAction;
 import net.tnemc.menu.core.page.Page;
 
+import java.util.function.Predicate;
+
 /**
- * SwitchMenuAction is used to switch to a new menu on click.
+ * DataAction represents an {@link IconAction}, which is used to get feedback from the player, through
+ * chat.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class SwitchMenuAction extends IconAction {
+public class ChatAction extends IconAction {
 
-  private final String menu;
+  private final Predicate<PlayerChatCallback> chatCallback;
 
-  public SwitchMenuAction(String menu) {
+  public ChatAction(Predicate<PlayerChatCallback> chatCallback) {
     super(ActionType.ANY);
-    this.menu = menu;
+    this.chatCallback = chatCallback;
   }
 
-  public SwitchMenuAction(String menu, ActionType type) {
+  public ChatAction(Predicate<PlayerChatCallback> chatCallback, final ActionType type) {
     super(type);
-    this.menu = menu;
+    this.chatCallback = chatCallback;
   }
 
   /**
@@ -67,6 +72,6 @@ public class SwitchMenuAction extends IconAction {
    */
   @Override
   public void onPerform(Menu menu, Page page, MenuPlayer player, Icon icon) {
-    player.inventory().openMenu(player, this.menu);
+    MenuManager.instance().pauseViewer(player.identifier(), chatCallback);
   }
 }

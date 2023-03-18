@@ -20,9 +20,12 @@ package net.tnemc.menu.core.viewer;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 /**
  * Represents data that belongs to a user that is interacting with a menu.
@@ -37,6 +40,10 @@ public class ViewerData {
   private UUID viewer;
   private String menu;
   private int page = 1;
+
+  private boolean paused = false;
+
+  private Predicate<PlayerChatCallback> chatCallback;
 
   public ViewerData(UUID viewer, final String menu) {
     this.viewer = viewer;
@@ -79,6 +86,26 @@ public class ViewerData {
 
   public void setPage(int page) {
     this.page = page;
+  }
+
+  public boolean awaitingChat() {
+    return chatCallback != null;
+  }
+
+  public boolean isPaused() {
+    return paused;
+  }
+
+  public void setPaused(boolean paused) {
+    this.paused = paused;
+  }
+
+  public Predicate<PlayerChatCallback> getChatCallback() {
+    return chatCallback;
+  }
+
+  public void setChatCallback(Predicate<PlayerChatCallback> chatCallback) {
+    this.chatCallback = chatCallback;
   }
 
   public Object getValue(String identifier) {

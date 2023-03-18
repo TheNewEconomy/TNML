@@ -20,9 +20,9 @@ package net.tnemc.menu.core.builder;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.callbacks.page.PageSlotClickCallback;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.page.Page;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;

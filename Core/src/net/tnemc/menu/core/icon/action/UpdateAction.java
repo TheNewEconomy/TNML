@@ -21,28 +21,26 @@ package net.tnemc.menu.core.icon.action;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.IconAction;
+import net.tnemc.menu.core.page.Page;
 
 /**
- * UpdateAction
+ * UpdateAction is used to update a menu after an icon click.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class UpdateAction implements IconAction {
+public class UpdateAction extends IconAction {
 
-  /**
-   * The action type that belongs to this icon action.
-   *
-   * @return The {@link ActionType} for when this action should happen.
-   */
-  @Override
-  public ActionType type() {
-    return ActionType.ANY;
+  public UpdateAction() {
+    super(ActionType.ANY);
+  }
+
+  public UpdateAction(ActionType type) {
+    super(type);
   }
 
   /**

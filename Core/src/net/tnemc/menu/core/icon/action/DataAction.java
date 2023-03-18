@@ -22,44 +22,48 @@ package net.tnemc.menu.core.icon.action;
 
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.IconAction;
+import net.tnemc.menu.core.page.Page;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * DataAction
+ * DataAction represents an {@link IconAction}, which is used to log specific data to a player's
+ * {@link net.tnemc.menu.core.viewer.ViewerData} file.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class DataAction implements IconAction {
+public class DataAction extends IconAction {
 
   protected final Map<String, Object> data = new ConcurrentHashMap<>();
 
   public DataAction() {
+    super(ActionType.ANY);
   }
 
   public DataAction(final String key, final Object data) {
+    super(ActionType.ANY);
     this.data.put(key, data);
   }
 
   public DataAction(Map<String, Object> data) {
+    super(ActionType.ANY);
     this.data.putAll(data);
   }
 
-  /**
-   * The action type that belongs to this icon action.
-   *
-   * @return The {@link ActionType} for when this action should happen.
-   */
-  @Override
-  public ActionType type() {
-    return ActionType.ANY;
+  public DataAction(final String key, final Object data, final ActionType type) {
+    super(type);
+    this.data.put(key, data);
+  }
+
+  public DataAction(Map<String, Object> data, final ActionType type) {
+    super(type);
+    this.data.putAll(data);
   }
 
   /**

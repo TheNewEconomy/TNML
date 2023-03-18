@@ -20,6 +20,7 @@ package net.tnemc.menu.core;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.utils.CloseType;
@@ -30,6 +31,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Predicate;
 
 /**
  * MenuManager
@@ -52,17 +54,34 @@ public class MenuManager {
 
   public boolean onClick(String menu, ActionType type, MenuPlayer player, int page, int slot) {
 
-    if(!menus.containsKey(menu) || !data.containsKey(player.identifier())) {
+    if(menus.containsKey(menu) && data.containsKey(player.identifier())) {
       return menus.get(menu).onClick(type, player, page, slot);
     }
 
     return false;
   }
 
+  public void onClose(MenuPlayer player, CloseType type) {
+
+    final Optional<ViewerData> viewer = Optional.ofNullable(data.get(player.identifier()));
+
+    if(viewer.isPresent() && menus.containsKey(viewer.get().getMenu())) {
+
+      if(!data.get(player.identifier()).isPaused() && !type.equals(CloseType.TEMPORARY)) {
+        menus.get(viewer.get().getMenu()).onClose(player, viewer.get().getPage(), type);
+      }
+
+      data.remove(player.identifier());
+    }
+  }
+
   public void onClose(String menu, MenuPlayer player, int page, CloseType type) {
 
     if(menus.containsKey(menu) && data.containsKey(player.identifier())) {
-      menus.get(menu).onClose(player, page, type);
+
+      if(!data.get(player.identifier()).isPaused() && !type.equals(CloseType.TEMPORARY)) {
+        menus.get(menu).onClose(player, page, type);
+      }
     }
   }
 
@@ -78,8 +97,40 @@ public class MenuManager {
     return data.containsKey(id);
   }
 
+  public void pauseViewer(final UUID id, Predicate<PlayerChatCallback> chatCallback) {
+    if(data.containsKey(id)) {
+
+      ViewerData viewer = data.get(id);
+
+      viewer.setPaused(true);
+      viewer.setChatCallback(chatCallback);
+
+      data.put(id, viewer);
+    }
+  }
+
+  public void resumeViewer(final UUID id) {
+    if(data.containsKey(id)) {
+
+      ViewerData viewer = data.get(id);
+
+      if(viewer.isPaused()) {
+        viewer.setPaused(false);
+        viewer.setChatCallback(null);
+
+        data.put(id, viewer);
+      }
+    }
+  }
+
   public void updateViewer(final UUID id, final String menu, final int page) {
     ViewerData viewer = data.getOrDefault(id, new ViewerData(id, menu));
+
+    if(viewer.isPaused()) {
+      viewer.setPaused(false);
+      return;
+    }
+
     viewer.setMenu(menu);
     viewer.setPage(page);
 

@@ -22,11 +22,11 @@ package net.tnemc.menu.core.icon;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.callbacks.icon.IconClickCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.constraints.ConstraintHolder;
 import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
+import net.tnemc.menu.core.page.Page;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -101,7 +101,7 @@ public class Icon implements ConstraintHolder {
 
     for(IconAction action : actions) {
 
-      if(action.type().equals(ActionType.ANY) || action.type().name().equalsIgnoreCase(type.name())) {
+      if(action.type().equals(ActionType.ANY) || action.type().equals(type)) {
         action.onPerform(menu, page, player, this);
 
         if(!action.continueOther()) {

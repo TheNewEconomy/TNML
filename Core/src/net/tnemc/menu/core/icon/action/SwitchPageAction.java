@@ -21,36 +21,30 @@ package net.tnemc.menu.core.icon.action;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.IconAction;
+import net.tnemc.menu.core.page.Page;
 
 /**
- * SwitchPageAction
+ * SwitchPageAction is used to switch pages to a different menu page.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class SwitchPageAction implements IconAction {
+public class SwitchPageAction extends IconAction {
 
   private final int page;
-  private final ActionType type;
 
-  public SwitchPageAction(Integer page, ActionType type) {
+  public SwitchPageAction(Integer page) {
+    super(ActionType.ANY);
     this.page = page;
-    this.type = type;
   }
 
-  /**
-   * The action type that belongs to this icon action.
-   *
-   * @return The {@link ActionType} for when this action should happen.
-   */
-  @Override
-  public ActionType type() {
-    return type;
+  public SwitchPageAction(Integer page, ActionType type) {
+    super(type);
+    this.page = page;
   }
 
   /**

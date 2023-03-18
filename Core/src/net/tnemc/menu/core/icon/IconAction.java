@@ -21,8 +21,8 @@ package net.tnemc.menu.core.icon;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.page.Page;
 
 /**
  * Represents an action that is performed on an action.
@@ -30,19 +30,27 @@ import net.tnemc.menu.core.compatibility.MenuPlayer;
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public interface IconAction {
+public abstract class IconAction {
+
+  protected final ActionType type;
+
+  public IconAction(ActionType type) {
+    this.type = type;
+  }
 
   /**
    * The action type that belongs to this icon action.
    * @return The {@link ActionType} for when this action should happen.
    */
-  ActionType type();
+  public ActionType type() {
+    return type;
+  }
 
   /**
    * Determines if any other icon actions should be performed after this action is performed.
    * @return True if other actions should be performed, otherwise false.
    */
-  boolean continueOther();
+  public abstract boolean continueOther();
 
   /**
    * This method is called when the action happens.
@@ -52,5 +60,5 @@ public interface IconAction {
    * @param player The player that performed the action.
    * @param icon   The icon clicked in the action.
    */
-  void onPerform(Menu menu, Page page, MenuPlayer player, final Icon icon);
+  public abstract void onPerform(Menu menu, Page page, MenuPlayer player, final Icon icon);
 }
