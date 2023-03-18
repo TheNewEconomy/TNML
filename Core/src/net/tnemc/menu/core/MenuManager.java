@@ -160,6 +160,13 @@ public class MenuManager {
     data.get(viewer).getData().putAll(toAppend);
   }
 
+  public void appendViewerData(UUID viewer, final String identifier, final Object value) {
+
+    if(data.containsKey(viewer)) {
+      data.get(viewer).getData().put(identifier, value);
+    }
+  }
+
   public void setViewerData(UUID viewer, final String menu, String identifier, Object value) {
     if(!data.containsKey(viewer)) {
       data.put(viewer, new ViewerData(viewer, menu));

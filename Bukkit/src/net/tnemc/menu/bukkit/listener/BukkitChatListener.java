@@ -40,14 +40,11 @@ public class BukkitChatListener implements Listener {
       event.setCancelled(true);
 
       Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
-      if(viewer.isPresent() && viewer.get().awaitingChat()) {
-
-        if(viewer.get().getChatCallback().test(new PlayerChatCallback(player.identifier(),
+      if(viewer.isPresent() && viewer.get().awaitingChat()
+          && viewer.get().getChatCallback().test(new PlayerChatCallback(player.identifier(),
                                                                       event.getMessage()))) {
-
-          MenuManager.instance().resumeViewer(player.identifier());
-          player.inventory().openMenu(player, viewer.get().getMenu(), viewer.get().getPage());
-        }
+        MenuManager.instance().resumeViewer(player.identifier());
+        player.inventory().openMenu(player, viewer.get().getMenu(), viewer.get().getPage());
       }
     }
   }

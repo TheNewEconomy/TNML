@@ -123,17 +123,6 @@ public interface PlayerInventory<I> {
   }
 
   /**
-   * Used to resume a player back into a menu after a temporary pause.
-   *
-   * @param player The menu player.
-   * @param menu The menu to open.
-   * @param page The page to open.
-   */
-  default void resume(final MenuPlayer player, final String menu, final int page) {
-
-  }
-
-  /**
    * Used to update the menu the player is in with a new item for a specific slot.
    *
    * @param slot The slot to update.
