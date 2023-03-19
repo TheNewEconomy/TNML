@@ -98,6 +98,16 @@ public class MinestomInventory implements PlayerInventory<Inventory> {
 
   }
 
+  /**
+   * Used to close the player's currently open inventory.
+   */
+  @Override
+  public void close() {
+    Optional<Player> player = Optional.ofNullable(MinecraftServer.getConnectionManager().getPlayer(id));
+
+    player.ifPresent(Player::closeInventory);
+  }
+
   private InventoryType typeFromSize(final int size) {
     return switch(size) {
       case 1 -> InventoryType.CHEST_1_ROW;

@@ -116,4 +116,14 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
           .set((ItemStack)item.locale());
     }
   }
+
+  /**
+   * Used to close the player's currently open inventory.
+   */
+  @Override
+  public void close() {
+    final Optional<Player> player = Sponge.getServer().getPlayer(id);
+
+    player.ifPresent(Player::closeInventory);
+  }
 }

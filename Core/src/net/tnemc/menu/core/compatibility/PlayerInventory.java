@@ -129,4 +129,9 @@ public interface PlayerInventory<I> {
    * @param item The item to update the specified slot with.
    */
   void updateInventory(int slot, AbstractItemStack<?> item);
+
+  /**
+   * Used to close the player's currently open inventory.
+   */
+  void close();
 }

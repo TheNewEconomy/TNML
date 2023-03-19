@@ -67,11 +67,11 @@ public class MenuManager {
 
     if(viewer.isPresent() && menus.containsKey(viewer.get().getMenu())) {
 
-      if(!data.get(player.identifier()).isPaused() && !type.equals(CloseType.TEMPORARY)) {
-        menus.get(viewer.get().getMenu()).onClose(player, viewer.get().getPage(), type);
-      }
+      menus.get(viewer.get().getMenu()).onClose(player, viewer.get().getPage(), type);
 
-      data.remove(player.identifier());
+      if(!viewer.get().isPaused() && !type.equals(CloseType.TEMPORARY)) {
+        data.remove(player.identifier());
+      }
     }
   }
 

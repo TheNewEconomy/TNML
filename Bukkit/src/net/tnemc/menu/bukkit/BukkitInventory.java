@@ -97,4 +97,15 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
       player.getPlayer().getInventory().setItem(slot, (ItemStack)item.locale());
     }
   }
+
+  /**
+   * Used to close the player's currently open inventory.
+   */
+  @Override
+  public void close() {
+    final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
+    if(player.getPlayer() != null) {
+      player.getPlayer().closeInventory();
+    }
+  }
 }

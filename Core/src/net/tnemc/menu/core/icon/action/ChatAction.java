@@ -73,5 +73,6 @@ public class ChatAction extends IconAction {
   @Override
   public void onPerform(Menu menu, Page page, MenuPlayer player, Icon icon) {
     MenuManager.instance().pauseViewer(player.identifier(), chatCallback);
+    player.inventory().close();
   }
 }
