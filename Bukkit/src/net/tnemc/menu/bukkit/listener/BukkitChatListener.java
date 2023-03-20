@@ -4,10 +4,12 @@ import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
 import net.tnemc.menu.core.viewer.ViewerData;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Optional;
 
@@ -32,6 +34,12 @@ import java.util.Optional;
  */
 public class BukkitChatListener implements Listener {
 
+  private final JavaPlugin plugin;
+
+  public BukkitChatListener(JavaPlugin plugin) {
+    this.plugin = plugin;
+  }
+
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onChat(final AsyncPlayerChatEvent event) {
 
@@ -45,7 +53,9 @@ public class BukkitChatListener implements Listener {
           && viewer.get().getChatCallback().test(new PlayerChatCallback(player.identifier(),
                                                                       event.getMessage()))) {
         MenuManager.instance().resumeViewer(player.identifier());
-        player.inventory().openMenu(player, viewer.get().getMenu(), viewer.get().getPage());
+        Bukkit.getScheduler().runTask(plugin, ()->{
+          player.inventory().openMenu(player, viewer.get().getMenu(), viewer.get().getPage());
+        });
       }
     }
   }
