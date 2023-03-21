@@ -99,6 +99,10 @@ public class Icon implements ConstraintHolder {
       return true;
     }
 
+    if(click != null) {
+      click.accept(new IconClickCallback(type, menu, page, player, this));
+    }
+
     for(IconAction action : actions) {
 
       if(action.type().equals(ActionType.ANY) || action.type().equals(type)) {
@@ -108,10 +112,6 @@ public class Icon implements ConstraintHolder {
           break;
         }
       }
-    }
-
-    if(click != null) {
-      click.accept(new IconClickCallback(type, menu, page, player, this));
     }
 
     final String message = getConstraint(IconStringConstraints.ICON_MESSAGE);
