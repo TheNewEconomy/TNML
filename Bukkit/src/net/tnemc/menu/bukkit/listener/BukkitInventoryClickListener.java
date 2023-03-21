@@ -31,14 +31,21 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Optional;
 
 public class BukkitInventoryClickListener implements Listener {
 
+  private final JavaPlugin plugin;
+
+  public BukkitInventoryClickListener(JavaPlugin plugin) {
+    this.plugin = plugin;
+  }
+
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onClick(final InventoryClickEvent event) {
-    final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getWhoClicked());
+    final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getWhoClicked(), plugin);
 
     final Optional<ViewerData> data = MenuManager.instance().getViewer(player.identifier());
     if(player.inventory().inMenu() && data.isPresent()) {
