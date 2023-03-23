@@ -29,6 +29,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 import java.util.UUID;
@@ -36,9 +37,11 @@ import java.util.UUID;
 public class BukkitInventory implements PlayerInventory<Inventory> {
 
   private final UUID id;
+  private final JavaPlugin plugin;
 
-  public BukkitInventory(UUID id) {
+  public BukkitInventory(UUID id, JavaPlugin plugin) {
     this.id = id;
+    this.plugin = plugin;
   }
 
   /**
@@ -80,7 +83,9 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public void openInventory(Inventory inventory) {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      player.getPlayer().openInventory(inventory);
+      Bukkit.getScheduler().runTask(plugin, ()->{
+          player.getPlayer().openInventory(inventory);
+      });
     }
   }
 
@@ -94,7 +99,9 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public void updateInventory(int slot, AbstractItemStack<?> item) {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      player.getPlayer().getInventory().setItem(slot, (ItemStack)item.locale());
+      Bukkit.getScheduler().runTask(plugin, ()->{
+        player.getPlayer().getInventory().setItem(slot, (ItemStack)item.locale());
+      });
     }
   }
 
@@ -105,7 +112,9 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public void close() {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      player.getPlayer().closeInventory();
+      Bukkit.getScheduler().runTask(plugin, ()->{
+        player.getPlayer().closeInventory();
+      });
     }
   }
 }

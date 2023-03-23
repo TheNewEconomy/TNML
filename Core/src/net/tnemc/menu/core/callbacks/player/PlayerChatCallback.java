@@ -6,9 +6,11 @@ public class PlayerChatCallback {
 
   private final MenuPlayer player;
   private final String message;
-  private boolean returnToMenu;
 
-  public PlayerChatCallback(MenuPlayer player, String message) {
+  private String menu;
+  private int page;
+
+  public PlayerChatCallback(MenuPlayer player, String message, String menu, int page) {
     this.player = player;
     this.message = message;
   }
@@ -21,11 +23,19 @@ public class PlayerChatCallback {
     return message;
   }
 
-  public boolean isReturnToMenu() {
-    return returnToMenu;
+  public String getMenu() {
+    return menu;
   }
 
-  public void setReturnToMenu(boolean returnToMenu) {
-    this.returnToMenu = returnToMenu;
+  public void setMenu(String menu) {
+    this.menu = menu;
+  }
+
+  public int getPage() {
+    return page;
+  }
+
+  public void setPage(int page) {
+    this.page = page;
   }
 }

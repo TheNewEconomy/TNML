@@ -4,7 +4,6 @@ import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
 import net.tnemc.menu.core.viewer.ViewerData;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -43,18 +42,19 @@ public class BukkitChatListener implements Listener {
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onChat(final AsyncPlayerChatEvent event) {
 
-
-    final BukkitPlayer player = new BukkitPlayer(event.getPlayer());
+    final BukkitPlayer player = new BukkitPlayer(event.getPlayer(), plugin);
     if(MenuManager.instance().inMenu(player.identifier())) {
       event.setCancelled(true);
 
       Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
-      if(viewer.isPresent() && viewer.get().awaitingChat()
-          && viewer.get().getChatCallback().test(new PlayerChatCallback(player, event.getMessage()))) {
-        MenuManager.instance().resumeViewer(player.identifier());
-        Bukkit.getScheduler().runTask(plugin, ()->{
-          player.inventory().openMenu(player, viewer.get().getMenu(), viewer.get().getPage());
-        });
+      if(viewer.isPresent() && viewer.get().awaitingChat()) {
+
+        PlayerChatCallback callback = new PlayerChatCallback(player, event.getMessage(),
+                                                             viewer.get().getMenu(),
+                                                             viewer.get().getPage());
+        if(viewer.get().getChatCallback().test(callback)) {
+          player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
+        }
       }
     }
   }
