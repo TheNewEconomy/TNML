@@ -2,8 +2,6 @@ package net.tnemc.menu.core.callbacks.player;
 
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 
-import java.util.UUID;
-
 public class PlayerChatCallback {
 
   private final MenuPlayer player;

@@ -28,20 +28,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class BukkitInventoryCloseListener implements Listener {
-
-  private final JavaPlugin plugin;
-
-  public BukkitInventoryCloseListener(JavaPlugin plugin) {
-    this.plugin = plugin;
-  }
 
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onClose(final InventoryCloseEvent event) {
 
-    final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer(), plugin);
+    final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer());
     if(MenuManager.instance().inMenu(player.identifier())) {
 
       final CloseType type = ((MenuManager.instance().getViewer(player.identifier()).get().isPaused())? CloseType.TEMPORARY : CloseType.CLOSE);

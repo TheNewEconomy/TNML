@@ -23,18 +23,15 @@ package net.tnemc.menu.bukkit;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
 public class BukkitPlayer implements MenuPlayer {
 
   private OfflinePlayer player;
-  private final JavaPlugin plugin;
 
-  public BukkitPlayer(OfflinePlayer player, JavaPlugin plugin) {
+  public BukkitPlayer(OfflinePlayer player) {
     this.player = player;
-    this.plugin = plugin;
   }
 
   /**
@@ -54,7 +51,7 @@ public class BukkitPlayer implements MenuPlayer {
    */
   @Override
   public BukkitInventory inventory() {
-    return new BukkitInventory(identifier(), plugin);
+    return new BukkitInventory(identifier());
   }
 
   /**

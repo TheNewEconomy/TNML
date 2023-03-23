@@ -44,7 +44,7 @@ public class BukkitChatListener implements Listener {
   public void onChat(final AsyncPlayerChatEvent event) {
 
 
-    final BukkitPlayer player = new BukkitPlayer(event.getPlayer(), plugin);
+    final BukkitPlayer player = new BukkitPlayer(event.getPlayer());
     if(MenuManager.instance().inMenu(player.identifier())) {
       event.setCancelled(true);
 

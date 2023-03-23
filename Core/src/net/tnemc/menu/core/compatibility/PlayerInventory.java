@@ -119,7 +119,9 @@ public interface PlayerInventory<I> {
 
     final Optional<Menu> menuObj = MenuManager.instance().getMenu(menu);
 
-    menuObj.ifPresent(value->openMenu(player, value, page));
+    if(menuObj.isPresent()) {
+      openMenu(player, menuObj.get(), page);
+    }
   }
 
   /**
