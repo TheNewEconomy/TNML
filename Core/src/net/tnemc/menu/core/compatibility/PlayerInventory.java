@@ -96,11 +96,12 @@ public interface PlayerInventory<I> {
    * @param page The page to open.
    */
   default void openMenu(final MenuPlayer player, final Menu menu, final int page) {
-    Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
-    viewer.ifPresent(viewerData->viewerData.setSwitching(true));
+
+    MenuManager.instance().switchViewer(player.identifier(), true);
 
     openInventory(build(player, menu, page));
-    viewer.ifPresent(viewerData->viewerData.setSwitching(false));
+
+    MenuManager.instance().switchViewer(player.identifier(), false);
 
     MenuManager.instance().updateViewer(player(), menu.getName(), page);
   }

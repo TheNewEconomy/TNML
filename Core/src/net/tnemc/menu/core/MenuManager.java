@@ -123,6 +123,17 @@ public class MenuManager {
     }
   }
 
+  public void switchViewer(final UUID id, boolean switching) {
+    if(data.containsKey(id)) {
+
+      ViewerData viewer = data.get(id);
+
+      viewer.setSwitching(switching);
+
+      data.put(id, viewer);
+    }
+  }
+
   public void updateViewer(final UUID id, final String menu, final int page) {
     ViewerData viewer = data.getOrDefault(id, new ViewerData(id, menu));
 
