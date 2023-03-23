@@ -23,6 +23,7 @@ package net.tnemc.menu.core.compatibility;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuManager;
+import net.tnemc.menu.core.viewer.ViewerData;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -97,6 +98,9 @@ public interface PlayerInventory<I> {
   default void openMenu(final MenuPlayer player, final Menu menu, final int page) {
 
     openInventory(build(player, menu, page));
+    Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
+    viewer.ifPresent(viewerData->viewerData.setSwitching(false));
+
     MenuManager.instance().updateViewer(player(), menu.getName(), page);
   }
 

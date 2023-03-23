@@ -53,6 +53,7 @@ public class BukkitChatListener implements Listener {
                                                              viewer.get().getMenu(),
                                                              viewer.get().getPage());
         if(viewer.get().getChatCallback().test(callback)) {
+          viewer.get().setSwitching(true);
           player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
         }
       }

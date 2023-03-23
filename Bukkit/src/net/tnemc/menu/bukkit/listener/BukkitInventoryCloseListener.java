@@ -44,7 +44,8 @@ public class BukkitInventoryCloseListener implements Listener {
     final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer(), plugin);
     if(MenuManager.instance().inMenu(player.identifier())) {
 
-      final CloseType type = ((MenuManager.instance().getViewer(player.identifier()).get().isPaused())? CloseType.TEMPORARY : CloseType.CLOSE);
+      final CloseType type = ((MenuManager.instance().getViewer(player.identifier()).get().isPaused() ||
+          MenuManager.instance().getViewer(player.identifier()).get().isSwitching())? CloseType.TEMPORARY : CloseType.CLOSE);
 
       MenuManager.instance().onClose(player, type);
     }

@@ -42,6 +42,7 @@ public class ViewerData {
   private int page = 1;
 
   private boolean paused = false;
+  private boolean switching = false;
 
   private Predicate<PlayerChatCallback> chatCallback;
 
@@ -98,6 +99,14 @@ public class ViewerData {
 
   public void setPaused(boolean paused) {
     this.paused = paused;
+  }
+
+  public boolean isSwitching() {
+    return switching;
+  }
+
+  public void setSwitching(boolean switching) {
+    this.switching = switching;
   }
 
   public Predicate<PlayerChatCallback> getChatCallback() {
