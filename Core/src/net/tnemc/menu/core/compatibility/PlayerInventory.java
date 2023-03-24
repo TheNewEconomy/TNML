@@ -23,8 +23,6 @@ package net.tnemc.menu.core.compatibility;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.page.Page;
-import net.tnemc.menu.core.viewer.ViewerData;
 
 import java.util.Optional;
 import java.util.UUID;

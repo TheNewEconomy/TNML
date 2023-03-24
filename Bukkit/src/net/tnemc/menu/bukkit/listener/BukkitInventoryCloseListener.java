@@ -23,12 +23,15 @@ package net.tnemc.menu.bukkit.listener;
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.utils.CloseType;
+import net.tnemc.menu.core.viewer.ViewerData;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Optional;
 
 public class BukkitInventoryCloseListener implements Listener {
 
@@ -42,12 +45,16 @@ public class BukkitInventoryCloseListener implements Listener {
   public void onClose(final InventoryCloseEvent event) {
 
     final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer(), plugin);
-    if(MenuManager.instance().inMenu(player.identifier())) {
+    final Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
 
-      final CloseType type = ((MenuManager.instance().getViewer(player.identifier()).get().isPaused() ||
-          MenuManager.instance().getViewer(player.identifier()).get().isSwitching())? CloseType.TEMPORARY : CloseType.CLOSE);
+    if(viewer.isPresent()) {
+
+      final CloseType type = ((viewer.get().isPaused() ||
+          viewer.get().isSwitching())? CloseType.TEMPORARY : CloseType.CLOSE);
 
       MenuManager.instance().onClose(player, type);
+
+      MenuManager.instance().switchViewer(player.identifier(), false);
     }
   }
 }

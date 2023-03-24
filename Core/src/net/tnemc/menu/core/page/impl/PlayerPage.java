@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public abstract class PlayerPage extends Page {
 
-  private final Map<UUID, PlayerIcons> playerIcons = new HashMap<>();
+  protected final Map<UUID, PlayerIcons> playerIcons = new HashMap<>();
 
   public PlayerPage(int id) {
     super(id);

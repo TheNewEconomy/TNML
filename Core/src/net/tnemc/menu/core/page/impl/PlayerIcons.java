@@ -2,13 +2,13 @@ package net.tnemc.menu.core.page.impl;
 
 import net.tnemc.menu.core.icon.Icon;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerIcons {
 
-  protected final Map<Integer, Icon> icons = new HashMap<>();
+  protected final ConcurrentHashMap<Integer, Icon> icons = new ConcurrentHashMap<>();
 
   private final UUID playerID;
 

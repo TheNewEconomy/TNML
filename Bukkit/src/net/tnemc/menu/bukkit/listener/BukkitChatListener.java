@@ -49,7 +49,7 @@ public class BukkitChatListener implements Listener {
       Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
       if(viewer.isPresent() && viewer.get().awaitingChat()) {
 
-        final PlayerChatCallback callback = new PlayerChatCallback(player, event.getMessage(),
+        PlayerChatCallback callback = new PlayerChatCallback(player, event.getMessage(),
                                                              viewer.get().getMenu(),
                                                              viewer.get().getPage());
 
