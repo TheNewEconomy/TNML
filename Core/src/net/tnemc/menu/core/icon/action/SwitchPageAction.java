@@ -21,6 +21,7 @@ package net.tnemc.menu.core.icon.action;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.ActionType;
 import net.tnemc.menu.core.icon.Icon;
@@ -67,6 +68,8 @@ public class SwitchPageAction extends IconAction {
    */
   @Override
   public void onPerform(Menu menu, Page page, MenuPlayer player, Icon icon) {
+    MenuManager.instance().switchViewer(player.identifier(), true);
+
     player.inventory().openMenu(player, menu, this.page);
   }
 }

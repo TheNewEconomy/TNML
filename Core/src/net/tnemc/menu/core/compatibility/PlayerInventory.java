@@ -23,6 +23,7 @@ package net.tnemc.menu.core.compatibility;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuManager;
+import net.tnemc.menu.core.page.Page;
 import net.tnemc.menu.core.viewer.ViewerData;
 
 import java.util.Optional;
@@ -57,6 +58,7 @@ public interface PlayerInventory<I> {
   /**
    * Builds an inventory object from a menu.
    *
+   * @param player The player that is opening the menu.
    * @param menu The menu to build.
    * @param page The page to use during the build.
    *
@@ -97,11 +99,7 @@ public interface PlayerInventory<I> {
    */
   default void openMenu(final MenuPlayer player, final Menu menu, final int page) {
 
-    MenuManager.instance().switchViewer(player.identifier(), true);
-
     openInventory(build(player, menu, page));
-
-    MenuManager.instance().switchViewer(player.identifier(), false);
 
     MenuManager.instance().updateViewer(player(), menu.getName(), page);
   }
