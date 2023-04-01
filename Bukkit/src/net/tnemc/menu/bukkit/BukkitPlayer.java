@@ -29,8 +29,8 @@ import java.util.UUID;
 
 public class BukkitPlayer implements MenuPlayer {
 
-  private OfflinePlayer player;
-  private final JavaPlugin plugin;
+  protected OfflinePlayer player;
+  protected final JavaPlugin plugin;
 
   public BukkitPlayer(OfflinePlayer player, JavaPlugin plugin) {
     this.player = player;

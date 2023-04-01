@@ -9,9 +9,9 @@
         <version>1.0-SNAPSHOT-16.2</version>
     </parent>
 
-    <artifactId>TNML-CORE</artifactId>
+    <artifactId>TNML-Folia</artifactId>
     <packaging>jar</packaging>
-    <name>The New Menu Library Core</name>
+    <name>The New Menu Library Folia</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,18 +19,32 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
+
     <repositories>
         <repository>
-            <id>codemc-releases</id>
-            <url>https://repo.codemc.io/repository/maven-public/</url>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
+            <groupId>dev.folia</groupId>
+            <artifactId>folia-api</artifactId>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>net.tnemc</groupId>
-            <artifactId>TNIL-Core</artifactId>
-            <version>0.1.7.0</version>
+            <artifactId>TNML-CORE</artifactId>
+            <version>1.0-SNAPSHOT-16.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.tnemc</groupId>
+            <artifactId>TNML-Bukkit</artifactId>
+            <version>1.0-SNAPSHOT-16.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

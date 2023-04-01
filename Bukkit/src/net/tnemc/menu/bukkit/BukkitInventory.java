@@ -36,8 +36,8 @@ import java.util.UUID;
 
 public class BukkitInventory implements PlayerInventory<Inventory> {
 
-  private final UUID id;
-  private final JavaPlugin plugin;
+  protected final UUID id;
+  protected final JavaPlugin plugin;
 
   public BukkitInventory(UUID id, JavaPlugin plugin) {
     this.id = id;
