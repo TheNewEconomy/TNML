@@ -28,7 +28,7 @@ import java.util.UUID;
 
 public class MinestomPlayer implements MenuPlayer {
 
-  private Player player;
+  protected Player player;
 
   public MinestomPlayer(Player player) {
     this.player = player;
