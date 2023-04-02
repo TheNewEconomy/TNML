@@ -22,6 +22,7 @@ package net.tnemc.menu.minestom;
 
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.Player;
+import net.minestom.server.inventory.AbstractInventory;
 import net.minestom.server.inventory.Inventory;
 import net.minestom.server.inventory.InventoryType;
 import net.minestom.server.item.ItemStack;
@@ -35,9 +36,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class MinestomInventory implements PlayerInventory<Inventory> {
+public class MinestomInventory implements PlayerInventory<AbstractInventory> {
 
-  private final UUID id;
+  protected final UUID id;
 
   public MinestomInventory(UUID id) {
     this.id = id;
@@ -62,7 +63,7 @@ public class MinestomInventory implements PlayerInventory<Inventory> {
    * @return The built inventory.
    */
   @Override
-  public Inventory build(final MenuPlayer player, Menu menu, int page) {
+  public AbstractInventory build(final MenuPlayer player, Menu menu, int page) {
     Inventory inventory = new Inventory(typeFromSize(menu.getSize()), menu.getTitle());
 
     for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
@@ -78,10 +79,12 @@ public class MinestomInventory implements PlayerInventory<Inventory> {
    * @param inventory The inventory to open.
    */
   @Override
-  public void openInventory(Inventory inventory) {
+  public void openInventory(AbstractInventory inventory) {
     Optional<Player> player = Optional.ofNullable(MinecraftServer.getConnectionManager().getPlayer(id));
 
-    player.ifPresent(value->value.openInventory(inventory));
+    if(inventory instanceof Inventory) {
+      player.ifPresent(value->value.openInventory((Inventory)inventory));
+    }
   }
 
   /**
