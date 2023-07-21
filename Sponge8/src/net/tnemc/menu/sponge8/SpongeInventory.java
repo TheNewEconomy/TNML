@@ -1,4 +1,4 @@
-package net.tnemc.menu.minestom;
+package net.tnemc.menu.sponge8;
 
 /*
  * The New Menu Library
@@ -20,28 +20,30 @@ package net.tnemc.menu.minestom;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.minestom.server.MinecraftServer;
-import net.minestom.server.entity.Player;
-import net.minestom.server.inventory.AbstractInventory;
-import net.minestom.server.inventory.Inventory;
-import net.minestom.server.inventory.InventoryType;
-import net.minestom.server.item.ItemStack;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import net.tnemc.menu.core.icon.Icon;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.server.ServerPlayer;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.plugin.PluginContainer;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class MinestomInventory implements PlayerInventory<AbstractInventory> {
+public class SpongeInventory implements PlayerInventory<Inventory> {
 
   protected final UUID id;
+  protected final PluginContainer container;
 
-  public MinestomInventory(UUID id) {
+  public SpongeInventory(UUID id, PluginContainer container) {
     this.id = id;
+    this.container = container;
   }
 
   /**
@@ -63,14 +65,14 @@ public class MinestomInventory implements PlayerInventory<AbstractInventory> {
    * @return The built inventory.
    */
   @Override
-  public AbstractInventory build(final MenuPlayer player, Menu menu, int page) {
-    Inventory inventory = new Inventory(typeFromSize(menu.getSize()), menu.getTitle());
+  public Inventory build(final MenuPlayer player, Menu menu, int page) {
+    final Inventory inventory = Inventory.builder().grid(9, menu.getSize()).completeStructure().plugin(container).build();
 
     for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
-
-      inventory.setItemStack(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
+      inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
     }
-    return null;
+
+    return inventory;
   }
 
   /**
@@ -79,12 +81,10 @@ public class MinestomInventory implements PlayerInventory<AbstractInventory> {
    * @param inventory The inventory to open.
    */
   @Override
-  public void openInventory(AbstractInventory inventory) {
-    Optional<Player> player = Optional.ofNullable(MinecraftServer.getConnectionManager().getPlayer(id));
+  public void openInventory(Inventory inventory) {
+    final Optional<ServerPlayer> player = Sponge.server().player(id);
 
-    if(inventory instanceof Inventory) {
-      player.ifPresent(value->value.openInventory((Inventory)inventory));
-    }
+    player.ifPresent(value->value.openInventory(inventory));
   }
 
   /**
@@ -95,10 +95,8 @@ public class MinestomInventory implements PlayerInventory<AbstractInventory> {
    */
   @Override
   public void updateInventory(int slot, AbstractItemStack<?> item) {
-    Optional<Player> player = Optional.ofNullable(MinecraftServer.getConnectionManager().getPlayer(id));
-
-    player.ifPresent(value->value.getInventory().setItemStack(slot, (ItemStack)item.locale()));
-
+    final Optional<ServerPlayer> player = Sponge.server().player(id);
+    player.ifPresent(serverPlayer -> serverPlayer.inventory().set(slot, (ItemStack) item.locale()));
   }
 
   /**
@@ -106,19 +104,7 @@ public class MinestomInventory implements PlayerInventory<AbstractInventory> {
    */
   @Override
   public void close() {
-    Optional<Player> player = Optional.ofNullable(MinecraftServer.getConnectionManager().getPlayer(id));
-
-    player.ifPresent(Player::closeInventory);
-  }
-
-  private InventoryType typeFromSize(final int size) {
-    return switch(size) {
-      case 1 -> InventoryType.CHEST_1_ROW;
-      case 2 -> InventoryType.CHEST_2_ROW;
-      case 3 -> InventoryType.CHEST_3_ROW;
-      case 4 -> InventoryType.CHEST_4_ROW;
-      case 5 -> InventoryType.CHEST_5_ROW;
-      default -> InventoryType.CHEST_6_ROW;
-    };
+    final Optional<ServerPlayer> player = Sponge.server().player(id);
+    player.ifPresent(ServerPlayer::closeInventory);
   }
 }

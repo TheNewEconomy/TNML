@@ -6,7 +6,7 @@
 
     <groupId>net.tnemc</groupId>
     <artifactId>TNML</artifactId>
-    <version>1.0-SNAPSHOT-19</version>
+    <version>1.0-SNAPSHOT-20</version>
     <packaging>pom</packaging>
     <name>The New Menu Library</name>
 
@@ -16,7 +16,6 @@
         <module>Bukkit</module>
         <module>Sponge7</module>
         <module>Sponge8</module>
-        <module>Minestom</module>
         <module>Folia</module>
     </modules>
 

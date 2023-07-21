@@ -1,4 +1,4 @@
-package net.tnemc.menu.minestom;
+package net.tnemc.menu.sponge8;
 
 /*
  * The New Menu Library
@@ -20,18 +20,22 @@ package net.tnemc.menu.minestom;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.minestom.server.entity.Player;
+import net.kyori.adventure.text.Component;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
+import org.spongepowered.api.entity.living.player.User;
+import org.spongepowered.plugin.PluginContainer;
 
 import java.util.UUID;
 
-public class MinestomPlayer implements MenuPlayer {
+public class SpongePlayer implements MenuPlayer {
 
-  protected Player player;
+  protected final User user;
+  protected final PluginContainer container;
 
-  public MinestomPlayer(Player player) {
-    this.player = player;
+  public SpongePlayer(User user, PluginContainer container) {
+    this.user = user;
+    this.container = container;
   }
 
   /**
@@ -41,7 +45,7 @@ public class MinestomPlayer implements MenuPlayer {
    */
   @Override
   public UUID identifier() {
-    return player.getUuid();
+    return user.uniqueId();
   }
 
   /**
@@ -50,8 +54,8 @@ public class MinestomPlayer implements MenuPlayer {
    * @return The {@link PlayerInventory} for this player.
    */
   @Override
-  public PlayerInventory<?> inventory() {
-    return new MinestomInventory(player.getUuid());
+  public SpongeInventory inventory() {
+    return new SpongeInventory(user.uniqueId(), container);
   }
 
   /**
@@ -63,7 +67,7 @@ public class MinestomPlayer implements MenuPlayer {
    */
   @Override
   public boolean hasPermission(String permission) {
-    return player.hasPermission(permission);
+    return user.hasPermission(permission);
   }
 
   /**
@@ -73,6 +77,8 @@ public class MinestomPlayer implements MenuPlayer {
    */
   @Override
   public void message(String message) {
-    player.sendMessage(message);
+    if(user.player().isPresent()) {
+      user.player().get().sendMessage(Component.text(message));
+    }
   }
 }

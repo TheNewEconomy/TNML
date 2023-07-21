@@ -1,4 +1,4 @@
-package net.tnemc.menu.minestom.consumers;
+package net.tnemc.menu.sponge8.listeners;
 
 /*
  * The New Menu Library
@@ -20,30 +20,34 @@ package net.tnemc.menu.minestom.consumers;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.minestom.server.event.inventory.InventoryCloseEvent;
 import net.tnemc.menu.core.MenuManager;
 import net.tnemc.menu.core.utils.CloseType;
 import net.tnemc.menu.core.viewer.ViewerData;
-import net.tnemc.menu.minestom.MinestomPlayer;
+import net.tnemc.menu.sponge8.SpongePlayer;
+import org.spongepowered.api.entity.living.player.server.ServerPlayer;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.filter.cause.First;
+import org.spongepowered.api.event.item.inventory.ChangeInventoryEvent;
+import org.spongepowered.plugin.PluginContainer;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
-public class MinestomCloseConsumer implements Consumer<InventoryCloseEvent> {
+public class Sponge8InteractInventoryListener {
 
-  /**
-   * Performs this operation on the given argument.
-   *
-   * @param event the input argument
-   */
-  @Override
-  public void accept(InventoryCloseEvent event) {
-    final MinestomPlayer player = new MinestomPlayer(event.getPlayer());
+  private final PluginContainer container;
 
-    final Optional<ViewerData> data = MenuManager.instance().getViewer(player.identifier());
+  public Sponge8InteractInventoryListener(PluginContainer container) {
+    this.container = container;
+  }
+
+  @Listener
+  public void onClose(ChangeInventoryEvent event, @First ServerPlayer player) {
+    final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
+
+    final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
     if(data.isPresent()) {
 
-      MenuManager.instance().onClose(data.get().getMenu(), player, data.get().getPage(), CloseType.CLOSE);
+      MenuManager.instance().onClose(data.get().getMenu(), sPlayer, data.get().getPage(), CloseType.CLOSE);
     }
   }
 }
