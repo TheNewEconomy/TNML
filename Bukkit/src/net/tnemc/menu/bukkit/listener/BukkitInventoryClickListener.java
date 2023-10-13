@@ -61,17 +61,40 @@ public class BukkitInventoryClickListener implements Listener {
   }
 
   private ActionType convertClick(ClickType click) {
-    return switch(click) {
-      case SHIFT_LEFT -> ActionType.LEFT_SHIFT;
-      case RIGHT -> ActionType.RIGHT_CLICK;
-      case SHIFT_RIGHT -> ActionType.RIGHT_SHIFT;
-      case MIDDLE -> ActionType.SCROLL_CLICK;
-      case DOUBLE_CLICK -> ActionType.DOUBLE_CLICK;
-      case DROP -> ActionType.DROP;
-      case CONTROL_DROP -> ActionType.DROP_CTRL;
-      case SWAP_OFFHAND -> ActionType.OFFHAND_SWAP;
-      case NUMBER_KEY -> ActionType.NUMBER;
-      default -> ActionType.LEFT_CLICK;
-    };
+    ActionType type = ActionType.LEFT_CLICK;
+
+    switch(click) {
+      case SHIFT_LEFT:
+        type = ActionType.LEFT_SHIFT;
+        break;
+      case RIGHT:
+        type = ActionType.RIGHT_CLICK;
+        break;
+      case SHIFT_RIGHT:
+        type = ActionType.RIGHT_SHIFT;
+        break;
+      case MIDDLE:
+        type = ActionType.SCROLL_CLICK;
+        break;
+      case DOUBLE_CLICK:
+        type = ActionType.DOUBLE_CLICK;
+        break;
+      case DROP:
+        type = ActionType.DROP;
+        break;
+      case CONTROL_DROP:
+        type = ActionType.DROP_CTRL;
+        break;
+      case SWAP_OFFHAND:
+        type = ActionType.OFFHAND_SWAP;
+        break;
+      case NUMBER_KEY:
+        type = ActionType.NUMBER;
+        break;
+      default:
+    }
+
+
+    return type;
   }
 }
