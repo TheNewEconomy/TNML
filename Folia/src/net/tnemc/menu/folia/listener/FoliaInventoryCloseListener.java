@@ -20,6 +20,8 @@ package net.tnemc.menu.folia.listener;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.folia.FoliaPlayer;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
@@ -27,6 +29,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Optional;
 
 public class FoliaInventoryCloseListener implements Listener {
 
@@ -40,16 +44,10 @@ public class FoliaInventoryCloseListener implements Listener {
   public void onClose(final InventoryCloseEvent event) {
 
     final FoliaPlayer player = new FoliaPlayer((OfflinePlayer)event.getPlayer(), plugin);
-    /*final Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+    if(viewer.isPresent() && viewer.get().status().closeMenu()) {
 
-    if(viewer.isPresent()) {
-
-      final CloseType type = ((viewer.get().isPaused() ||
-          viewer.get().isSwitching())? CloseType.TEMPORARY : CloseType.CLOSE);
-
-      MenuManager.instance().onClose(player, type);
-
-      MenuManager.instance().switchViewer(player.identifier(), false);
-    }*/
+      viewer.get().close(player);
+    }
   }
 }

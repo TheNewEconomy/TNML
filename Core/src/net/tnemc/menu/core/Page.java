@@ -56,4 +56,12 @@ public class Page {
   public Map<Integer, Icon> getIcons() {
     return icons;
   }
+
+  public Function<MenuClickHandler, Boolean> getClickHandler() {
+    return clickHandler;
+  }
+
+  public void setClickHandler(Function<MenuClickHandler, Boolean> clickHandler) {
+    this.clickHandler = clickHandler;
+  }
 }

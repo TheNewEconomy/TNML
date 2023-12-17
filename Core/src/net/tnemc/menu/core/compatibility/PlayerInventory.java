@@ -96,7 +96,7 @@ public interface PlayerInventory<I> {
 
     openInventory(build(player, menu, page));
 
-    MenuManager.instance().updateViewer(player(), menu.getName(), page);
+    MenuManager.instance().updateViewer(player.identifier(), menu.getName(), page);
   }
 
   /**

@@ -111,7 +111,39 @@ public class MenuManager {
    * @param viewer The MenuViewer to be added.
    */
   public void addViewer(final MenuViewer viewer) {
+
+    final Optional<MenuViewer> existing = MenuManager.instance().findViewer(viewer.uuid());
+    if(existing.isPresent()) {
+
+      existing.get().merge(viewer);
+      return;
+    }
+
     viewers.put(viewer.uuid(), viewer);
+  }
+
+  /**
+   * Updates the menu and page for a MenuViewer identified by the given UUID.
+   *
+   * @param identifier The UUID identifying the player associated with the MenuViewer.
+   * @param menu    The new menu to set for the MenuViewer.
+   * @param page    The new page to set for the MenuViewer.
+   */
+  public void updateViewer(final UUID identifier, final String menu, final int page) {
+
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(identifier);
+    if (viewer.isPresent()) {
+      viewer.get().setMenu(menu);
+      viewer.get().setPage(page);
+    }
+  }
+  /**
+   * Removes a MenuViewer associated with the given UUID from the viewers map.
+   *
+   * @param identifier The UUID identifying the player whose {@link MenuViewer viewer data} should be removed.
+   */
+  public void removeViewer(final UUID identifier) {
+    viewers.remove(identifier);
   }
 
   /**
