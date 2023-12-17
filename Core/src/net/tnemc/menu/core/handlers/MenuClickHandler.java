@@ -1,4 +1,5 @@
-package net.tnemc.menu.core;
+package net.tnemc.menu.core.handlers;
+
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -17,49 +18,48 @@ package net.tnemc.menu.core;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.menu.core.handlers.MenuClickHandler;
-
-import java.util.function.Function;
+import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.icon.action.ActionType;
+import net.tnemc.menu.core.utils.SlotPos;
 
 /**
- * Menu
+ * MenuClickProvider
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class Menu {
+public class MenuClickHandler {
 
-  protected Function<MenuClickHandler, Boolean> clickHandler;
+  private final SlotPos slot;
 
-  protected String name;
-  protected String title;
-  protected int rows;
+  private final MenuPlayer player;
 
-  public boolean onClick(final MenuClickHandler handler) {
-    return clickHandler.apply(handler);
+  private final Menu menu;
+
+  private final ActionType actionType;
+
+
+  public MenuClickHandler(SlotPos slot, MenuPlayer player, Menu menu, ActionType actionType) {
+    this.slot = slot;
+    this.player = player;
+    this.menu = menu;
+    this.actionType = actionType;
   }
 
-  public String getName() {
-    return name;
+  public SlotPos getSlot() {
+    return slot;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public MenuPlayer getPlayer() {
+    return player;
   }
 
-  public String getTitle() {
-    return title;
+  public Menu getMenu() {
+    return menu;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public int getRows() {
-    return rows;
-  }
-
-  public void setRows(int rows) {
-    this.rows = rows;
+  public ActionType getActionType() {
+    return actionType;
   }
 }

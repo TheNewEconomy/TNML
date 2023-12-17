@@ -29,6 +29,8 @@ public class MenuViewer {
 
   private final UUID uuid;
 
+  private String menu;
+
   private ViewerStatus status = CoreStatus.IN_MENU;
 
   public MenuViewer(UUID uuid) {
@@ -37,6 +39,14 @@ public class MenuViewer {
 
   public UUID getUuid() {
     return uuid;
+  }
+
+  public String getMenu() {
+    return menu;
+  }
+
+  public void setMenu(String menu) {
+    this.menu = menu;
   }
 
   public ViewerStatus getStatus() {

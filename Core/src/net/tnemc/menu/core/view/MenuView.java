@@ -25,5 +25,4 @@ package net.tnemc.menu.core.view;
  */
 public class MenuView {
 
-
 }

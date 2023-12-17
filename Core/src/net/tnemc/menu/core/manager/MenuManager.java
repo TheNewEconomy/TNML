@@ -18,6 +18,7 @@ package net.tnemc.menu.core.manager;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.viewer.MenuViewer;
 
 import java.util.HashMap;
@@ -33,6 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.5.0.0
  */
 public class MenuManager {
+
+  public static final int ROW_SIZE = 9;
 
   /**
    * The collection to store menus, where the key is the menu name and the value is the menu itself.
@@ -50,13 +53,33 @@ public class MenuManager {
   private static final MenuManager instance = new MenuManager();
 
   /**
+   * Handles a click action for a specific viewer identified by its UUID.
+   *
+   * @param id The UUID of the viewer triggering the click action.
+   * @param handler The {@link  MenuClickHandler} for the click.
+   * @return {@code true} if the click action is blocked, indicating that it should be prevented,
+   *         {@code false} if the click action is allowed to proceed.
+   */
+  public boolean onClick(final UUID id, final MenuClickHandler handler) {
+
+    final Optional<MenuViewer> viewer = findViewer(id);
+    if(viewer.isPresent()) {
+
+      final Optional<Menu> menu = findMenu(viewer.get().getMenu());
+      if(menu.isPresent()) {
+        return menu.get().onClick(handler);
+      }
+    }
+    return false;
+  }
+
+  /**
    * Finds a menu by its name and returns it as an Optional.
    *
    * @param name The name of the menu to find.
    * @return An Optional containing the found menu, or an empty Optional if not found.
    */
   public Optional<Menu> findMenu(final String name) {
-    // Using Optional.ofNullable to handle the case where the menu with the specified name is not present.
     return Optional.ofNullable(menus.get(name));
   }
 
@@ -66,7 +89,6 @@ public class MenuManager {
    * @param menu The menu to be added.
    */
   public void addMenu(final Menu menu) {
-    // Associates the menu name with the menu object in the menus collection.
     menus.put(menu.getName(), menu);
   }
 
