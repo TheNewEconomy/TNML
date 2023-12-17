@@ -45,7 +45,8 @@ public class MenuClickHandler {
   private final ActionType actionType;
 
 
-  public MenuClickHandler(@NotNull SlotPos slot, @NotNull MenuPlayer player, @NotNull Menu menu, @Nullable Integer page, @NotNull ActionType actionType) {
+  public MenuClickHandler(@NotNull SlotPos slot, @NotNull MenuPlayer player, @NotNull Menu menu,
+                          @Nullable Integer page, @NotNull ActionType actionType) {
     this.slot = slot;
     this.player = player;
     this.menu = menu;

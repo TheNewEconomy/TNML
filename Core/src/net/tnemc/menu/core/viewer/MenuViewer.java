@@ -30,6 +30,7 @@ public class MenuViewer {
   private final UUID uuid;
 
   private String menu;
+  private int page = -1;
 
   private ViewerStatus status = CoreStatus.IN_MENU;
 
@@ -37,11 +38,11 @@ public class MenuViewer {
     this.uuid = uuid;
   }
 
-  public UUID getUuid() {
+  public UUID uuid() {
     return uuid;
   }
 
-  public String getMenu() {
+  public String menu() {
     return menu;
   }
 
@@ -49,7 +50,15 @@ public class MenuViewer {
     this.menu = menu;
   }
 
-  public ViewerStatus getStatus() {
+  public int page() {
+    return page;
+  }
+
+  public void setPage(int page) {
+    this.page = page;
+  }
+
+  public ViewerStatus status() {
     return status;
   }
 

@@ -21,8 +21,11 @@ package net.tnemc.menu.bukkit.listener;
  */
 
 import net.tnemc.menu.bukkit.BukkitPlayer;
+import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.utils.SlotPos;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
@@ -49,11 +52,17 @@ public class BukkitInventoryClickListener implements Listener {
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(player.identifier());
     if(player.inventory().inMenu() && data.isPresent()) {
 
-      /*final boolean cancel = new InventoryClickHandler().handle(convertClick(event.getClick()), player, event.getSlot());
+      final Optional<Menu> menu = MenuManager.instance().findMenu(data.get().menu());
+      if(menu.isPresent()) {
 
-      if(cancel) {
-        event.setCancelled(true);
-      }*/
+        final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(event.getSlot()),
+                                                                       player, menu.get(), data.get().page(),
+                                                                       convertClick(event.getClick())));
+
+        if(cancel) {
+          event.setCancelled(true);
+        }
+      }
     }
   }
 
