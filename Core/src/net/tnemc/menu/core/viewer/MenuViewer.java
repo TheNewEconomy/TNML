@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.icon;
+package net.tnemc.menu.core.viewer;
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -17,42 +17,33 @@ package net.tnemc.menu.core.icon;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.item.AbstractItemStack;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
 
 /**
- * Icon
+ * MenuViewer
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class Icon {
+public class MenuViewer {
 
-  protected final Map<String, String> constraints = new HashMap<>();
+  private final UUID uuid;
 
-  protected final AbstractItemStack<?> item;
+  private ViewerStatus status = CoreStatus.IN_MENU;
 
-  protected int slot;
-
-  public Icon(AbstractItemStack<?> item) {
-    this.item = item;
+  public MenuViewer(UUID uuid) {
+    this.uuid = uuid;
   }
 
-  public Map<String, String> getConstraints() {
-    return constraints;
+  public UUID getUuid() {
+    return uuid;
   }
 
-  public AbstractItemStack<?> getItem() {
-    return item;
+  public ViewerStatus getStatus() {
+    return status;
   }
 
-  public int getSlot() {
-    return slot;
-  }
-
-  public void setSlot(int slot) {
-    this.slot = slot;
+  public void setStatus(ViewerStatus status) {
+    this.status = status;
   }
 }

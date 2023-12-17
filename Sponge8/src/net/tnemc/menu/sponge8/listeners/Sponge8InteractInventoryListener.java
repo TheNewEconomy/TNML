@@ -20,9 +20,6 @@ package net.tnemc.menu.sponge8.listeners;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.utils.CloseType;
-import net.tnemc.menu.core.viewer.ViewerData;
 import net.tnemc.menu.sponge8.SpongePlayer;
 import org.spongepowered.api.entity.living.player.server.ServerPlayer;
 import org.spongepowered.api.event.Listener;
@@ -30,7 +27,6 @@ import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ChangeInventoryEvent;
 import org.spongepowered.plugin.PluginContainer;
 
-import java.util.Optional;
 
 public class Sponge8InteractInventoryListener {
 
@@ -44,10 +40,10 @@ public class Sponge8InteractInventoryListener {
   public void onClose(ChangeInventoryEvent event, @First ServerPlayer player) {
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
 
-    final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
+    /*final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
     if(data.isPresent()) {
 
       MenuManager.instance().onClose(data.get().getMenu(), sPlayer, data.get().getPage(), CloseType.CLOSE);
-    }
+    }*/
   }
 }

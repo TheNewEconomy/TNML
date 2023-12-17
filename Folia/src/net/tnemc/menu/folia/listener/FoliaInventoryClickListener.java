@@ -20,10 +20,9 @@ package net.tnemc.menu.folia.listener;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.compatibility.InventoryClickHandler;
-import net.tnemc.menu.core.icon.ActionType;
-import net.tnemc.menu.core.viewer.ViewerData;
+import net.tnemc.menu.core.icon.action.ActionType;
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.folia.FoliaPlayer;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
@@ -47,16 +46,16 @@ public class FoliaInventoryClickListener implements Listener {
   public void onClick(final InventoryClickEvent event) {
     final FoliaPlayer player = new FoliaPlayer((OfflinePlayer)event.getWhoClicked(), plugin);
 
-    final Optional<ViewerData> data = MenuManager.instance().getViewer(player.identifier());
+    final Optional<MenuViewer> data = MenuManager.instance().findViewer(player.identifier());
     if(player.inventory().inMenu() && data.isPresent()) {
 
-      final boolean cancel = new InventoryClickHandler().handle(convertClick(event.getClick()),
+      /*final boolean cancel = new InventoryClickHandler().handle(convertClick(event.getClick()),
                                                                 player, event.getSlot()
       );
 
       if(cancel) {
         event.setCancelled(true);
-      }
+      }*/
     }
   }
 

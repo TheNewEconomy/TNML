@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.icon;
+package net.tnemc.menu.core.viewer;
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -17,42 +17,29 @@ package net.tnemc.menu.core.icon;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.item.AbstractItemStack;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Icon
+ * Represents the status of a {@link MenuViewer viewer} in the menu system.
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class Icon {
+public interface ViewerStatus {
 
-  protected final Map<String, String> constraints = new HashMap<>();
-
-  protected final AbstractItemStack<?> item;
-
-  protected int slot;
-
-  public Icon(AbstractItemStack<?> item) {
-    this.item = item;
+  /**
+   * Checks whether the viewer is currently awaiting chat input.
+   *
+   * @return {@code true} if the viewer is awaiting chat input, {@code false} otherwise.
+   */
+  default boolean awaitingChatInput() {
+    return false;
   }
 
-  public Map<String, String> getConstraints() {
-    return constraints;
-  }
-
-  public AbstractItemStack<?> getItem() {
-    return item;
-  }
-
-  public int getSlot() {
-    return slot;
-  }
-
-  public void setSlot(int slot) {
-    this.slot = slot;
+  /**
+   * Checks whether the viewer wants to close the menu.
+   *
+   * @return {@code true} if the viewer wants to close the menu, {@code false} otherwise.
+   */
+  default boolean closeMenu() {
+    return false;
   }
 }

@@ -24,7 +24,6 @@ import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
-import net.tnemc.menu.core.icon.Icon;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.Inventory;
@@ -36,7 +35,6 @@ import org.spongepowered.api.item.inventory.query.QueryOperationTypes;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,16 +70,16 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
     Inventory inventory = Inventory
         .builder().property(InventoryTitle.of(Text.of(menu.getTitle())))
-        .property(InventoryDimension.of(9, menu.getSize())).build(plugin);
+        .property(InventoryDimension.of(9, menu.getRows())).build(plugin);
 
-    for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
+    /*for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
 
       final int y = entry.getKey() / 9;
       final int x = (entry.getKey() % 9);
 
       inventory.query(QueryOperationTypes.INVENTORY_PROPERTY.of(SlotPos.of(x, y)))
                .set((ItemStack)entry.getValue().getItem().locale());
-    }
+    }*/
 
     return inventory;
   }

@@ -24,15 +24,12 @@ import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
-import net.tnemc.menu.core.icon.Icon;
 import org.spongepowered.api.Sponge;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.server.ServerPlayer;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.plugin.PluginContainer;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,11 +63,11 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
-    final Inventory inventory = Inventory.builder().grid(9, menu.getSize()).completeStructure().plugin(container).build();
+    final Inventory inventory = Inventory.builder().grid(9, menu.getRows()).completeStructure().plugin(container).build();
 
-    for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
+    /*for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
       inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
-    }
+    }*/
 
     return inventory;
   }

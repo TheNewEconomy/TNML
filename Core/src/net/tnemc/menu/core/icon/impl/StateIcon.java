@@ -1,65 +1,59 @@
 package net.tnemc.menu.core.icon.impl;
-
 /*
  * The New Menu Library
- *
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.icon.Icon;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.function.Function;
 
 /**
- * StateIcon
+ * The {@link StateIcon} class represents an icon with a dynamic state that is determined by a state handler.
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 1.5.0.0
+ * @see Icon
  */
 public class StateIcon extends Icon {
 
-  protected Map<String, AbstractItemStack<?>> states = new HashMap<>();
+  /**
+   * The function responsible for determining the state of the icon based on its current state.
+   */
+  protected final Function<StateIcon, AbstractItemStack<?>> stateHandler;
 
-  protected String state;
-
-  public StateIcon(int slot, AbstractItemStack<?> item) {
-    super(slot, item);
+  /**
+   * Constructs a {@link StateIcon} with an initial state and a state handler.
+   *
+   * @param initial The initial state of the icon.
+   * @param stateHandler The function to handle state transitions and determine the current state of the icon.
+   */
+  public StateIcon(AbstractItemStack<?> initial, Function<StateIcon, AbstractItemStack<?>> stateHandler) {
+    super(initial);
+    this.stateHandler = stateHandler;
   }
 
-  public StateIcon(int slot, Map<String, AbstractItemStack<?>> states, String state) {
-    super(slot, states.get(state));
-    this.states = states;
-    this.state = state;
-  }
-
-  public void changeState(final String state) {
-    if(states.containsKey(state)) {
-      this.state = state;
-      this.item = states.get(state);
-    }
-  }
-
+  /**
+   * Retrieves the current {@link AbstractItemStack item} of the icon by applying the state handler.
+   *
+   * @return The {@link AbstractItemStack item} representing the current state of the icon.
+   */
   @Override
   public AbstractItemStack<?> getItem() {
-    if(states.containsKey(state)) {
-      return states.get(state);
-    }
-    return item;
+    return stateHandler.apply(this);
   }
 }
