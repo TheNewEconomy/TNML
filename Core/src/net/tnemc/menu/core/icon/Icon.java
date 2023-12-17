@@ -20,6 +20,7 @@ package net.tnemc.menu.core.icon;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.constraints.ConstraintHolder;
 import net.tnemc.menu.core.icon.action.IconAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +37,7 @@ import java.util.function.Function;
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class Icon {
+public class Icon implements ConstraintHolder {
 
   protected final List<IconAction> actions = new LinkedList<>();
 
@@ -57,10 +58,6 @@ public class Icon {
     return actions;
   }
 
-  public Map<String, String> getConstraints() {
-    return constraints;
-  }
-
   public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
     if(player != null && itemProvider != null) return itemProvider.apply(player);
     return item;
@@ -72,5 +69,10 @@ public class Icon {
 
   public void setSlot(int slot) {
     this.slot = slot;
+  }
+
+  @Override
+  public Map<String, String> constraints() {
+    return constraints;
   }
 }
