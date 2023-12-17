@@ -18,7 +18,9 @@ package net.tnemc.menu.core.icon.impl;
  */
 
 import net.tnemc.item.AbstractItemStack;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.Icon;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
@@ -42,18 +44,21 @@ public class StateIcon extends Icon {
    * @param initial The initial state of the icon.
    * @param stateHandler The function to handle state transitions and determine the current state of the icon.
    */
-  public StateIcon(AbstractItemStack<?> initial, Function<StateIcon, AbstractItemStack<?>> stateHandler) {
-    super(initial);
+  public StateIcon(AbstractItemStack<?> initial, @Nullable Function<MenuPlayer, AbstractItemStack<?>> itemProvider,
+                   Function<StateIcon, AbstractItemStack<?>> stateHandler) {
+    super(initial, itemProvider);
     this.stateHandler = stateHandler;
   }
 
   /**
    * Retrieves the current {@link AbstractItemStack item} of the icon by applying the state handler.
    *
+   * @param player The player that is viewing the menu.
+   *
    * @return The {@link AbstractItemStack item} representing the current state of the icon.
    */
   @Override
-  public AbstractItemStack<?> getItem() {
+  public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
     return stateHandler.apply(this);
   }
 }

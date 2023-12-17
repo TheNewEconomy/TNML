@@ -18,12 +18,16 @@ package net.tnemc.menu.core.icon;
  */
 
 import net.tnemc.item.AbstractItemStack;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.action.IconAction;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Icon
@@ -41,8 +45,11 @@ public class Icon {
 
   protected int slot;
 
-  public Icon(AbstractItemStack<?> item) {
+  protected final Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
+
+  public Icon(@NotNull final AbstractItemStack<?> item, @Nullable Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {
     this.item = item;
+    this.itemProvider = itemProvider;
   }
 
   public List<IconAction> getActions() {
@@ -53,7 +60,8 @@ public class Icon {
     return constraints;
   }
 
-  public AbstractItemStack<?> getItem() {
+  public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
+    if(player != null && itemProvider != null) return itemProvider.apply(player);
     return item;
   }
 

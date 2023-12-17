@@ -19,9 +19,12 @@ package net.tnemc.menu.core.handlers;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.utils.SlotPos;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * MenuClickProvider
@@ -37,13 +40,16 @@ public class MenuClickHandler {
 
   private final Menu menu;
 
+  private final Integer page;
+
   private final ActionType actionType;
 
 
-  public MenuClickHandler(SlotPos slot, MenuPlayer player, Menu menu, ActionType actionType) {
+  public MenuClickHandler(@NotNull SlotPos slot, @NotNull MenuPlayer player, @NotNull Menu menu, @Nullable Integer page, @NotNull ActionType actionType) {
     this.slot = slot;
     this.player = player;
     this.menu = menu;
+    this.page = page;
     this.actionType = actionType;
   }
 
@@ -57,6 +63,10 @@ public class MenuClickHandler {
 
   public Menu getMenu() {
     return menu;
+  }
+
+  public Integer getPage() {
+    return page;
   }
 
   public ActionType getActionType() {

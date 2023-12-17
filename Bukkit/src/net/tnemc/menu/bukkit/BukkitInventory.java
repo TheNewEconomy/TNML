@@ -66,9 +66,9 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
     Inventory inventory = Bukkit.createInventory(null, menu.getRows() * 9, menu.getTitle());
 
-    for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
+    for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
-      inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
+      inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
     }
 
     return inventory;

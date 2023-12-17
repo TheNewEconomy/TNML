@@ -53,16 +53,15 @@ public class MenuManager {
   private static final MenuManager instance = new MenuManager();
 
   /**
-   * Handles a click action for a specific viewer identified by its UUID.
+   * Handles a click action for a specific viewer.
    *
-   * @param id The UUID of the viewer triggering the click action.
    * @param handler The {@link  MenuClickHandler} for the click.
    * @return {@code true} if the click action is blocked, indicating that it should be prevented,
    *         {@code false} if the click action is allowed to proceed.
    */
-  public boolean onClick(final UUID id, final MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
 
-    final Optional<MenuViewer> viewer = findViewer(id);
+    final Optional<MenuViewer> viewer = findViewer(handler.getPlayer().identifier());
     if(viewer.isPresent()) {
 
       final Optional<Menu> menu = findMenu(viewer.get().getMenu());

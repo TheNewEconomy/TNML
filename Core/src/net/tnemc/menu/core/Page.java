@@ -18,61 +18,42 @@ package net.tnemc.menu.core;
  */
 
 import net.tnemc.menu.core.handlers.MenuClickHandler;
+import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.utils.SlotPos;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 /**
- * Menu
+ * Page
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class Menu {
+public class Page {
 
-  public final Map<Integer, Page> pages = new HashMap<>();
+  protected final Map<Integer, Icon> icons = new HashMap<>();
 
-  protected String name;
-  protected String title;
-  protected int rows;
+  protected Function<MenuClickHandler, Boolean> clickHandler;
 
-  /**
-   * Handles a click action for a specific viewer identified by its UUID.
-   *
-   * @param handler The {@link  MenuClickHandler} for the click.
-   * @return {@code true} if the click action is blocked, indicating that it should be prevented,
-   *         {@code false} if the click action is allowed to proceed.
-   */
   public boolean onClick(final MenuClickHandler handler) {
-
-    if(pages.containsKey(handler.getPage())) {
-      return pages.get(handler.getPage()).onClick(handler);
+    if(clickHandler != null) {
+      return clickHandler.apply(handler);
     }
-    return false;
+
+    return icons.containsKey(handler.getSlot().slot());
   }
 
-  public String getName() {
-    return name;
+  public void addIcon(final int slot, final Icon icon) {
+    icons.put(slot, icon);
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void addIcon(final SlotPos slot, final Icon icon) {
+    icons.put(slot.slot(), icon);
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public int getRows() {
-    return rows;
-  }
-
-  public void setRows(int rows) {
-    this.rows = rows;
+  public Map<Integer, Icon> getIcons() {
+    return icons;
   }
 }
