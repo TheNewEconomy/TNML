@@ -18,8 +18,11 @@ package net.tnemc.menu.core.icon;
  */
 
 import net.tnemc.item.AbstractItemStack;
+import net.tnemc.menu.core.icon.action.IconAction;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +33,8 @@ import java.util.Map;
  */
 public class Icon {
 
+  protected final List<IconAction> actions = new LinkedList<>();
+
   protected final Map<String, String> constraints = new HashMap<>();
 
   protected final AbstractItemStack<?> item;
@@ -38,6 +43,10 @@ public class Icon {
 
   public Icon(AbstractItemStack<?> item) {
     this.item = item;
+  }
+
+  public List<IconAction> getActions() {
+    return actions;
   }
 
   public Map<String, String> getConstraints() {
