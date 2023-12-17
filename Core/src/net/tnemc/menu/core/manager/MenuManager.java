@@ -64,7 +64,7 @@ public class MenuManager {
     final Optional<MenuViewer> viewer = findViewer(handler.getPlayer().identifier());
     if(viewer.isPresent()) {
 
-      final Optional<Menu> menu = findMenu(viewer.get().getMenu());
+      final Optional<Menu> menu = findMenu(viewer.get().menu());
       if(menu.isPresent()) {
         return menu.get().onClick(handler);
       }
@@ -111,7 +111,7 @@ public class MenuManager {
    * @param viewer The MenuViewer to be added.
    */
   public void addViewer(final MenuViewer viewer) {
-    viewers.put(viewer.getUuid(), viewer);
+    viewers.put(viewer.uuid(), viewer);
   }
 
   /**

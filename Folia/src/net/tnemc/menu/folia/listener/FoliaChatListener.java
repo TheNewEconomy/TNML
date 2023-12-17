@@ -1,5 +1,6 @@
 package net.tnemc.menu.folia.listener;
 
+import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.folia.FoliaPlayer;
@@ -44,20 +45,19 @@ public class FoliaChatListener implements Listener {
     final FoliaPlayer player = new FoliaPlayer(event.getPlayer(), plugin);
     Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
 
-
-    if(viewer.isPresent() && viewer.get().getStatus().awaitingChatInput()) {
+    if(viewer.isPresent() && viewer.get().status().awaitingChatInput()) {
       event.setCancelled(true);
 
-      /*final PlayerChatCallback callback = new PlayerChatCallback(player, event.getMessage(),
-              viewer.get().getMenu(),
-              viewer.get().getPage());
+      final ChatCallback callback = new ChatCallback(player, event.getMessage(),
+              viewer.get().menu(),
+              viewer.get().page());
 
-      if(viewer.get().getChatCallback().test(callback)) {
+      if(viewer.get().chat(callback)) {
 
-        MenuManager.instance().switchViewer(player.identifier(), true);
+        //MenuManager.instance().switchViewer(player.identifier(), true);
 
         player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
-      }*/
+      }
     }
   }
 }

@@ -1,4 +1,5 @@
-package net.tnemc.menu.core.viewer;
+package net.tnemc.menu.core.callbacks;
+
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -17,37 +18,36 @@ package net.tnemc.menu.core.viewer;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.menu.core.callbacks.ChatCallback;
-
-import java.util.UUID;
-import java.util.function.Predicate;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
 
 /**
- * MenuViewer
+ * ChatCallback
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class MenuViewer {
+public class ChatCallback {
 
-  private final UUID uuid;
+  private final MenuPlayer player;
+  private final String message;
 
   private String menu;
-  private int page = -1;
+  private int page;
 
-  private Predicate<ChatCallback> chatHandler;
-
-  private ViewerStatus status = CoreStatus.IN_MENU;
-
-  public MenuViewer(UUID uuid) {
-    this.uuid = uuid;
+  public ChatCallback(MenuPlayer player, String message, String menu, int page) {
+    this.player = player;
+    this.message = message;
   }
 
-  public UUID uuid() {
-    return uuid;
+  public MenuPlayer getPlayer() {
+    return player;
   }
 
-  public String menu() {
+  public String getMessage() {
+    return message;
+  }
+
+  public String getMenu() {
     return menu;
   }
 
@@ -55,31 +55,11 @@ public class MenuViewer {
     this.menu = menu;
   }
 
-  public int page() {
+  public int getPage() {
     return page;
   }
 
   public void setPage(int page) {
     this.page = page;
-  }
-
-  public ViewerStatus status() {
-    return status;
-  }
-
-  public void setStatus(ViewerStatus status) {
-    this.status = status;
-  }
-
-  public boolean chat(ChatCallback callback) {
-    return chatHandler.test(callback);
-  }
-
-  public Predicate<ChatCallback> getChatHandler() {
-    return chatHandler;
-  }
-
-  public void setChatHandler(Predicate<ChatCallback> chatHandler) {
-    this.chatHandler = chatHandler;
   }
 }
