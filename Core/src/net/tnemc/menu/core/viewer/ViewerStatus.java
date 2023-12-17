@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.viewer;
+
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar

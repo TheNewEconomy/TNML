@@ -1,4 +1,5 @@
 package net.tnemc.menu.core;
+
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -25,7 +26,6 @@ import net.tnemc.menu.core.handlers.MenuClickHandler;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * Menu

@@ -1,4 +1,5 @@
 package net.tnemc.menu.core.viewer;
+
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -18,7 +19,6 @@ package net.tnemc.menu.core.viewer;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.manager.MenuManager;

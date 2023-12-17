@@ -19,7 +19,6 @@ package net.tnemc.menu.core.handlers;
  */
 
 import net.tnemc.menu.core.Menu;
-import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.utils.SlotPos;
