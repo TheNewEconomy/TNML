@@ -23,6 +23,7 @@ import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.viewer.MenuViewer;
+import net.tnemc.menu.core.viewer.ViewerStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -130,6 +131,14 @@ public class MenuManager {
     newViewer.setMenu(menu);
     newViewer.setPage(page);
     viewers.put(identifier, newViewer);
+  }
+
+  public void updateViewer(final UUID identifier, final ViewerStatus status) {
+
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(identifier);
+
+    //TODO: Validate this actually changes.
+    viewer.ifPresent(menuViewer->menuViewer.setStatus(status));
   }
 
   /**

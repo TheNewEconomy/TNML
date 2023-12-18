@@ -18,6 +18,9 @@ package net.tnemc.menu.core.compatibility;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.ViewerStatus;
+
 import java.util.UUID;
 
 /**
@@ -54,4 +57,8 @@ public interface MenuPlayer {
    * @param message The message.
    */
   void message(final String message);
+
+  default void status(final ViewerStatus status) {
+    MenuManager.instance().updateViewer(identifier(), status);
+  }
 }

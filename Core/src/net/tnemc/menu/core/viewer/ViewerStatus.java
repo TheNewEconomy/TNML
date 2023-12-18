@@ -41,6 +41,6 @@ public interface ViewerStatus {
    * @return {@code true} if the viewer wants to close the menu, {@code false} otherwise.
    */
   default boolean closeMenu() {
-    return false;
+    return true;
   }
 }
