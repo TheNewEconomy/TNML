@@ -72,4 +72,14 @@ public class MenuClickHandler {
   public ActionType getActionType() {
     return actionType;
   }
+
+  @Override
+  public String toString() {
+    return "MenuClickHandler{" +
+            "slot=" + slot +
+            ", menu=" + menu.getName() +
+            ", page=" + page +
+            ", actionType=" + actionType.name() +
+            '}';
+  }
 }

@@ -77,4 +77,12 @@ public class SlotPos {
   public int getColumn() {
     return column;
   }
+
+  @Override
+  public String toString() {
+    return "SlotPos{" +
+            "row=" + row +
+            ", column=" + column +
+            '}';
+  }
 }

@@ -22,6 +22,7 @@ import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.constraints.ConstraintHolder;
 import net.tnemc.menu.core.icon.action.IconAction;
+import net.tnemc.menu.core.utils.SlotPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,12 +64,16 @@ public class Icon implements ConstraintHolder {
     return item;
   }
 
-  public int getSlot() {
+  public int slot() {
     return slot;
   }
 
   public void setSlot(int slot) {
     this.slot = slot;
+  }
+
+  public void setSlot(final SlotPos slotPos) {
+    this.slot = slotPos.slot();
   }
 
   @Override

@@ -9,9 +9,9 @@
         <version>1.0-SNAPSHOT-31</version>
     </parent>
 
-    <artifactId>TNML-Bukkit</artifactId>
+    <artifactId>TNML-Example</artifactId>
     <packaging>jar</packaging>
-    <name>The New Menu Library Bukkit</name>
+    <name>The New Menu Library Examples</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -29,13 +29,6 @@
     </repositories>
 
     <dependencies>
-
-        <dependency>
-            <groupId>net.tnemc</groupId>
-            <artifactId>TNIL-Bukkit</artifactId>
-            <version>0.1.7.4-Pre-25</version>
-            <scope>compile</scope>
-        </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -45,6 +38,12 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
+            <version>1.0-SNAPSHOT-31</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.tnemc</groupId>
+            <artifactId>TNML-Bukkit</artifactId>
             <version>1.0-SNAPSHOT-31</version>
             <scope>compile</scope>
         </dependency>

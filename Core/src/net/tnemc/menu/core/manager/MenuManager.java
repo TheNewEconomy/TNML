@@ -19,6 +19,8 @@ package net.tnemc.menu.core.manager;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.viewer.MenuViewer;
 
@@ -53,6 +55,14 @@ public class MenuManager {
    */
   private static final MenuManager instance = new MenuManager();
 
+  public void open(final String menu, final int page, final MenuPlayer player) {
+
+    final Optional<Menu> menuObj = findMenu(menu);
+    if(menuObj.isPresent()) {
+
+    }
+  }
+
   /**
    * Handles a click action for a specific viewer.
    *
@@ -61,6 +71,7 @@ public class MenuManager {
    *         {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final MenuClickHandler handler) {
+    System.out.println("Click: " + handler.toString());
 
     final Optional<MenuViewer> viewer = findViewer(handler.getPlayer().identifier());
     if(viewer.isPresent()) {

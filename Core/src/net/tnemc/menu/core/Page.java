@@ -46,12 +46,8 @@ public class Page {
     return icons.containsKey(handler.getSlot().slot());
   }
 
-  public void addIcon(final int slot, final Icon icon) {
-    icons.put(slot, icon);
-  }
-
-  public void addIcon(final SlotPos slot, final Icon icon) {
-    icons.put(slot.slot(), icon);
+  public void addIcon(final Icon icon) {
+    icons.put(icon.slot(), icon);
   }
 
   public Map<Integer, Icon> getIcons() {
