@@ -51,12 +51,12 @@ public class BukkitTNML extends JavaPlugin implements Listener {
 
     this.menu = new BukkitMenuHandler(this, true);
 
-    Menu exampleMenu = new Menu();
+    final Menu exampleMenu = new Menu();
     exampleMenu.setName("example");
     exampleMenu.setTitle("Example GUI");
     exampleMenu.setRows(5);
 
-    Menu exampleMenu2 = new Menu();
+    final Menu exampleMenu2 = new Menu();
     exampleMenu2.setName("example2");
     exampleMenu2.setTitle("Example2 GUI");
     exampleMenu2.setRows(3);
