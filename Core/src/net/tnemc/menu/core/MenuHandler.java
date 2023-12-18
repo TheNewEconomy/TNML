@@ -18,6 +18,8 @@ package net.tnemc.menu.core;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.item.AbstractItemStack;
+
 /**
  * MenuHandler
  *
@@ -27,4 +29,6 @@ package net.tnemc.menu.core;
 public interface MenuHandler {
 
   void registerListeners();
+
+  AbstractItemStack<?> stackBuilder();
 }

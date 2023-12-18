@@ -17,7 +17,7 @@ package net.tnemc.menu.example.bukkit;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.item.bukkit.BukkitItemStack;
+import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.bukkit.BukkitMenuHandler;
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.Menu;
@@ -62,9 +62,9 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     exampleMenu2.setRows(3);
 
     //Icons
-    final BukkitItemStack stack = new BukkitItemStack().display("Example Icon").of("RED_WOOL", 1);
-    final BukkitItemStack stack2 = new BukkitItemStack().display("Example Icon2").of("GREEN_WOOL", 1);
-    final BukkitItemStack stack3 = new BukkitItemStack().display("Example2 Icon").of("STONE", 1);
+    final AbstractItemStack<?> stack = menu.stackBuilder().display("Example Icon").of("RED_WOOL", 1);
+    final AbstractItemStack<?> stack2 = menu.stackBuilder().display("Example Icon2").of("GREEN_WOOL", 1);
+    final AbstractItemStack<?> stack3 = menu.stackBuilder().display("Example2 Icon").of("STONE", 1);
 
     final Icon icon = new Icon(stack, null);
     icon.setSlot(new SlotPos(2, 3));

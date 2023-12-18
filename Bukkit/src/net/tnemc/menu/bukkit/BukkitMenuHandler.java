@@ -18,6 +18,8 @@ package net.tnemc.menu.bukkit;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.item.AbstractItemStack;
+import net.tnemc.item.bukkit.BukkitItemStack;
 import net.tnemc.menu.bukkit.listener.BukkitChatListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;
@@ -50,6 +52,11 @@ public class BukkitMenuHandler implements MenuHandler {
     Bukkit.getPluginManager().registerEvents(new BukkitChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(plugin), plugin);
+  }
+
+  @Override
+  public AbstractItemStack<?> stackBuilder() {
+    return new BukkitItemStack();
   }
 
   public MenuManager getManager() {
