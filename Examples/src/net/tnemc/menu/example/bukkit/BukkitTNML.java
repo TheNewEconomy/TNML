@@ -24,6 +24,8 @@ import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.icon.action.impl.SwitchMenuAction;
+import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
 import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.utils.SlotPos;
 import org.bukkit.Bukkit;
@@ -54,15 +56,29 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     exampleMenu.setTitle("Example GUI");
     exampleMenu.setRows(5);
 
+    Menu exampleMenu2 = new Menu();
+    exampleMenu2.setName("example2");
+    exampleMenu2.setTitle("Example2 GUI");
+    exampleMenu2.setRows(3);
+
     //Icons
     final BukkitItemStack stack = new BukkitItemStack().display("Example Icon").of("RED_WOOL", 1);
     final BukkitItemStack stack2 = new BukkitItemStack().display("Example Icon2").of("GREEN_WOOL", 1);
+    final BukkitItemStack stack3 = new BukkitItemStack().display("Example2 Icon").of("STONE", 1);
 
     final Icon icon = new Icon(stack, null);
     icon.setSlot(new SlotPos(2, 3));
+    icon.addConstraint(IconStringConstraints.ICON_MESSAGE, "You switched a menu!");
+    icon.getActions().add(new SwitchMenuAction("example2"));
 
     final Icon icon2 = new Icon(stack2, null);
     icon2.setSlot(new SlotPos(2, 6));
+    icon2.addConstraint(IconStringConstraints.ICON_MESSAGE, "This is an example message sent on click!");
+
+    final Icon icon3 = new Icon(stack3, null);
+    icon3.setSlot(new SlotPos(2, 5));
+    icon3.getActions().add(new SwitchMenuAction("example"));
+    icon3.addConstraint(IconStringConstraints.ICON_MESSAGE, "You switched a menu and found the new button!");
 
     //Pages
     final Page page = new Page();
@@ -71,7 +87,14 @@ public class BukkitTNML extends JavaPlugin implements Listener {
 
     exampleMenu.pages.put(1, page);
 
+    //Pages
+    final Page page2 = new Page();
+    page2.addIcon(icon3);
+
+    exampleMenu2.pages.put(1, page2);
+
     MenuManager.instance().addMenu(exampleMenu);
+    MenuManager.instance().addMenu(exampleMenu2);
   }
 
   @EventHandler

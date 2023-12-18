@@ -1,5 +1,4 @@
-package net.tnemc.menu.core.icon.action;
-
+package net.tnemc.menu.core.icon.action.impl;
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -19,40 +18,41 @@ package net.tnemc.menu.core.icon.action;
  */
 
 import net.tnemc.menu.core.handlers.MenuClickHandler;
+import net.tnemc.menu.core.icon.action.ActionType;
+import net.tnemc.menu.core.icon.action.IconAction;
 
 /**
- * Represents an action that is performed on an icon within a menu.
- * This class provides a common structure for different types of icon actions.
+ * SwitchMenuAction
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public abstract class IconAction {
+public class SwitchMenuAction extends IconAction {
 
-  protected final ActionType type;
+  private final String menu;
 
-  public IconAction(ActionType type) {
-    this.type = type;
+  public SwitchMenuAction(String menu) {
+    super(ActionType.ANY);
+    this.menu = menu;
   }
 
-  public ActionType getType() {
-    return type;
-  }
-
-  /**
-   * Determines if any other icon actions should be performed after this action is performed.
-   *
-   * @return {@code true} if other actions should be performed, otherwise {@code false}.
-   */
-  public boolean continueOther() {
-    return true;
+  public SwitchMenuAction(String menu, ActionType type) {
+    super(type);
+    this.menu = menu;
   }
 
   /**
    * Handles the click action for the icon using the provided {@link MenuClickHandler}.
    *
    * @param handler The {@link MenuClickHandler} to be executed upon the click action.
-   * @return {@code true} if the click action is blocked or has special behavior, otherwise {@code false}.
+   *
+   * @return {@code true} if the click action is blocked or has special behavior, otherwise
+   * {@code false}.
    */
-  public abstract boolean onClick(final MenuClickHandler handler);
+  @Override
+  public boolean onClick(MenuClickHandler handler) {
+
+    handler.player().inventory().openMenu(handler.player(), menu);
+    return true;
+  }
 }

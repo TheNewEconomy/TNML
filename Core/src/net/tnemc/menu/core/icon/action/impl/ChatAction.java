@@ -1,5 +1,4 @@
-package net.tnemc.menu.core.icon.action;
-
+package net.tnemc.menu.core.icon.action.impl;
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -18,41 +17,47 @@ package net.tnemc.menu.core.icon.action;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
+import net.tnemc.menu.core.icon.action.ActionType;
+import net.tnemc.menu.core.icon.action.IconAction;
+import net.tnemc.menu.core.manager.MenuManager;
+
+import java.util.function.Predicate;
 
 /**
- * Represents an action that is performed on an icon within a menu.
- * This class provides a common structure for different types of icon actions.
+ * ChatAction
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public abstract class IconAction {
+public class ChatAction extends IconAction {
 
-  protected final ActionType type;
+  private final Predicate<ChatCallback> chatCallback;
 
-  public IconAction(ActionType type) {
-    this.type = type;
+  public ChatAction(Predicate<ChatCallback> chatCallback) {
+    super(ActionType.ANY);
+    this.chatCallback = chatCallback;
   }
 
-  public ActionType getType() {
-    return type;
-  }
-
-  /**
-   * Determines if any other icon actions should be performed after this action is performed.
-   *
-   * @return {@code true} if other actions should be performed, otherwise {@code false}.
-   */
-  public boolean continueOther() {
-    return true;
+  public ChatAction(Predicate<ChatCallback> chatCallback, final ActionType type) {
+    super(type);
+    this.chatCallback = chatCallback;
   }
 
   /**
    * Handles the click action for the icon using the provided {@link MenuClickHandler}.
    *
    * @param handler The {@link MenuClickHandler} to be executed upon the click action.
-   * @return {@code true} if the click action is blocked or has special behavior, otherwise {@code false}.
+   *
+   * @return {@code true} if the click action is blocked or has special behavior, otherwise
+   * {@code false}.
    */
-  public abstract boolean onClick(final MenuClickHandler handler);
+  @Override
+  public boolean onClick(MenuClickHandler handler) {
+
+    //MenuManager.instance().pauseViewer(handler.player().identifier(), chatCallback);
+    handler.player().inventory().close();
+    return true;
+  }
 }

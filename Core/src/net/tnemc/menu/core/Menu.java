@@ -54,8 +54,8 @@ public class Menu {
   public boolean onClick(final MenuClickHandler handler) {
     System.out.println("Click: " + handler.toString());
 
-    if(pages.containsKey(handler.getPage())) {
-      return pages.get(handler.getPage()).onClick(handler);
+    if(pages.containsKey(handler.page())) {
+      return pages.get(handler.page()).onClick(handler);
     }
     return false;
   }

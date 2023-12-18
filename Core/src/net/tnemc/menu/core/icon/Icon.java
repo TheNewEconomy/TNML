@@ -19,7 +19,6 @@ package net.tnemc.menu.core.icon;
  */
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.menu.core.callbacks.menu.MenuOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.constraints.ConstraintHolder;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
@@ -69,7 +68,7 @@ public class Icon implements ConstraintHolder {
 
     //Permission check.
     final String permission = getConstraint(IconStringConstraints.ICON_PERMISSION);
-    if(!permission.isEmpty() && !handler.getPlayer().hasPermission(permission)) {
+    if(!permission.isEmpty() && !handler.player().hasPermission(permission)) {
       return false;
     }
 
@@ -80,7 +79,7 @@ public class Icon implements ConstraintHolder {
 
     //run our actions
     for(IconAction action : actions) {
-      if(!action.getType().equals(ActionType.ANY) && !action.getType().equals(handler.getActionType())) {
+      if(!action.getType().equals(ActionType.ANY) && !action.getType().equals(handler.action())) {
         continue;
       }
 
@@ -94,7 +93,7 @@ public class Icon implements ConstraintHolder {
     //Send message if applicable to menu user.
     final String message = getConstraint(IconStringConstraints.ICON_MESSAGE);
     if(!message.isEmpty()) {
-      handler.getPlayer().message(message);
+      handler.player().message(message);
     }
     return true;
   }

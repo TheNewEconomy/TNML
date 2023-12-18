@@ -46,8 +46,8 @@ public class Page {
    */
   public boolean onClick(final MenuClickHandler handler) {
     System.out.println("Page click!");
-    if(icons.containsKey(handler.getSlot().slot())) {
-      if(!icons.get(handler.getSlot().slot()).onClick(handler)) {
+    if(icons.containsKey(handler.slot().slot())) {
+      if(!icons.get(handler.slot().slot()).onClick(handler)) {
         return true;
       }
     }
@@ -57,7 +57,7 @@ public class Page {
       return clickHandler.apply(handler);
     }
 
-    return icons.containsKey(handler.getSlot().slot());
+    return icons.containsKey(handler.slot().slot());
   }
 
   public void addIcon(final Icon icon) {

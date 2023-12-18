@@ -53,23 +53,23 @@ public class MenuClickHandler {
     this.actionType = actionType;
   }
 
-  public SlotPos getSlot() {
+  public SlotPos slot() {
     return slot;
   }
 
-  public MenuPlayer getPlayer() {
+  public MenuPlayer player() {
     return player;
   }
 
-  public Menu getMenu() {
+  public Menu menu() {
     return menu;
   }
 
-  public Integer getPage() {
+  public Integer page() {
     return page;
   }
 
-  public ActionType getActionType() {
+  public ActionType action() {
     return actionType;
   }
 
