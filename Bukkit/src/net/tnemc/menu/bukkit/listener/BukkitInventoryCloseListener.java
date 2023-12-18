@@ -22,6 +22,7 @@ package net.tnemc.menu.bukkit.listener;
 
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.CoreStatus;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
@@ -47,12 +48,15 @@ public class BukkitInventoryCloseListener implements Listener {
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
 
     if(viewer.isPresent()) {
-      System.out.println("Status: " + viewer.get().status().toString());
-    }
 
-    if(viewer.isPresent() && viewer.get().status().closeMenu()) {
+      if(viewer.get().status().closeMenu()) {
+        viewer.get().close(player);
+        return;
+      }
 
-      viewer.get().close(player);
+      if(viewer.get().status().changing()) {
+        MenuManager.instance().updateViewer(player.identifier(), CoreStatus.IN_MENU);
+      }
     }
   }
 }

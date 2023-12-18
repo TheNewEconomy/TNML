@@ -43,4 +43,13 @@ public interface ViewerStatus {
   default boolean closeMenu() {
     return true;
   }
+
+  /**
+   * Checks whether the viewer wants to change to a different menu.
+   *
+   * @return {@code true} if the viewer wants to change to a different menu, {@code false} otherwise.
+   */
+  default boolean changing() {
+    return false;
+  }
 }

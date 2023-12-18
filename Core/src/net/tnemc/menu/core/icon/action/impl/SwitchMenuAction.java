@@ -20,7 +20,11 @@ package net.tnemc.menu.core.icon.action.impl;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.icon.action.IconAction;
+import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.viewer.CoreStatus;
+import net.tnemc.menu.core.viewer.MenuViewer;
+
+import java.util.Optional;
 
 /**
  * SwitchMenuAction
@@ -55,7 +59,6 @@ public class SwitchMenuAction extends IconAction {
 
     handler.player().status(CoreStatus.SWITCHING);
     handler.player().inventory().openMenu(handler.player(), menu);
-    handler.player().status(CoreStatus.IN_MENU);
     return true;
   }
 }

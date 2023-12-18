@@ -52,7 +52,6 @@ public class Menu {
    *         {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final MenuClickHandler handler) {
-    System.out.println("Click: " + handler.toString());
 
     if(pages.containsKey(handler.page())) {
       return pages.get(handler.page()).onClick(handler);

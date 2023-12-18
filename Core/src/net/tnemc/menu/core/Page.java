@@ -45,7 +45,6 @@ public class Page {
    *         {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final MenuClickHandler handler) {
-    System.out.println("Page click!");
     if(icons.containsKey(handler.slot().slot())) {
       if(!icons.get(handler.slot().slot()).onClick(handler)) {
         return true;

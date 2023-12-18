@@ -21,6 +21,7 @@ package net.tnemc.menu.folia.listener;
  */
 
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.CoreStatus;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.folia.FoliaPlayer;
 import org.bukkit.OfflinePlayer;
@@ -45,9 +46,17 @@ public class FoliaInventoryCloseListener implements Listener {
 
     final FoliaPlayer player = new FoliaPlayer((OfflinePlayer)event.getPlayer(), plugin);
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
-    if(viewer.isPresent() && viewer.get().status().closeMenu()) {
 
-      viewer.get().close(player);
+    if(viewer.isPresent()) {
+
+      if(viewer.get().status().closeMenu()) {
+        viewer.get().close(player);
+        return;
+      }
+
+      if(viewer.get().status().changing()) {
+        MenuManager.instance().updateViewer(player.identifier(), CoreStatus.IN_MENU);
+      }
     }
   }
 }

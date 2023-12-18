@@ -27,16 +27,6 @@ package net.tnemc.menu.core.viewer;
 public enum CoreStatus implements ViewerStatus {
 
   IN_MENU {
-
-    /**
-     * Checks whether the viewer wants to close the menu.
-     *
-     * @return {@code true} if the viewer wants to close the menu, {@code false} otherwise.
-     */
-    @Override
-    public boolean closeMenu() {
-      return false;
-    }
   },
 
   AWAITING_CHAT {
@@ -71,6 +61,17 @@ public enum CoreStatus implements ViewerStatus {
     @Override
     public boolean closeMenu() {
       return false;
+    }
+
+    /**
+     * Checks whether the viewer wants to change to a different menu.
+     *
+     * @return {@code true} if the viewer wants to change to a different menu, {@code false}
+     * otherwise.
+     */
+    @Override
+    public boolean changing() {
+      return true;
     }
   },
 

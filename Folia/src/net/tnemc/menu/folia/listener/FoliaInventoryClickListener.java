@@ -56,7 +56,7 @@ public class FoliaInventoryClickListener implements Listener {
       final Optional<Menu> menu = MenuManager.instance().findMenu(data.get().menu());
       if(menu.isPresent()) {
 
-        final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(event.getSlot()),
+        final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(event.getRawSlot()),
                 player, menu.get(), data.get().page(),
                 convertClick(event.getClick())));
 

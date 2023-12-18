@@ -50,12 +50,12 @@ public class BukkitInventoryClickListener implements Listener {
     final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getWhoClicked(), plugin);
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(player.identifier());
-    if(player.inventory().inMenu() && data.isPresent()) {
+    if(data.isPresent()) {
 
       final Optional<Menu> menu = MenuManager.instance().findMenu(data.get().menu());
       if(menu.isPresent()) {
 
-        final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(event.getSlot()),
+        final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(event.getRawSlot()),
                                                                        player, menu.get(), data.get().page(),
                                                                        convertClick(event.getClick())));
 
