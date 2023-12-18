@@ -52,6 +52,7 @@ public class Menu {
    *         {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final MenuClickHandler handler) {
+    System.out.println("Click: " + handler.toString());
 
     if(pages.containsKey(handler.getPage())) {
       return pages.get(handler.getPage()).onClick(handler);
@@ -59,8 +60,12 @@ public class Menu {
     return false;
   }
 
-  public void onClose(final MenuPlayer player) {
+  public void onOpen(final MenuPlayer player, final int page) {
+    player.inventory().openMenu(player, this, page);
+  }
 
+  public void onClose(final MenuPlayer player) {
+    player.inventory().close();
   }
 
   public Map<Integer, Page> getPages() {

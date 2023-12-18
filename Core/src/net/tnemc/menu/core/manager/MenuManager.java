@@ -58,30 +58,7 @@ public class MenuManager {
   public void open(final String menu, final int page, final MenuPlayer player) {
 
     final Optional<Menu> menuObj = findMenu(menu);
-    if(menuObj.isPresent()) {
-
-    }
-  }
-
-  /**
-   * Handles a click action for a specific viewer.
-   *
-   * @param handler The {@link  MenuClickHandler} for the click.
-   * @return {@code true} if the click action is blocked, indicating that it should be prevented,
-   *         {@code false} if the click action is allowed to proceed.
-   */
-  public boolean onClick(final MenuClickHandler handler) {
-    System.out.println("Click: " + handler.toString());
-
-    final Optional<MenuViewer> viewer = findViewer(handler.getPlayer().identifier());
-    if(viewer.isPresent()) {
-
-      final Optional<Menu> menu = findMenu(viewer.get().menu());
-      if(menu.isPresent()) {
-        return menu.get().onClick(handler);
-      }
-    }
-    return false;
+    menuObj.ifPresent(value->value.onOpen(player, page));
   }
 
   /**
@@ -147,7 +124,12 @@ public class MenuManager {
     if (viewer.isPresent()) {
       viewer.get().setMenu(menu);
       viewer.get().setPage(page);
+      return;
     }
+    final MenuViewer newViewer = new MenuViewer(identifier);
+    newViewer.setMenu(menu);
+    newViewer.setPage(page);
+    viewers.put(identifier, newViewer);
   }
   /**
    * Removes a MenuViewer associated with the given UUID from the viewers map.

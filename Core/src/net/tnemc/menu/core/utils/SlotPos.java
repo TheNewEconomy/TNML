@@ -58,7 +58,7 @@ public class SlotPos {
    */
   public SlotPos(final int slot) {
     this.row = slot / ROW_SIZE + 1;
-    this.column = slot % ROW_SIZE;
+    this.column = (slot % ROW_SIZE) + 1;
   }
 
   /**
@@ -67,7 +67,7 @@ public class SlotPos {
    * @return The slot number.
    */
   public int slot() {
-    return (row - 1) * ROW_SIZE + column;
+    return (row - 1) * ROW_SIZE + (column - 1);
   }
 
   public int getRow() {

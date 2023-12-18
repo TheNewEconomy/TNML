@@ -20,7 +20,6 @@ package net.tnemc.menu.core;
 
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
-import net.tnemc.menu.core.utils.SlotPos;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +38,7 @@ public class Page {
   protected Function<MenuClickHandler, Boolean> clickHandler;
 
   public boolean onClick(final MenuClickHandler handler) {
+    System.out.println("Page click!");
     if(clickHandler != null) {
       return clickHandler.apply(handler);
     }

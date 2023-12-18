@@ -19,6 +19,7 @@ package net.tnemc.menu.example.bukkit;
 
 import net.tnemc.item.bukkit.BukkitItemStack;
 import net.tnemc.menu.bukkit.BukkitMenuHandler;
+import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.Page;
@@ -69,10 +70,14 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     page.addIcon(icon2);
 
     exampleMenu.pages.put(1, page);
+
+    MenuManager.instance().addMenu(exampleMenu);
   }
 
   @EventHandler
   public void onJoin(final PlayerJoinEvent event) {
-    MenuManager.instance().open(event.getPlayer().getUniqueId());
+
+    final BukkitPlayer player = new BukkitPlayer(event.getPlayer(), this);
+    MenuManager.instance().open("example", 1, player);
   }
 }

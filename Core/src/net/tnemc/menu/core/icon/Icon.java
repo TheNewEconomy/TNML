@@ -59,6 +59,8 @@ public class Icon implements ConstraintHolder {
     return actions;
   }
 
+  //TODO: Icon click actions.
+
   public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
     if(player != null && itemProvider != null) return itemProvider.apply(player);
     return item;
