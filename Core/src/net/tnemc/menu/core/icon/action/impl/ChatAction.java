@@ -21,7 +21,6 @@ import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.icon.action.IconAction;
-import net.tnemc.menu.core.manager.MenuManager;
 
 import java.util.function.Predicate;
 

@@ -20,7 +20,6 @@ package net.tnemc.menu.core.icon.action.impl;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.icon.action.IconAction;
-import net.tnemc.menu.core.viewer.CoreStatus;
 
 import java.util.function.Consumer;
 
