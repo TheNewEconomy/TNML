@@ -19,9 +19,13 @@ package net.tnemc.menu.core.icon;
  */
 
 import net.tnemc.item.AbstractItemStack;
+import net.tnemc.menu.core.callbacks.menu.MenuOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.constraints.ConstraintHolder;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
+import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.icon.action.IconAction;
+import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
 import net.tnemc.menu.core.utils.SlotPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +34,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -49,6 +54,7 @@ public class Icon implements ConstraintHolder {
   protected int slot;
 
   protected final Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
+  protected Consumer<MenuClickHandler> click;
 
   public Icon(@NotNull final AbstractItemStack<?> item, @Nullable Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {
     this.item = item;
@@ -59,7 +65,39 @@ public class Icon implements ConstraintHolder {
     return actions;
   }
 
-  //TODO: Icon click actions.
+  public boolean onClick(final MenuClickHandler handler) {
+
+    //Permission check.
+    final String permission = getConstraint(IconStringConstraints.ICON_PERMISSION);
+    if(!permission.isEmpty() && !handler.getPlayer().hasPermission(permission)) {
+      return false;
+    }
+
+    //Our callback if it's present.
+    if(click != null) {
+      click.accept(handler);
+    }
+
+    //run our actions
+    for(IconAction action : actions) {
+      if(!action.getType().equals(ActionType.ANY) && !action.getType().equals(handler.getActionType())) {
+        continue;
+      }
+
+      action.onClick(handler);
+
+      if(!action.continueOther()) {
+        break;
+      }
+    }
+
+    //Send message if applicable to menu user.
+    final String message = getConstraint(IconStringConstraints.ICON_MESSAGE);
+    if(!message.isEmpty()) {
+      handler.getPlayer().message(message);
+    }
+    return true;
+  }
 
   public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
     if(player != null && itemProvider != null) return itemProvider.apply(player);
@@ -81,5 +119,13 @@ public class Icon implements ConstraintHolder {
   @Override
   public Map<String, String> constraints() {
     return constraints;
+  }
+
+  public Consumer<MenuClickHandler> getClick() {
+    return click;
+  }
+
+  public void setClick(Consumer<MenuClickHandler> click) {
+    this.click = click;
   }
 }

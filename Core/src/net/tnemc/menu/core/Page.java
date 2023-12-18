@@ -37,8 +37,22 @@ public class Page {
 
   protected Function<MenuClickHandler, Boolean> clickHandler;
 
+  /**
+   * Handles a click action for a specific viewer identified by its UUID.
+   *
+   * @param handler The {@link  MenuClickHandler} for the click.
+   * @return {@code true} if the click action is blocked, indicating that it should be prevented,
+   *         {@code false} if the click action is allowed to proceed.
+   */
   public boolean onClick(final MenuClickHandler handler) {
     System.out.println("Page click!");
+    if(icons.containsKey(handler.getSlot().slot())) {
+      if(!icons.get(handler.getSlot().slot()).onClick(handler)) {
+        return true;
+      }
+    }
+
+
     if(clickHandler != null) {
       return clickHandler.apply(handler);
     }
