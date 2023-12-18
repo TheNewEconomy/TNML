@@ -131,6 +131,7 @@ public class MenuManager {
     newViewer.setPage(page);
     viewers.put(identifier, newViewer);
   }
+
   /**
    * Removes a MenuViewer associated with the given UUID from the viewers map.
    *
