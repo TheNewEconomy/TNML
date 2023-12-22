@@ -74,8 +74,13 @@ public class BukkitTNML extends JavaPlugin implements Listener {
 
     final Icon icon2 = new Icon(stack2, null);
     icon2.setSlot(new SlotPos(2, 6));
-    icon2.addConstraint(IconStringConstraints.ICON_MESSAGE, "This is an example message sent on click!");
+    icon2.addConstraint(IconStringConstraints.ICON_MESSAGE, "Please type: hello");
     icon2.getActions().add(new ChatAction((callback)->{
+
+      if(!callback.getMessage().equalsIgnoreCase("hello")) {
+        callback.getPlayer().message("Invalid Input! Type: hello");
+        return false;
+      }
 
       System.out.println("Chat Input: " + callback.getMessage());
 

@@ -3,6 +3,7 @@ package net.tnemc.menu.bukkit.listener;
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.CoreStatus;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -58,6 +59,8 @@ public class BukkitChatListener implements Listener {
         System.out.println("OnChat Viewer: Callback");
 
         player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
+        viewer.get().setStatus(CoreStatus.IN_MENU);
+        viewer.get().setChatHandler(null);
       }
     }
   }
