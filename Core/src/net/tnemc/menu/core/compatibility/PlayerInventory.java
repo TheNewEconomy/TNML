@@ -118,6 +118,7 @@ public interface PlayerInventory<I> {
   default void openMenu(final MenuPlayer player, final String menu, final int page) {
 
     final Optional<Menu> menuObj = MenuManager.instance().findMenu(menu);
+    System.out.println("PlayerInv: Menu - " + menu);
 
     menuObj.ifPresent(value->openMenu(player, value, page));
   }

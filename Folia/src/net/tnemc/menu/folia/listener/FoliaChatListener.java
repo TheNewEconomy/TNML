@@ -43,7 +43,7 @@ public class FoliaChatListener implements Listener {
   public void onChat(final AsyncPlayerChatEvent event) {
 
     final FoliaPlayer player = new FoliaPlayer(event.getPlayer(), plugin);
-    Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
 
     if(viewer.isPresent() && viewer.get().status().awaitingChatInput()) {
       event.setCancelled(true);
@@ -53,8 +53,6 @@ public class FoliaChatListener implements Listener {
               viewer.get().page());
 
       if(viewer.get().chat(callback)) {
-
-        //MenuManager.instance().switchViewer(player.identifier(), true);
 
         player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
       }

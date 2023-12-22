@@ -43,7 +43,7 @@ public class BukkitChatListener implements Listener {
   public void onChat(final AsyncPlayerChatEvent event) {
 
     final BukkitPlayer player = new BukkitPlayer(event.getPlayer(), plugin);
-    Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
 
     if(viewer.isPresent() && viewer.get().status().awaitingChatInput()) {
       event.setCancelled(true);
@@ -51,10 +51,11 @@ public class BukkitChatListener implements Listener {
       final ChatCallback callback = new ChatCallback(player, event.getMessage(),
               viewer.get().menu(),
               viewer.get().page());
+      System.out.println("OnChat Viewer: Callback");
 
       if(viewer.get().chat(callback)) {
-
-        //MenuManager.instance().switchViewer(player.identifier(), true);
+        System.out.println("OnChat Viewer: Callback true");
+        System.out.println("OnChat Viewer: Callback");
 
         player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
       }

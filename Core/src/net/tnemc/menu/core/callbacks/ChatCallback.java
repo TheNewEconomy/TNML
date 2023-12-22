@@ -37,6 +37,8 @@ public class ChatCallback {
   public ChatCallback(MenuPlayer player, String message, String menu, int page) {
     this.player = player;
     this.message = message;
+    this.menu = menu;
+    this.page = page;
   }
 
   public MenuPlayer getPlayer() {

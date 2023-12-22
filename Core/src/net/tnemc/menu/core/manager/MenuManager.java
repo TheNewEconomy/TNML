@@ -20,6 +20,7 @@ package net.tnemc.menu.core.manager;
 
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.viewer.CoreStatus;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.core.viewer.ViewerStatus;
 
@@ -119,15 +120,24 @@ public class MenuManager {
    */
   public void updateViewer(final UUID identifier, final String menu, final int page) {
 
+    System.out.println("Menu: " + menu);
+    System.out.println("Page: " + page);
+
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(identifier);
     if (viewer.isPresent()) {
+
+      System.out.println("Present");
       viewer.get().setMenu(menu);
       viewer.get().setPage(page);
       return;
     }
+
+    System.out.println("Not Present");
+
     final MenuViewer newViewer = new MenuViewer(identifier);
     newViewer.setMenu(menu);
     newViewer.setPage(page);
+
     viewers.put(identifier, newViewer);
   }
 
@@ -135,7 +145,6 @@ public class MenuManager {
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(identifier);
 
-    //TODO: Validate this actually changes.
     viewer.ifPresent(menuViewer->menuViewer.setStatus(status));
   }
 

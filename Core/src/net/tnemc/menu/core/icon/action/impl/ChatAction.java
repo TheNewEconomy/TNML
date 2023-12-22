@@ -21,7 +21,11 @@ import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.icon.action.IconAction;
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.CoreStatus;
+import net.tnemc.menu.core.viewer.MenuViewer;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -55,8 +59,15 @@ public class ChatAction extends IconAction {
   @Override
   public boolean onClick(MenuClickHandler handler) {
 
-    //MenuManager.instance().pauseViewer(handler.player().identifier(), chatCallback);
-    handler.player().inventory().close();
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(handler.player().identifier());
+    System.out.println("Chat Click Viewer: " + viewer.isPresent());
+    if(viewer.isPresent()) {
+
+      viewer.get().setStatus(CoreStatus.AWAITING_CHAT);
+      viewer.get().setChatHandler(chatCallback);
+
+      handler.player().inventory().close();
+    }
     return true;
   }
 }

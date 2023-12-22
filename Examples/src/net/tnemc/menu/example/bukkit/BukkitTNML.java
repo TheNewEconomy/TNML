@@ -24,6 +24,7 @@ import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.icon.action.impl.ChatAction;
 import net.tnemc.menu.core.icon.action.impl.SwitchMenuAction;
 import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
 import net.tnemc.menu.core.manager.MenuManager;
@@ -74,6 +75,12 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     final Icon icon2 = new Icon(stack2, null);
     icon2.setSlot(new SlotPos(2, 6));
     icon2.addConstraint(IconStringConstraints.ICON_MESSAGE, "This is an example message sent on click!");
+    icon2.getActions().add(new ChatAction((callback)->{
+
+      System.out.println("Chat Input: " + callback.getMessage());
+
+      return true;
+    }));
 
     final Icon icon3 = new Icon(stack3, null);
     icon3.setSlot(new SlotPos(2, 5));
