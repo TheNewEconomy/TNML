@@ -29,11 +29,14 @@ import net.tnemc.menu.core.icon.action.impl.SwitchMenuAction;
 import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
 import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.utils.SlotPos;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Optional;
 
 /**
  * BukkitTNML
@@ -77,9 +80,9 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     icon2.addConstraint(IconStringConstraints.ICON_MESSAGE, "Please type: hello");
     icon2.getActions().add(new ChatAction((callback)->{
 
-      if(!callback.getMessage().equalsIgnoreCase("hello")) {
-        callback.getPlayer().message("Invalid Input! Type: hello");
-        return false;
+      final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(callback.getPlayer().identifier());
+      if(viewer.isPresent()) {
+        viewer.get().addData("example-data", callback.getMessage());
       }
 
       System.out.println("Chat Input: " + callback.getMessage());
@@ -92,6 +95,18 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     icon3.getActions().add(new SwitchMenuAction("example"));
     icon3.addConstraint(IconStringConstraints.ICON_MESSAGE, "You switched a menu and found the new button!");
 
+    final Icon icon4 = new Icon(stack3, (player)->{
+      final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+      if(viewer.isPresent()) {
+        final Optional<Object> display = viewer.get().findData("example-data");
+        if(display.isPresent()) {
+          return menu.stackBuilder().display((String)display.get()).of("GRASS", 1);
+        }
+      }
+      return stack3;
+    });
+    icon4.setSlot(new SlotPos(2, 2));
+
     //Pages
     final Page page = new Page();
     page.addIcon(icon);
@@ -102,6 +117,7 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     //Pages
     final Page page2 = new Page();
     page2.addIcon(icon3);
+    page2.addIcon(icon4);
 
     exampleMenu2.pages.put(1, page2);
 

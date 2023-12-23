@@ -23,8 +23,10 @@ import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.manager.MenuManager;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 /**
@@ -34,6 +36,8 @@ import java.util.function.Predicate;
  * @since 1.5.0.0
  */
 public class MenuViewer {
+
+  private final Map<String, Object> data = new ConcurrentHashMap<>();
 
   private final UUID uuid;
 
@@ -75,6 +79,14 @@ public class MenuViewer {
     if (chatHandler != viewer.chatHandler) {
       chatHandler = viewer.chatHandler;
     }
+  }
+
+  public void addData(final String identifier, final Object data) {
+    this.data.put(identifier, data);
+  }
+
+  public Optional<Object> findData(final String identifier) {
+    return Optional.ofNullable(data.get(identifier));
   }
 
   /**
