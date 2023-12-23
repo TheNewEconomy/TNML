@@ -52,11 +52,8 @@ public class BukkitChatListener implements Listener {
       final ChatCallback callback = new ChatCallback(player, event.getMessage(),
               viewer.get().menu(),
               viewer.get().page());
-      System.out.println("OnChat Viewer: Callback");
 
       if(viewer.get().chat(callback)) {
-        System.out.println("OnChat Viewer: Callback true");
-        System.out.println("OnChat Viewer: Callback");
 
         player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
         viewer.get().setStatus(CoreStatus.IN_MENU);

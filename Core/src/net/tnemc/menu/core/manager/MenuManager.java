@@ -119,19 +119,13 @@ public class MenuManager {
    */
   public void updateViewer(final UUID identifier, final String menu, final int page) {
 
-    System.out.println("Menu: " + menu);
-    System.out.println("Page: " + page);
-
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(identifier);
     if (viewer.isPresent()) {
 
-      System.out.println("Present");
       viewer.get().setMenu(menu);
       viewer.get().setPage(page);
       return;
     }
-
-    System.out.println("Not Present");
 
     final MenuViewer newViewer = new MenuViewer(identifier);
     newViewer.setMenu(menu);

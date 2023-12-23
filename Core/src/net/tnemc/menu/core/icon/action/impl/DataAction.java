@@ -60,7 +60,6 @@ public class DataAction extends IconAction {
   public boolean onClick(MenuClickHandler handler) {
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(handler.player().identifier());
-    System.out.println("Data Click Viewer: " + viewer.isPresent());
     viewer.ifPresent(menuViewer->menuViewer.addData(identifier, data));
     return true;
   }

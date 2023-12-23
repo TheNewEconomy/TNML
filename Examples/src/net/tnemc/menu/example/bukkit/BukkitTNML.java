@@ -17,20 +17,16 @@ package net.tnemc.menu.example.bukkit;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.bukkit.BukkitMenuHandler;
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuHandler;
-import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.builder.IconBuilder;
 import net.tnemc.menu.core.builder.MenuBuilder;
 import net.tnemc.menu.core.builder.PageBuilder;
-import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.action.impl.ChatAction;
 import net.tnemc.menu.core.icon.action.impl.SwitchMenuAction;
 import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
-import net.tnemc.menu.core.icon.impl.StateIcon;
 import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.utils.SlotPos;
 import net.tnemc.menu.core.viewer.MenuViewer;
@@ -95,8 +91,6 @@ public class BukkitTNML extends JavaPlugin implements Listener {
       if(viewer.isPresent()) {
         viewer.get().addData("example-data", callback.getMessage());
       }
-
-      System.out.println("Chat Input: " + callback.getMessage());
 
       return true;
     }));
@@ -175,7 +169,6 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                               if (viewer.isPresent()) {
                                                 viewer.get().addData("example-data", callback.getMessage());
                                               }
-                                              System.out.println("Chat Input: " + callback.getMessage());
                                               return true;
                                             }))
                                             .build()

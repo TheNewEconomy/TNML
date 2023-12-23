@@ -60,7 +60,6 @@ public class ChatAction extends IconAction {
   public boolean onClick(MenuClickHandler handler) {
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(handler.player().identifier());
-    System.out.println("Chat Click Viewer: " + viewer.isPresent());
     if(viewer.isPresent()) {
 
       viewer.get().setStatus(CoreStatus.AWAITING_CHAT);

@@ -46,19 +46,15 @@ public class BukkitInventoryCloseListener implements Listener {
 
     final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getPlayer(), plugin);
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
-    System.out.println("OnClose Viewer: " + viewer.isPresent());
     if(viewer.isPresent()) {
-      System.out.println("OnClose Status: " + viewer.get().status().toString());
 
       if(viewer.get().status().closeMenu()) {
-        System.out.println("OnClose Viewer: Close");
 
         viewer.get().close(player);
         return;
       }
 
       if(viewer.get().status().changing()) {
-        System.out.println("OnClose Viewer: Changing");
         MenuManager.instance().updateViewer(player.identifier(), CoreStatus.IN_MENU);
       }
     }
