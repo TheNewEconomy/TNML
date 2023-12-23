@@ -64,6 +64,10 @@ public class Icon implements ConstraintHolder {
     return actions;
   }
 
+  public void addAction(final IconAction action) {
+    actions.add(action);
+  }
+
   public boolean onClick(final MenuClickHandler handler) {
 
     //Permission check.

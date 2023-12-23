@@ -134,14 +134,14 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     icon5.addState("STATE-3", state3Stack);
 
     //Pages
-    final Page page = new Page();
+    final Page page = new Page(1);
     page.addIcon(icon);
     page.addIcon(icon2);
 
     exampleMenu.pages.put(1, page);
 
     //Pages
-    final Page page2 = new Page();
+    final Page page2 = new Page(1);
     page2.addIcon(icon3);
     page2.addIcon(icon4);
     page2.addIcon(icon5);

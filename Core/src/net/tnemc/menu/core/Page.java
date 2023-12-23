@@ -33,9 +33,19 @@ import java.util.function.Function;
  */
 public class Page {
 
+  private final int pageNumber;
+
   protected final Map<Integer, Icon> icons = new HashMap<>();
 
   protected Function<MenuClickHandler, Boolean> clickHandler;
+
+  public Page(int pageNumber) {
+    this.pageNumber = pageNumber;
+  }
+
+  public int number() {
+    return pageNumber;
+  }
 
   /**
    * Handles a click action for a specific viewer identified by its UUID.
