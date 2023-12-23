@@ -89,6 +89,10 @@ public class MenuViewer {
     return Optional.ofNullable(data.get(identifier));
   }
 
+  public Object dataOrDefault(final String identifier, final Object defaultData) {
+    return data.getOrDefault(identifier, defaultData);
+  }
+
   /**
    * Closes the menu for a specific player and removes the associated {@link MenuViewer viewer data}.
    *

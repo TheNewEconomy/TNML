@@ -20,9 +20,16 @@ package net.tnemc.menu.core.icon.impl;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.MenuViewer;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -34,21 +41,47 @@ import java.util.function.Function;
  */
 public class StateIcon extends Icon {
 
+  private final Map<String, AbstractItemStack<?>> states = new HashMap<>();
+
+  private final String stateID;
+
+  private final String defaultState;
+
   /**
    * The function responsible for determining the state of the icon based on its current state.
    */
-  protected final Function<StateIcon, AbstractItemStack<?>> stateHandler;
+  protected final Function<String, String> stateHandler;
 
-  /**
-   * Constructs a {@link StateIcon} with an initial state and a state handler.
-   *
-   * @param initial The initial state of the icon.
-   * @param stateHandler The function to handle state transitions and determine the current state of the icon.
-   */
-  public StateIcon(AbstractItemStack<?> initial, @Nullable Function<MenuPlayer, AbstractItemStack<?>> itemProvider,
-                   Function<StateIcon, AbstractItemStack<?>> stateHandler) {
-    super(initial, itemProvider);
+  public StateIcon(@NotNull AbstractItemStack<?> item, @Nullable Function<MenuPlayer,
+          AbstractItemStack<?>> itemProvider, String stateID, String defaultState,
+                   @NotNull Function<String, String> stateHandler) {
+    super(item, itemProvider);
+    this.stateID = stateID;
+    this.defaultState = defaultState;
     this.stateHandler = stateHandler;
+  }
+
+  public Map<String, AbstractItemStack<?>> getStates() {
+    return states;
+  }
+
+  public void addState(final String stateID, final AbstractItemStack<?> item) {
+    states.put(stateID, item);
+  }
+
+  @Override
+  public boolean onClick(MenuClickHandler handler) {
+    if(onClick(handler)) {
+
+      final Optional<MenuViewer> viewer = handler.player().viewer();
+      if(viewer.isPresent()) {
+
+        final String currentState = (String)viewer.get().dataOrDefault(stateID, defaultState);
+
+        viewer.get().addData(stateID, stateHandler.apply(currentState));
+      }
+    }
+    return false;
   }
 
   /**
@@ -60,6 +93,15 @@ public class StateIcon extends Icon {
    */
   @Override
   public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
-    return stateHandler.apply(this);
+
+    if(player != null) {
+
+      final Optional<MenuViewer> viewer = player.viewer();
+      if(viewer.isPresent()) {
+
+        return states.getOrDefault((String)viewer.get().dataOrDefault(stateID, defaultState), item);
+      }
+    }
+    return item;
   }
 }
