@@ -1,8 +1,8 @@
 package net.tnemc.menu.folia.listener;
 
-import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
-import net.tnemc.menu.core.viewer.ViewerData;
+import net.tnemc.menu.core.callbacks.ChatCallback;
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.folia.FoliaPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -43,22 +43,18 @@ public class FoliaChatListener implements Listener {
   public void onChat(final AsyncPlayerChatEvent event) {
 
     final FoliaPlayer player = new FoliaPlayer(event.getPlayer(), plugin);
-    if(MenuManager.instance().inMenu(player.identifier())) {
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+
+    if(viewer.isPresent() && viewer.get().status().awaitingChatInput()) {
       event.setCancelled(true);
 
-      Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
-      if(viewer.isPresent() && viewer.get().awaitingChat()) {
+      final ChatCallback callback = new ChatCallback(player, event.getMessage(),
+              viewer.get().menu(),
+              viewer.get().page());
 
-        PlayerChatCallback callback = new PlayerChatCallback(player, event.getMessage(),
-                                                             viewer.get().getMenu(),
-                                                             viewer.get().getPage());
+      if(viewer.get().chat(callback)) {
 
-        if(viewer.get().getChatCallback().test(callback)) {
-
-          MenuManager.instance().switchViewer(player.identifier(), true);
-
-          player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
-        }
+        player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
       }
     }
   }

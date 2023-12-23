@@ -44,6 +44,7 @@ public enum IconStringConstraints implements StringConstraint {
       return "";
     }
   },
+
   ICON_MESSAGE {
 
     @Override

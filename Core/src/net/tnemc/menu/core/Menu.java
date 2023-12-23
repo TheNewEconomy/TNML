@@ -2,100 +2,89 @@ package net.tnemc.menu.core;
 
 /*
  * The New Menu Library
- *
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.callbacks.menu.MenuCloseCallback;
 import net.tnemc.menu.core.callbacks.menu.MenuOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
-import net.tnemc.menu.core.icon.ActionType;
-import net.tnemc.menu.core.page.Page;
-import net.tnemc.menu.core.utils.CloseType;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.function.Consumer;
 
 /**
- * Represents an inventory-based menu, which may be utilized for the player to perform actions or
- * view information in-game in a neat and organized manner.
+ * Menu
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 1.5.0.0
  */
 public class Menu {
 
-  protected final ConcurrentSkipListMap<Integer, Page> pages = new ConcurrentSkipListMap<>();
+  public final Map<Integer, Page> pages = new HashMap<>();
 
   protected String name;
   protected String title;
-  protected int size;
+  protected int rows;
 
-  protected boolean readOnly = true;
-
-  protected int page;
-
-  //Callbacks
   protected Consumer<MenuOpenCallback> open;
-
   protected Consumer<MenuCloseCallback> close;
 
-  public Menu(String name, String title, int size) {
-    this.name = name;
-    this.title = title;
-    
-    int workingSize = size;
-    if(workingSize % 9 > 0) {
-      workingSize = workingSize + (workingSize % 9);
-    }
-    this.size = Math.min(workingSize, 45);
+  /**
+   * Handles a click action for a specific viewer identified by its UUID.
+   *
+   * @param handler The {@link  MenuClickHandler} for the click.
+   * @return {@code true} if the click action is blocked, indicating that it should be prevented,
+   *         {@code false} if the click action is allowed to proceed.
+   */
+  public boolean onClick(final MenuClickHandler handler) {
 
-    this.page = 1;
-  }
-
-  public void build(MenuPlayer player) {
-    player.inventory().openMenu(player, this);
-  }
-
-  public void update(MenuPlayer player, int slot, AbstractItemStack<?> item) {
-    player.inventory().updateInventory(slot, item);
-  }
-
-  public boolean onClick(ActionType type, MenuPlayer player, int page, int slot) {
-    if(pages.containsKey(page)) {
-      return pages.get(page).onClick(type, player, this, slot);
+    if(pages.containsKey(handler.page())) {
+      return pages.get(handler.page()).onClick(handler);
     }
     return false;
   }
 
-  public void onClose(MenuPlayer player, int page, CloseType type) {
-    if(pages.containsKey(page)) {
-      pages.get(page).onClose(player, type);
-    }
+  public void onOpen(final MenuPlayer player, final int page) {
+    player.inventory().openMenu(player, this, page);
+  }
 
-    if(close != null) {
-      close.accept(new MenuCloseCallback(this, pages.get(page), player, type));
-    }
+  public void onClose(final MenuPlayer player) {
+    player.inventory().close();
   }
 
   public Map<Integer, Page> getPages() {
     return pages;
+  }
+
+  public Consumer<MenuOpenCallback> getOpen() {
+    return open;
+  }
+
+  public void setOpen(Consumer<MenuOpenCallback> open) {
+    this.open = open;
+  }
+
+  public Consumer<MenuCloseCallback> getClose() {
+    return close;
+  }
+
+  public void setClose(Consumer<MenuCloseCallback> close) {
+    this.close = close;
   }
 
   public String getName() {
@@ -114,39 +103,11 @@ public class Menu {
     this.title = title;
   }
 
-  public int getSize() {
-    return size;
+  public int getRows() {
+    return rows;
   }
 
-  public boolean isReadOnly() {
-    return readOnly;
-  }
-
-  public void setReadOnly(boolean readOnly) {
-    this.readOnly = readOnly;
-  }
-
-  public int getPage() {
-    return page;
-  }
-
-  public void setPage(int page) {
-    this.page = page;
-  }
-
-  public Consumer<MenuOpenCallback> getOpen() {
-    return open;
-  }
-
-  public void setOpen(Consumer<MenuOpenCallback> open) {
-    this.open = open;
-  }
-
-  public Consumer<MenuCloseCallback> getClose() {
-    return close;
-  }
-
-  public void setClose(Consumer<MenuCloseCallback> close) {
-    this.close = close;
+  public void setRows(int rows) {
+    this.rows = rows;
   }
 }

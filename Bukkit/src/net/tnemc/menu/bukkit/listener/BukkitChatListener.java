@@ -1,9 +1,10 @@
 package net.tnemc.menu.bukkit.listener;
 
 import net.tnemc.menu.bukkit.BukkitPlayer;
-import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.callbacks.player.PlayerChatCallback;
-import net.tnemc.menu.core.viewer.ViewerData;
+import net.tnemc.menu.core.callbacks.ChatCallback;
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.CoreStatus;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -43,22 +44,23 @@ public class BukkitChatListener implements Listener {
   public void onChat(final AsyncPlayerChatEvent event) {
 
     final BukkitPlayer player = new BukkitPlayer(event.getPlayer(), plugin);
-    if(MenuManager.instance().inMenu(player.identifier())) {
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+
+    if(viewer.isPresent() && viewer.get().status().awaitingChatInput()) {
       event.setCancelled(true);
 
-      Optional<ViewerData> viewer = MenuManager.instance().getViewer(player.identifier());
-      if(viewer.isPresent() && viewer.get().awaitingChat()) {
+      final ChatCallback callback = new ChatCallback(player, event.getMessage(),
+              viewer.get().menu(),
+              viewer.get().page());
+      System.out.println("OnChat Viewer: Callback");
 
-        PlayerChatCallback callback = new PlayerChatCallback(player, event.getMessage(),
-                                                             viewer.get().getMenu(),
-                                                             viewer.get().getPage());
+      if(viewer.get().chat(callback)) {
+        System.out.println("OnChat Viewer: Callback true");
+        System.out.println("OnChat Viewer: Callback");
 
-        if(viewer.get().getChatCallback().test(callback)) {
-
-          MenuManager.instance().switchViewer(player.identifier(), true);
-
-          player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
-        }
+        player.inventory().openMenu(player, callback.getMenu(), callback.getPage());
+        viewer.get().setStatus(CoreStatus.IN_MENU);
+        viewer.get().setChatHandler(null);
       }
     }
   }

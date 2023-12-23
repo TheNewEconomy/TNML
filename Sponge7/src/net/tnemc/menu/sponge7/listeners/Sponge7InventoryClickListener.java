@@ -20,20 +20,13 @@ package net.tnemc.menu.sponge7.listeners;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import net.tnemc.menu.core.MenuManager;
-import net.tnemc.menu.core.compatibility.InventoryClickHandler;
-import net.tnemc.menu.core.icon.ActionType;
-import net.tnemc.menu.core.viewer.ViewerData;
+import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.sponge7.SpongePlayer;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
-import org.spongepowered.api.item.inventory.Slot;
-import org.spongepowered.api.item.inventory.property.SlotIndex;
 import org.spongepowered.api.plugin.Plugin;
-
-import java.util.Optional;
 
 public class Sponge7InventoryClickListener {
 
@@ -47,7 +40,7 @@ public class Sponge7InventoryClickListener {
   public void onDouble(ClickInventoryEvent event, @First Player player) {
     final SpongePlayer sPlayer = new SpongePlayer(player, plugin);
 
-    final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
+    /*final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
     final Optional<Slot> slot = event.getSlot();
     if(slot.isPresent() && sPlayer.inventory().inMenu() && data.isPresent()) {
 
@@ -61,7 +54,7 @@ public class Sponge7InventoryClickListener {
           event.setCancelled(true);
         }
       }
-    }
+    }*/
   }
 
 

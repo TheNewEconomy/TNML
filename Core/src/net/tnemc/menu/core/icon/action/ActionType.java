@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.callbacks.menu;
+package net.tnemc.menu.core.icon.action;
 
 /*
  * The New Menu Library
@@ -18,27 +18,23 @@ package net.tnemc.menu.core.callbacks.menu;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.menu.core.Menu;
-
 /**
- * Presents a callback related directly to a {@link net.tnemc.menu.core.Menu}.
+ * Represents when an action should be performed.
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class MenuCallback {
+public enum ActionType {
 
-  protected Menu menu;
-
-  public MenuCallback(Menu menu) {
-    this.menu = menu;
-  }
-
-  public Menu getMenu() {
-    return menu;
-  }
-
-  public void setMenu(Menu menu) {
-    this.menu = menu;
-  }
+  ANY,
+  DOUBLE_CLICK,
+  LEFT_CLICK,
+  LEFT_SHIFT,
+  SCROLL_CLICK,
+  RIGHT_CLICK,
+  RIGHT_SHIFT,
+  DROP,
+  DROP_CTRL,
+  NUMBER,
+  OFFHAND_SWAP
 }

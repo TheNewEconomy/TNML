@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.callbacks.menu;
+package net.tnemc.menu.core;
 
 /*
  * The New Menu Library
@@ -18,27 +18,17 @@ package net.tnemc.menu.core.callbacks.menu;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.menu.core.Menu;
+import net.tnemc.item.AbstractItemStack;
 
 /**
- * Presents a callback related directly to a {@link net.tnemc.menu.core.Menu}.
+ * MenuHandler
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 1.5.0.0
  */
-public class MenuCallback {
+public interface MenuHandler {
 
-  protected Menu menu;
+  void registerListeners();
 
-  public MenuCallback(Menu menu) {
-    this.menu = menu;
-  }
-
-  public Menu getMenu() {
-    return menu;
-  }
-
-  public void setMenu(Menu menu) {
-    this.menu = menu;
-  }
+  AbstractItemStack<?> stackBuilder();
 }

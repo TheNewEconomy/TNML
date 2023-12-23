@@ -1,4 +1,4 @@
-package net.tnemc.menu.core.callbacks.menu;
+package net.tnemc.menu.core.callbacks;
 
 /*
  * The New Menu Library
@@ -18,27 +18,50 @@ package net.tnemc.menu.core.callbacks.menu;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.compatibility.MenuPlayer;
 
 /**
- * Presents a callback related directly to a {@link net.tnemc.menu.core.Menu}.
+ * ChatCallback
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 1.5.0.0
  */
-public class MenuCallback {
+public class ChatCallback {
 
-  protected Menu menu;
+  private final MenuPlayer player;
+  private final String message;
 
-  public MenuCallback(Menu menu) {
+  private String menu;
+  private int page;
+
+  public ChatCallback(MenuPlayer player, String message, String menu, int page) {
+    this.player = player;
+    this.message = message;
     this.menu = menu;
+    this.page = page;
   }
 
-  public Menu getMenu() {
+  public MenuPlayer getPlayer() {
+    return player;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public String getMenu() {
     return menu;
   }
 
-  public void setMenu(Menu menu) {
+  public void setMenu(String menu) {
     this.menu = menu;
+  }
+
+  public int getPage() {
+    return page;
+  }
+
+  public void setPage(int page) {
+    this.page = page;
   }
 }

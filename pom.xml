@@ -17,6 +17,7 @@
         <module>Sponge7</module>
         <module>Sponge8</module>
         <module>Folia</module>
+        <module>Examples</module>
     </modules>
 
     <properties>

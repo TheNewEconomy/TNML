@@ -64,11 +64,11 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
-    Inventory inventory = Bukkit.createInventory(null, menu.getSize(), menu.getTitle());
+    Inventory inventory = Bukkit.createInventory(null, menu.getRows() * 9, menu.getTitle());
 
-    for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
+    for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
-      inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
+      inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
     }
 
     return inventory;
@@ -99,9 +99,7 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public void updateInventory(int slot, AbstractItemStack<?> item) {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      Bukkit.getScheduler().runTask(plugin, ()->{
-        player.getPlayer().getInventory().setItem(slot, (ItemStack)item.locale());
-      });
+      Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().getOpenInventory().setItem(slot, (ItemStack)item.locale()));
     }
   }
 
@@ -112,9 +110,7 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public void close() {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      Bukkit.getScheduler().runTask(plugin, ()->{
-        player.getPlayer().closeInventory();
-      });
+      Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().closeInventory());
     }
   }
 }

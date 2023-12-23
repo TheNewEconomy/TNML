@@ -2,24 +2,27 @@ package net.tnemc.menu.core.compatibility;
 
 /*
  * The New Menu Library
- *
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.MenuViewer;
+import net.tnemc.menu.core.viewer.ViewerStatus;
+
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -56,4 +59,19 @@ public interface MenuPlayer {
    * @param message The message.
    */
   void message(final String message);
+
+  default void status(final ViewerStatus status) {
+    MenuManager.instance().updateViewer(identifier(), status);
+  }
+
+  /**
+   * Retrieves the {@link MenuViewer} associated with the identifier.
+   *
+   * @return An {@link Optional} containing the found {@link MenuViewer} based on the identifier,
+   *         or an empty {@code Optional} if the viewer is not found.
+   * @see MenuManager#findViewer(UUID)
+   */
+  default Optional<MenuViewer> viewer() {
+    return MenuManager.instance().findViewer(identifier());
+  }
 }
