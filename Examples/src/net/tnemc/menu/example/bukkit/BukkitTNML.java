@@ -27,6 +27,7 @@ import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.action.impl.ChatAction;
 import net.tnemc.menu.core.icon.action.impl.SwitchMenuAction;
 import net.tnemc.menu.core.icon.constraints.IconStringConstraints;
+import net.tnemc.menu.core.icon.impl.StateIcon;
 import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.utils.SlotPos;
 import net.tnemc.menu.core.viewer.MenuViewer;
@@ -36,6 +37,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -69,6 +71,12 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     final AbstractItemStack<?> stack = menu.stackBuilder().display("Example Icon").of("RED_WOOL", 1);
     final AbstractItemStack<?> stack2 = menu.stackBuilder().display("Example Icon2").of("GREEN_WOOL", 1);
     final AbstractItemStack<?> stack3 = menu.stackBuilder().display("Example2 Icon").of("STONE", 1);
+
+    //StateIconItems
+    final AbstractItemStack<?> defaultStack = menu.stackBuilder().display("Default State").of("BLACK_WOOL", 1);
+    final AbstractItemStack<?> state1Stack = menu.stackBuilder().display("State 1 State").of("BROWN_WOOL", 1);
+    final AbstractItemStack<?> state2Stack = menu.stackBuilder().display("State 2 State").of("BLUE_WOOL", 1);
+    final AbstractItemStack<?> state3Stack = menu.stackBuilder().display("State 3 State").of("GREEN_WOOL", 1);
 
     final Icon icon = new Icon(stack, null);
     icon.setSlot(new SlotPos(2, 3));
@@ -107,6 +115,24 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     });
     icon4.setSlot(new SlotPos(2, 2));
 
+    final StateIcon icon5 = new StateIcon(defaultStack, null, "TEST-STATE", "STATE-0", (currentState)->{
+      switch(currentState.toUpperCase(Locale.ROOT)) {
+
+        case "STATE-0":
+          return "STATE-1";
+        case "STATE-1":
+          return "STATE-2";
+        case "STATE-2":
+          return "STATE-3";
+        default:
+          return "STATE-0";
+      }
+    });
+
+    icon5.addState("STATE-1", state1Stack);
+    icon5.addState("STATE-2", state2Stack);
+    icon5.addState("STATE-3", state3Stack);
+
     //Pages
     final Page page = new Page();
     page.addIcon(icon);
@@ -118,6 +144,7 @@ public class BukkitTNML extends JavaPlugin implements Listener {
     final Page page2 = new Page();
     page2.addIcon(icon3);
     page2.addIcon(icon4);
+    page2.addIcon(icon5);
 
     exampleMenu2.pages.put(1, page2);
 

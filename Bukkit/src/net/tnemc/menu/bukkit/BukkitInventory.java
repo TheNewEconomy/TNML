@@ -99,7 +99,7 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public void updateInventory(int slot, AbstractItemStack<?> item) {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().getInventory().setItem(slot, (ItemStack)item.locale()));
+      Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().getOpenInventory().setItem(slot, (ItemStack)item.locale()));
     }
   }
 

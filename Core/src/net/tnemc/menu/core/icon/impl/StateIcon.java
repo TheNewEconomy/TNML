@@ -22,7 +22,6 @@ import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
-import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -71,7 +70,7 @@ public class StateIcon extends Icon {
 
   @Override
   public boolean onClick(MenuClickHandler handler) {
-    if(onClick(handler)) {
+    if(super.onClick(handler)) {
 
       final Optional<MenuViewer> viewer = handler.player().viewer();
       if(viewer.isPresent()) {
@@ -79,6 +78,7 @@ public class StateIcon extends Icon {
         final String currentState = (String)viewer.get().dataOrDefault(stateID, defaultState);
 
         viewer.get().addData(stateID, stateHandler.apply(currentState));
+        handler.player().inventory().updateInventory(slot(), getItem(handler.player()));
       }
     }
     return false;

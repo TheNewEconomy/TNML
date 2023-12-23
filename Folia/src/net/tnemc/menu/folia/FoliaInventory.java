@@ -41,7 +41,7 @@ public class FoliaInventory extends BukkitInventory {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
       Bukkit.getGlobalRegionScheduler().run(plugin, (scheduledTask)->{
-        player.getPlayer().getInventory().setItem(slot, (ItemStack)item.locale());
+        player.getPlayer().getOpenInventory().setItem(slot, (ItemStack)item.locale());
       });
     }
   }
