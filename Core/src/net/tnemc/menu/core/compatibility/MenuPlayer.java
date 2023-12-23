@@ -19,8 +19,10 @@ package net.tnemc.menu.core.compatibility;
  */
 
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.core.viewer.ViewerStatus;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -60,5 +62,16 @@ public interface MenuPlayer {
 
   default void status(final ViewerStatus status) {
     MenuManager.instance().updateViewer(identifier(), status);
+  }
+
+  /**
+   * Retrieves the {@link MenuViewer} associated with the identifier.
+   *
+   * @return An {@link Optional} containing the found {@link MenuViewer} based on the identifier,
+   *         or an empty {@code Optional} if the viewer is not found.
+   * @see MenuManager#findViewer(UUID)
+   */
+  default Optional<MenuViewer> viewer() {
+    return MenuManager.instance().findViewer(identifier());
   }
 }
