@@ -20,6 +20,7 @@ package net.tnemc.menu.core.builder;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
+import net.tnemc.menu.core.constraints.Constraint;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
 import net.tnemc.menu.core.icon.action.IconAction;
@@ -51,6 +52,8 @@ public class IconBuilder {
   private int slot;
   private Consumer<MenuClickHandler> click;
   private final List<IconAction> actions = new LinkedList<>();
+
+  protected final Map<String, String> constraints = new HashMap<>();
   private final Map<String, AbstractItemStack<?>> states = new HashMap<>();
   private String stateID;
   private String defaultState;
@@ -106,6 +109,18 @@ public class IconBuilder {
    */
   public IconBuilder withClick(Consumer<MenuClickHandler> click) {
     this.click = click;
+    return this;
+  }
+
+  /**
+   * Adds a constraint to the icon.
+   *
+   * @param key   The key of the constraint.
+   * @param value The value of the constraint.
+   * @return This {@code IconBuilder} instance for method chaining.
+   */
+  public IconBuilder withConstraint(Constraint<?> key, String value) {
+    this.constraints.put(key.identifier(), value);
     return this;
   }
 
@@ -179,6 +194,7 @@ public class IconBuilder {
       stateIcon.getStates().putAll(states);
     }
 
+    icon.constraints().putAll(constraints);
     icon.setSlot(slot);
     icon.setClick(click);
     actions.forEach(icon::addAction);
