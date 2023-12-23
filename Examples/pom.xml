@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.0-SNAPSHOT-31</version>
+        <version>1.5.0.0-SNAPSHOT-1</version>
     </parent>
 
     <artifactId>TNML-Example</artifactId>
@@ -18,8 +18,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
 
     <repositories>
         <repository>
@@ -38,13 +36,13 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.0-SNAPSHOT-31</version>
+            <version>1.5.0.0-SNAPSHOT-1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-Bukkit</artifactId>
-            <version>1.0-SNAPSHOT-31</version>
+            <version>1.5.0.0-SNAPSHOT-1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
