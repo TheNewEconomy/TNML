@@ -165,7 +165,14 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                             .withSlot(new SlotPos(2, 6))
                                             .withConstraint(IconStringConstraints.ICON_MESSAGE, "Please type: hello")
                                             .withActions(new ChatAction(callback -> {
-                                              Optional<MenuViewer> viewer = MenuManager.instance().findViewer(callback.getPlayer().identifier());
+
+                                              if(!callback.getMessage().equalsIgnoreCase("hello")) {
+                                                //Make our user retype since they didn't say hello
+                                                callback.getPlayer().message("Please type: hello");
+                                                return false;
+                                              }
+
+                                              final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(callback.getPlayer().identifier());
                                               if (viewer.isPresent()) {
                                                 viewer.get().addData("example-data", callback.getMessage());
                                               }
