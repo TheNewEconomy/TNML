@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.5.0.0-SNAPSHOT-2</version>
+        <version>1.5.0.0-SNAPSHOT-3</version>
     </parent>
 
     <artifactId>TNML-Bukkit</artifactId>
@@ -26,6 +26,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -33,7 +37,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNIL-Bukkit</artifactId>
-            <version>0.1.7.4-Pre-26</version>
+            <version>0.1.7.4-Pre-27</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -45,7 +49,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.5.0.0-SNAPSHOT-2</version>
+            <version>1.5.0.0-SNAPSHOT-3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
