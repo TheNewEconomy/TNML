@@ -20,3 +20,4 @@ jobs:
           java-version: 17
           target-folder: ""
           project: maven
+          custom-command: mvn javadoc:javadoc
