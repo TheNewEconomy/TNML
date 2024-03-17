@@ -19,8 +19,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-
     <repositories>
         <repository>
             <id>papermc</id>
@@ -31,6 +29,19 @@
             <url>https://repo.codemc.io/repository/maven-public/</url>
         </repository>
     </repositories>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <show>private</show>
+                    <source>17</source>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <dependencies>
         <dependency>
