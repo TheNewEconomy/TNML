@@ -19,11 +19,13 @@ package net.tnemc.menu.core.builder;
  */
 
 import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -37,6 +39,8 @@ public class PageBuilder {
 
   private final Map<Integer, Icon> icons = new HashMap<>();
   private Function<MenuClickHandler, Boolean> clickHandler;
+
+  protected Consumer<PageOpenCallback> open;
 
   private final int pageNumber;
 
@@ -70,6 +74,17 @@ public class PageBuilder {
   }
 
   /**
+   * Sets the open handler for the page.
+   *
+   * @param open The click handler to be set for the page.
+   * @return This {@code PageBuilder} instance for method chaining.
+   */
+  public PageBuilder withOpenHandler(Consumer<PageOpenCallback> open) {
+    this.open = open;
+    return this;
+  }
+
+  /**
    * Builds and returns the {@link Page} instance based on the provided configuration.
    *
    * @return The constructed {@code Page} instance.
@@ -79,6 +94,7 @@ public class PageBuilder {
 
     page.getIcons().putAll(icons);
     page.setClickHandler(clickHandler);
+    page.setOpen(open);
 
     return page;
   }

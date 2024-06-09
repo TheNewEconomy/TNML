@@ -60,12 +60,26 @@ public class Menu {
   }
 
   public void onOpen(final MenuPlayer player, final int page) {
+
+    if(open != null) {
+      open.accept(new MenuOpenCallback(this, pages.get(page), player));
+    }
+
     player.inventory().openMenu(player, this, page);
   }
 
   public void onClose(final MenuPlayer player) {
+
+    if(close != null) {
+
+      final int page = (player.viewer().isPresent())? player.viewer().get().page() : 1;
+      close.accept(new MenuCloseCallback(this, pages.get(page), player));
+    }
+
     player.inventory().close();
   }
+
+
 
   public Map<Integer, Page> getPages() {
     return pages;

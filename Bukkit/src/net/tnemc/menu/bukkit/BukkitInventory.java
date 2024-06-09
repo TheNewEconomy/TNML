@@ -22,6 +22,8 @@ package net.tnemc.menu.bukkit;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import net.tnemc.menu.core.icon.Icon;
@@ -66,9 +68,18 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
     Inventory inventory = Bukkit.createInventory(null, menu.getRows() * 9, menu.getTitle());
 
-    for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
+    if(menu.pages.containsKey(page)) {
 
-      inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+      final Page pageObj = menu.pages.get(page);
+      if(pageObj.getOpen() != null) {
+        pageObj.getOpen().accept(new PageOpenCallback(pageObj, player));
+      }
+
+      for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
+
+        inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+      }
+
     }
 
     return inventory;

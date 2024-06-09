@@ -18,11 +18,13 @@ package net.tnemc.menu.core;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -38,6 +40,8 @@ public class Page {
   protected final Map<Integer, Icon> icons = new HashMap<>();
 
   protected Function<MenuClickHandler, Boolean> clickHandler;
+
+  protected Consumer<PageOpenCallback> open;
 
   public Page(int pageNumber) {
     this.pageNumber = pageNumber;
@@ -75,6 +79,14 @@ public class Page {
 
   public Map<Integer, Icon> getIcons() {
     return icons;
+  }
+
+  public Consumer<PageOpenCallback> getOpen() {
+    return open;
+  }
+
+  public void setOpen(Consumer<PageOpenCallback> open) {
+    this.open = open;
   }
 
   public Function<MenuClickHandler, Boolean> getClickHandler() {
