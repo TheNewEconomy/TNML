@@ -79,7 +79,9 @@ public class Menu {
     player.inventory().close();
   }
 
-
+  public void addPage(final Page page) {
+    pages.put(page.number(), page);
+  }
 
   public Map<Integer, Page> getPages() {
     return pages;

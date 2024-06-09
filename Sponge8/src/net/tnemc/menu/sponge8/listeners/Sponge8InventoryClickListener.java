@@ -20,8 +20,11 @@ package net.tnemc.menu.sponge8.listeners;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.utils.SlotPos;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.sponge8.SpongePlayer;
 import org.spongepowered.api.data.Keys;
@@ -43,27 +46,30 @@ public class Sponge8InventoryClickListener {
   }
 
   @Listener
-  public void onDouble(ClickContainerEvent event, @First ServerPlayer player) {
+  public void onClick(ClickContainerEvent event, @First ServerPlayer player) {
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
     final Optional<Slot> slot = event.slot();
-    if(slot.isPresent() && sPlayer.inventory().inMenu() && data.isPresent()) {
+    if(data.isPresent()) {
 
-      final int slotIndex = slot.get().getInt(Keys.SLOT_INDEX).orElse(-1);
+      final Optional<Menu> menu = MenuManager.instance().findMenu(data.get().menu());
+      if(menu.isPresent() && slot.isPresent()) {
 
-      if(slotIndex > -1) {
-        /*final boolean cancel = new InventoryClickHandler().handle(convertClick(event),
-                                                                  sPlayer, slotIndex);
+        final int slotIndex = slot.get().getInt(Keys.SLOT_INDEX).orElse(-1);
 
-        if(cancel) {
-          event.setCancelled(true);
-        }*/
+        if(slotIndex > -1) {
+          final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(slotIndex),
+                  sPlayer, menu.get(), data.get().page(),
+                  convertClick(event)));
+
+          if(cancel) {
+            event.setCancelled(true);
+          }
+        }
       }
     }
   }
-
-
 
   private ActionType convertClick(ClickContainerEvent event) {
     if (event instanceof ClickContainerEvent.Shift.Primary) {

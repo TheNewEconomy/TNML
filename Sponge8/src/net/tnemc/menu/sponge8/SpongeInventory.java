@@ -22,14 +22,18 @@ package net.tnemc.menu.sponge8;
 
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
+import net.tnemc.menu.core.icon.Icon;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.server.ServerPlayer;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.plugin.PluginContainer;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -65,10 +69,18 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
     final Inventory inventory = Inventory.builder().grid(9, menu.getRows()).completeStructure().plugin(container).build();
 
-    /*for(Map.Entry<Integer, Icon> entry : menu.getPages().get(page).getIcons(player).entrySet()) {
-      inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem().locale());
-    }*/
+    if(menu.pages.containsKey(page)) {
 
+      final Page pageObj = menu.pages.get(page);
+      if(pageObj.getOpen() != null) {
+        pageObj.getOpen().accept(new PageOpenCallback(pageObj, player));
+      }
+
+      for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
+
+        inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+      }
+    }
     return inventory;
   }
 

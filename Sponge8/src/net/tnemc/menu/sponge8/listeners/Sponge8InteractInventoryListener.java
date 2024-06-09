@@ -20,12 +20,17 @@ package net.tnemc.menu.sponge8.listeners;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.viewer.CoreStatus;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.sponge8.SpongePlayer;
 import org.spongepowered.api.entity.living.player.server.ServerPlayer;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ChangeInventoryEvent;
 import org.spongepowered.plugin.PluginContainer;
+
+import java.util.Optional;
 
 
 public class Sponge8InteractInventoryListener {
@@ -38,12 +43,20 @@ public class Sponge8InteractInventoryListener {
 
   @Listener
   public void onClose(ChangeInventoryEvent event, @First ServerPlayer player) {
+
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
+    final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(sPlayer.identifier());
+    if(viewer.isPresent()) {
 
-    /*final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
-    if(data.isPresent()) {
+      if(viewer.get().status().closeMenu()) {
 
-      MenuManager.instance().onClose(data.get().getMenu(), sPlayer, data.get().getPage(), CloseType.CLOSE);
-    }*/
+        viewer.get().close(sPlayer);
+        return;
+      }
+
+      if(viewer.get().status().changing()) {
+        MenuManager.instance().updateViewer(sPlayer.identifier(), CoreStatus.IN_MENU);
+      }
+    }
   }
 }
