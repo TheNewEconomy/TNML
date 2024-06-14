@@ -43,7 +43,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNIL-Core</artifactId>
-            <version>0.1.7.5-Pre-1</version>
+            <version>0.1.7.5-Pre-2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

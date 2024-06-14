@@ -18,6 +18,7 @@ package net.tnemc.menu.core.manager;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.item.providers.HelperMethods;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.viewer.MenuViewer;
@@ -30,10 +31,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * The {@link MenuManager} class represents a manager for a collection of menus.
- *
- * @author creatorfromhell
- * @since 1.5.0.0
+ * MenuManager class is responsible for managing menus and menu viewers.
  */
 public class MenuManager {
 
@@ -53,6 +51,8 @@ public class MenuManager {
    * Singleton instance of the MenuManager.
    */
   private static final MenuManager instance = new MenuManager();
+
+  private HelperMethods helper;
 
   public void open(final String menu, final int page, final MenuPlayer player) {
 
@@ -148,6 +148,24 @@ public class MenuManager {
    */
   public void removeViewer(final UUID identifier) {
     viewers.remove(identifier);
+  }
+
+  /**
+   * Returns the HelperMethods object associated with this MenuManager.
+   *
+   * @return The HelperMethods object associated with this MenuManager.
+   */
+  public HelperMethods getHelper() {
+    return helper;
+  }
+
+  /**
+   * Sets the HelperMethods object associated with this MenuManager.
+   *
+   * @param helper The HelperMethods object to be set.
+   */
+  public void setHelper(HelperMethods helper) {
+    this.helper = helper;
   }
 
   /**

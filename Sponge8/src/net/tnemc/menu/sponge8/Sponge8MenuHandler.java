@@ -1,5 +1,4 @@
-package net.tnemc.menu.bukkit;
-
+package net.tnemc.menu.sponge8;
 /*
  * The New Menu Library
  * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
@@ -19,31 +18,31 @@ package net.tnemc.menu.bukkit;
  */
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.item.bukkit.BukkitHelper;
-import net.tnemc.item.bukkit.BukkitItemStack;
-import net.tnemc.menu.bukkit.listener.BukkitChatListener;
-import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
-import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.manager.MenuManager;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.tnemc.menu.sponge8.listeners.Sponge8ChatListener;
+import net.tnemc.menu.sponge8.listeners.Sponge8InteractInventoryListener;
+import net.tnemc.menu.sponge8.listeners.Sponge8InventoryClickListener;
+import net.tnemc.sponge.SpongeHelper;
+import net.tnemc.sponge.SpongeItemStack;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.plugin.PluginContainer;
 
 /**
- * BukkitMenuHandler
+ * SpongeMenuHandler
  *
  * @author creatorfromhell
  * @since 1.5.0.0
  */
-public class BukkitMenuHandler implements MenuHandler {
+public class Sponge8MenuHandler implements MenuHandler {
 
-  private final JavaPlugin plugin;
+  protected final PluginContainer container;
   private final MenuManager manager;
 
-  public BukkitMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
-    this.plugin = plugin;
+  public Sponge8MenuHandler(final PluginContainer container, final boolean registerListeners) {
+    this.container = container;
     this.manager = new MenuManager();
-    this.manager.setHelper(new BukkitHelper());
+    this.manager.setHelper(new SpongeHelper());
 
     if(registerListeners) {
       registerListeners();
@@ -51,14 +50,14 @@ public class BukkitMenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
-    Bukkit.getPluginManager().registerEvents(new BukkitChatListener(plugin), plugin);
-    Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(plugin), plugin);
-    Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(plugin), plugin);
+    Sponge.eventManager().registerListeners(container, new Sponge8ChatListener(container));
+    Sponge.eventManager().registerListeners(container, new Sponge8InteractInventoryListener(container));
+    Sponge.eventManager().registerListeners(container, new Sponge8InventoryClickListener(container));
   }
 
   @Override
   public AbstractItemStack<?> stackBuilder() {
-    return new BukkitItemStack();
+    return new SpongeItemStack();
   }
 
   public MenuManager getManager() {
