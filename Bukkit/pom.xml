@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.5.0.1-SNAPSHOT-1</version>
+        <version>1.5.0.1-SNAPSHOT-2</version>
     </parent>
 
     <artifactId>TNML-Bukkit</artifactId>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNIL-Bukkit</artifactId>
-            <version>0.1.7.5-Pre-2</version>
+            <version>0.1.7.5-Pre-3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.5.0.1-SNAPSHOT-1</version>
+            <version>1.5.0.1-SNAPSHOT-2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
