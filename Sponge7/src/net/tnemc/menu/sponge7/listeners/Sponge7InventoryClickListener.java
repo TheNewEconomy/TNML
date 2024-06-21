@@ -3,7 +3,7 @@ package net.tnemc.menu.sponge7.listeners;
 /*
  * The New Menu Library
  *
- * Copyright (C) 2022 - 2023 Daniel "creatorfromhell" Vidmar
+ * Copyright (C) 2022 - 2024 Daniel "creatorfromhell" Vidmar
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,13 +20,22 @@ package net.tnemc.menu.sponge7.listeners;
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
+import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.core.utils.SlotPos;
+import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.sponge7.SpongePlayer;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
+import org.spongepowered.api.item.inventory.Slot;
+import org.spongepowered.api.item.inventory.property.SlotIndex;
 import org.spongepowered.api.plugin.Plugin;
+
+import java.util.Optional;
 
 public class Sponge7InventoryClickListener {
 
@@ -40,6 +49,27 @@ public class Sponge7InventoryClickListener {
   public void onDouble(ClickInventoryEvent event, @First Player player) {
     final SpongePlayer sPlayer = new SpongePlayer(player, plugin);
 
+    final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
+    final Optional<Slot> slot = event.getSlot();
+    if(data.isPresent()) {
+
+      final Optional<Menu> menu = MenuManager.instance().findMenu(data.get().menu());
+      if(menu.isPresent() && slot.isPresent()) {
+
+        final Optional<SlotIndex> property = slot.get().getInventoryProperty(SlotIndex.class);
+
+        if(property.isPresent()) {
+          final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(property.get().getValue()),
+                  sPlayer, menu.get(), data.get().page(),
+                  convertClick(event)));
+
+          if(cancel) {
+            event.setCancelled(true);
+          }
+        }
+      }
+    }
+
     /*final Optional<ViewerData> data = MenuManager.instance().getViewer(sPlayer.identifier());
     final Optional<Slot> slot = event.getSlot();
     if(slot.isPresent() && sPlayer.inventory().inMenu() && data.isPresent()) {
@@ -48,7 +78,7 @@ public class Sponge7InventoryClickListener {
 
       if(property.isPresent()) {
         final boolean cancel = new InventoryClickHandler().handle(convertClick(event),
-                                                                  sPlayer, property.get().getValue());
+                sPlayer, property.get().getValue());
 
         if(cancel) {
           event.setCancelled(true);
