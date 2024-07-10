@@ -54,6 +54,11 @@ public class MenuManager {
 
   private HelperMethods helper;
 
+  //private constructor for MenuManager.
+  private MenuManager() {
+
+  }
+
   public void open(final String menu, final int page, final MenuPlayer player) {
 
     final Optional<Menu> menuObj = findMenu(menu);

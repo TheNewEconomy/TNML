@@ -36,13 +36,11 @@ import org.spongepowered.api.plugin.Plugin;
 public class Sponge7MenuHandler implements MenuHandler {
 
   protected final Plugin plugin;
-  private final MenuManager manager;
 
   public Sponge7MenuHandler(final Plugin plugin, final boolean registerListeners) {
     this.plugin = plugin;
-    this.manager = new MenuManager();
     //TODO: TNIL for sponge 7
-    //this.manager.setHelper(new SpongeHelper());
+    //MenuManager.instance().setHelper(new SpongeHelper());
 
     if(registerListeners) {
       registerListeners();
@@ -62,6 +60,6 @@ public class Sponge7MenuHandler implements MenuHandler {
   }
 
   public MenuManager getManager() {
-    return manager;
+    return MenuManager.instance();
   }
 }

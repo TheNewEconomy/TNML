@@ -38,12 +38,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class BukkitMenuHandler implements MenuHandler {
 
   private final JavaPlugin plugin;
-  private final MenuManager manager;
 
   public BukkitMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
     this.plugin = plugin;
-    this.manager = new MenuManager();
-    this.manager.setHelper(new BukkitHelper());
+    MenuManager.instance().setHelper(new BukkitHelper());
 
     if(registerListeners) {
       registerListeners();
@@ -62,6 +60,6 @@ public class BukkitMenuHandler implements MenuHandler {
   }
 
   public MenuManager getManager() {
-    return manager;
+    return MenuManager.instance();
   }
 }

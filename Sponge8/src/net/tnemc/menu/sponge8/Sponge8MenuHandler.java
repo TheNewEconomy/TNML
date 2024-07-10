@@ -37,12 +37,10 @@ import org.spongepowered.plugin.PluginContainer;
 public class Sponge8MenuHandler implements MenuHandler {
 
   protected final PluginContainer container;
-  private final MenuManager manager;
 
   public Sponge8MenuHandler(final PluginContainer container, final boolean registerListeners) {
     this.container = container;
-    this.manager = new MenuManager();
-    this.manager.setHelper(new SpongeHelper());
+    MenuManager.instance().setHelper(new SpongeHelper());
 
     if(registerListeners) {
       registerListeners();
@@ -61,6 +59,6 @@ public class Sponge8MenuHandler implements MenuHandler {
   }
 
   public MenuManager getManager() {
-    return manager;
+    return MenuManager.instance();
   }
 }

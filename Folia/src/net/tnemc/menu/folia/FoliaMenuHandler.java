@@ -19,6 +19,7 @@ package net.tnemc.menu.folia;
  */
 
 import net.tnemc.item.AbstractItemStack;
+import net.tnemc.item.bukkit.BukkitHelper;
 import net.tnemc.item.bukkit.BukkitItemStack;
 import net.tnemc.menu.bukkit.listener.BukkitChatListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
@@ -37,11 +38,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class FoliaMenuHandler implements MenuHandler {
 
   private final JavaPlugin plugin;
-  private final MenuManager manager;
 
   public FoliaMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
     this.plugin = plugin;
-    this.manager = new MenuManager();
+    MenuManager.instance().setHelper(new BukkitHelper());
 
     if(registerListeners) {
       registerListeners();
@@ -60,6 +60,6 @@ public class FoliaMenuHandler implements MenuHandler {
   }
 
   public MenuManager getManager() {
-    return manager;
+    return MenuManager.instance();
   }
 }
