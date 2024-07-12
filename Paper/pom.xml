@@ -9,9 +9,9 @@
         <version>1.5.0.1-SNAPSHOT-7</version>
     </parent>
 
-    <artifactId>TNML-Bukkit</artifactId>
+    <artifactId>TNML-Paper</artifactId>
     <packaging>jar</packaging>
-    <name>The New Menu Library Bukkit</name>
+    <name>The New Menu Library Paper</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -21,8 +21,8 @@
 
     <repositories>
         <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
             <id>codemc-releases</id>
@@ -42,6 +42,39 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.19-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.tnemc</groupId>
+            <artifactId>TNIL-Paper</artifactId>
+            <version>${tnil.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.tnemc</groupId>
+            <artifactId>TNML-CORE</artifactId>
+            <version>1.5.0.1-SNAPSHOT-7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.tnemc</groupId>
+            <artifactId>TNML-Bukkit</artifactId>
+            <version>1.5.0.1-SNAPSHOT-7</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.tnemc</groupId>
+                    <artifactId>TNIL-Bukkit</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
@@ -97,25 +130,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>net.tnemc</groupId>
-            <artifactId>TNIL-Bukkit</artifactId>
-            <version>${tnil.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.17-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.tnemc</groupId>
-            <artifactId>TNML-CORE</artifactId>
-            <version>1.5.0.1-SNAPSHOT-7</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
 </project>

@@ -17,6 +17,7 @@ package net.tnemc.menu.example.bukkit;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.kyori.adventure.text.Component;
 import net.tnemc.menu.bukkit.BukkitMenuHandler;
 import net.tnemc.menu.bukkit.BukkitPlayer;
 import net.tnemc.menu.core.Menu;
@@ -155,13 +156,13 @@ public class BukkitTNML extends JavaPlugin implements Listener {
             .withPages(
                     new PageBuilder(1)
                             .withIcons(
-                                    new IconBuilder(menu.stackBuilder().display("Example Icon").of("RED_WOOL", 1))
+                                    new IconBuilder(menu.stackBuilder().display(Component.text("Example Icon")).of("RED_WOOL", 1))
                                             .withSlot(new SlotPos(2, 3))
                                             .withConstraint(IconStringConstraints.ICON_MESSAGE, "You switched a menu!")
                                             .withActions(new SwitchMenuAction("example2"))
                                             .build(),
 
-                                    new IconBuilder(menu.stackBuilder().display("Example Icon2").of("GREEN_WOOL", 1))
+                                    new IconBuilder(menu.stackBuilder().display(Component.text("Example Icon2")).of("GREEN_WOOL", 1))
                                             .withSlot(new SlotPos(2, 6))
                                             .withConstraint(IconStringConstraints.ICON_MESSAGE, "Please type: hello")
                                             .withActions(new ChatAction(callback -> {
@@ -190,26 +191,26 @@ public class BukkitTNML extends JavaPlugin implements Listener {
             .withPages(
                     new PageBuilder(1)
                             .withIcons(
-                                    new IconBuilder(menu.stackBuilder().display("Example2 Icon").of("STONE", 1))
+                                    new IconBuilder(menu.stackBuilder().display(Component.text("Example2 Icon")).of("STONE", 1))
                                             .withSlot(new SlotPos(2, 5))
                                             .withConstraint(IconStringConstraints.ICON_MESSAGE, "You switched a menu and found the new button!")
                                             .withActions(new SwitchMenuAction("example"))
                                             .build(),
-                                    new IconBuilder(menu.stackBuilder().display("Dynamic Input-based Icon").of("STONE", 1))
+                                    new IconBuilder(menu.stackBuilder().display(Component.text("Dynamic Input-based Icon")).of("STONE", 1))
                                             .withItemProvider(player -> {
                                               Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
                                               if (viewer.isPresent()) {
                                                 Optional<Object> display = viewer.get().findData("example-data");
                                                 if (display.isPresent()) {
-                                                  return menu.stackBuilder().display((String) display.get()).of("GRASS", 1);
+                                                  return menu.stackBuilder().display(Component.text((String) display.get())).of("GRASS", 1);
                                                 }
                                               }
-                                              return menu.stackBuilder().display("Default Display").of("STONE", 1);
+                                              return menu.stackBuilder().display(Component.text("Default Display")).of("STONE", 1);
                                             })
                                             .withSlot(new SlotPos(2, 2))
                                             .build(),
 
-                                    new IconBuilder(menu.stackBuilder().display("Default State").of("BLACK_WOOL", 1))
+                                    new IconBuilder(menu.stackBuilder().display(Component.text("Default State")).of("BLACK_WOOL", 1))
                                             .withStateID("TEST-STATE")
                                             .withDefaultState("STATE-0")
                                             .withStateHandler(currentState -> {
@@ -224,9 +225,9 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                                   return "STATE-0";
                                               }
                                             })
-                                            .withState("STATE-1", menu.stackBuilder().display("State 1").of("BROWN_WOOL", 1))
-                                            .withState("STATE-2", menu.stackBuilder().display("State 2").of("BLUE_WOOL", 1))
-                                            .withState("STATE-3", menu.stackBuilder().display("State 3").of("GREEN_WOOL", 1))
+                                            .withState("STATE-1", menu.stackBuilder().display(Component.text("State 1")).of("BROWN_WOOL", 1))
+                                            .withState("STATE-2", menu.stackBuilder().display(Component.text("State 2")).of("BLUE_WOOL", 1))
+                                            .withState("STATE-3", menu.stackBuilder().display(Component.text("State 3")).of("GREEN_WOOL", 1))
                                             .build()
                             ).build()
             ).build();

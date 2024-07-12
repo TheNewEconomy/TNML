@@ -18,10 +18,11 @@
         <module>Sponge8</module>
         <module>Folia</module>
         <module>Examples</module>
+        <module>Paper</module>
     </modules>
 
     <properties>
-        <tnil.version>0.1.7.5-Pre-7</tnil.version>
+        <tnil.version>0.1.7.6-Pre-1</tnil.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
