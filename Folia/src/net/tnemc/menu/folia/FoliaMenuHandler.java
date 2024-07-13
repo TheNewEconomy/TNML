@@ -19,13 +19,13 @@ package net.tnemc.menu.folia;
  */
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.item.bukkit.BukkitHelper;
-import net.tnemc.item.bukkit.BukkitItemStack;
-import net.tnemc.menu.bukkit.listener.BukkitChatListener;
-import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
-import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;
+import net.tnemc.item.paper.PaperHelper;
+import net.tnemc.item.paper.PaperItemStack;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.manager.MenuManager;
+import net.tnemc.menu.folia.listener.FoliaChatListener;
+import net.tnemc.menu.folia.listener.FoliaInventoryClickListener;
+import net.tnemc.menu.folia.listener.FoliaInventoryCloseListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,7 +41,7 @@ public class FoliaMenuHandler implements MenuHandler {
 
   public FoliaMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
     this.plugin = plugin;
-    MenuManager.instance().setHelper(new BukkitHelper());
+    MenuManager.instance().setHelper(new PaperHelper());
 
     if(registerListeners) {
       registerListeners();
@@ -49,14 +49,14 @@ public class FoliaMenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
-    Bukkit.getPluginManager().registerEvents(new BukkitChatListener(plugin), plugin);
-    Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(plugin), plugin);
-    Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new FoliaChatListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new FoliaInventoryClickListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new FoliaInventoryCloseListener(plugin), plugin);
   }
 
   @Override
   public AbstractItemStack<?> stackBuilder() {
-    return new BukkitItemStack();
+    return new PaperItemStack();
   }
 
   public MenuManager getManager() {

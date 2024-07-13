@@ -1,7 +1,7 @@
 package net.tnemc.menu.folia;
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.menu.bukkit.BukkitInventory;
+import net.tnemc.menu.paper.PaperInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
-public class FoliaInventory extends BukkitInventory {
+public class FoliaInventory extends PaperInventory {
   public FoliaInventory(UUID id, JavaPlugin plugin) {
     super(id, plugin);
   }

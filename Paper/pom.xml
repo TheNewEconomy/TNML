@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.5.0.1-SNAPSHOT-7</version>
+        <version>1.5.0.1-SNAPSHOT-8</version>
     </parent>
 
     <artifactId>TNML-Paper</artifactId>
@@ -59,19 +59,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.5.0.1-SNAPSHOT-7</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.tnemc</groupId>
-            <artifactId>TNML-Bukkit</artifactId>
-            <version>1.5.0.1-SNAPSHOT-7</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.tnemc</groupId>
-                    <artifactId>TNIL-Bukkit</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>1.5.0.1-SNAPSHOT-8</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -127,6 +115,23 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+                    <artifactSet>
+                        <excludes>
+                            <exclude>net.tnemc:TNIL-Bukkit</exclude>
+                            <exclude>net.kyori:adventure-api</exclude>
+                            <exclude>net.kyori:adventure-text-serializer-legacy</exclude>
+                        </excludes>
+                    </artifactSet>
+                    <filters>
+                        <filter>
+                            <excludes>
+                                <exclude>net/kyori/adventure/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
             </plugin>
         </plugins>
     </build>

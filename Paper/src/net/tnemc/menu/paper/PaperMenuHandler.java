@@ -19,15 +19,13 @@ package net.tnemc.menu.paper;
  */
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.item.bukkit.BukkitHelper;
-import net.tnemc.item.bukkit.BukkitItemStack;
-import net.tnemc.menu.bukkit.listener.BukkitChatListener;
-import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
-import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;
+import net.tnemc.item.paper.PaperHelper;
+import net.tnemc.item.paper.PaperItemStack;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.manager.MenuManager;
-import net.tnemc.paper.PaperHelper;
-import net.tnemc.paper.PaperItemStack;
+import net.tnemc.menu.paper.listener.PaperChatListener;
+import net.tnemc.menu.paper.listener.PaperInventoryClickListener;
+import net.tnemc.menu.paper.listener.PaperInventoryCloseListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -51,9 +49,9 @@ public class PaperMenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
-    Bukkit.getPluginManager().registerEvents(new BukkitChatListener(plugin), plugin);
-    Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(plugin), plugin);
-    Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new PaperChatListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new PaperInventoryClickListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new PaperInventoryCloseListener(plugin), plugin);
   }
 
   @Override

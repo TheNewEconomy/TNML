@@ -17,7 +17,6 @@ package net.tnemc.menu.core.callbacks.page;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.Page;
 
 /**

@@ -6,7 +6,7 @@
 
     <groupId>net.tnemc</groupId>
     <artifactId>TNML</artifactId>
-    <version>1.5.0.1-SNAPSHOT-7</version>
+    <version>1.5.0.1-SNAPSHOT-8</version>
     <packaging>pom</packaging>
     <name>The New Menu Library</name>
 
@@ -14,15 +14,15 @@
 
         <module>Core</module>
         <module>Bukkit</module>
+        <module>Paper</module>
+        <module>Folia</module>
         <module>Sponge7</module>
         <module>Sponge8</module>
-        <module>Folia</module>
         <module>Examples</module>
-        <module>Paper</module>
     </modules>
 
     <properties>
-        <tnil.version>0.1.7.6-Pre-1</tnil.version>
+        <tnil.version>0.1.7.6-Pre-2</tnil.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
@@ -73,5 +73,4 @@
             <url>https://repo.codemc.io/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
 </project>
