@@ -6,7 +6,7 @@
 
     <groupId>net.tnemc</groupId>
     <artifactId>TNML</artifactId>
-    <version>1.5.0.1-SNAPSHOT-13</version>
+    <version>1.5.0.1-SNAPSHOT-14</version>
     <packaging>pom</packaging>
     <name>The New Menu Library</name>
 
@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-        <tnil.version>0.1.7.6-Pre-8</tnil.version>
+        <tnil.version>0.1.7.6-Pre-9</tnil.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
