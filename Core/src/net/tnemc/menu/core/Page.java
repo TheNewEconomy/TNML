@@ -18,14 +18,18 @@ package net.tnemc.menu.core;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.menu.core.builder.IconBuilder;
 import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.utils.SlotPos;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
 
 /**
  * Page
@@ -49,6 +53,45 @@ public class Page {
 
   public int number() {
     return pageNumber;
+  }
+
+  /**
+   * Sets the specified {@link IconBuilder} to the specified row.
+   *
+   * @param row The row index where the icons will be set. Rows are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   */
+  public void setRow(final int row, final IconBuilder iconBuilder) {
+    for(int i = 1; i <= ROW_SIZE; i++) {
+      addIcon(iconBuilder.withSlot(new SlotPos(row, i)).build());
+    }
+  }
+
+  /**
+   * Sets the specified {@link IconBuilder} to the specified column.
+   *
+   * @param menuRows The number of rows that the menu has.
+   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   */
+  public void setColumn(final int menuRows, final int column, final IconBuilder iconBuilder) {
+
+    setColumn(menuRows, 1, column, iconBuilder);
+  }
+
+  /**
+   * Sets the specified {@link IconBuilder} to the specified column.
+   *
+   * @param menuRows The number of rows that the menu has.
+   * @param startingRow The row that the icons should start at.
+   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   */
+  public void setColumn(final int menuRows, final int startingRow, final int column, final IconBuilder iconBuilder) {
+
+    for(int i = startingRow; i <= menuRows; i++) {
+      addIcon(iconBuilder.withSlot(new SlotPos(i, column)).build());
+    }
   }
 
   /**

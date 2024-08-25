@@ -68,7 +68,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
-    Inventory inventory = Inventory
+    final Inventory inventory = Inventory
         .builder().property(InventoryTitle.of(Text.of(menu.getTitle())))
         .property(InventoryDimension.of(9, menu.getRows())).build(plugin);
 

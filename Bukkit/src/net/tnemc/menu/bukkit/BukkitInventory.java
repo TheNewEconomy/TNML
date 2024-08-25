@@ -66,7 +66,7 @@ public class BukkitInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public Inventory build(final MenuPlayer player, Menu menu, int page) {
-    Inventory inventory = Bukkit.createInventory(null, menu.getRows() * 9, menu.getTitle());
+    final Inventory inventory = Bukkit.createInventory(null, menu.getRows() * 9, menu.getTitle());
 
     if(menu.pages.containsKey(page)) {
 
