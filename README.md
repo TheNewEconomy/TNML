@@ -3,10 +3,9 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a4759b6313274de3b27108c0de5987fd)](https://www.codacy.com/gh/TheNewEconomy/TNML/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TheNewEconomy/TNML&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://ci.codemc.io/job/creatorfromhell/job/TheNewMenuLibrary/badge/icon)](https://ci.codemc.io/job/creatorfromhell/job/TheNewMenuLibrary/)
 
-A library used by The New Economy for custom inventory-based menus. The New Menu Library grants developers
-the ability to write their custom menus once, and run it across multiple Minecraft platforms. Check below for
-platform support. Please note this library depends on The New Item Library so verify that the platform is supported
-there too.
+The New Menu Library is a versatile tool designed for developers working within The New Economy ecosystem, enabling the creation of custom, inventory-based menus that function seamlessly across multiple Minecraft platforms. This library allows developers to craft their menus just once and deploy them effortlessly on various supported platforms, streamlining the development process and ensuring consistency in user experience.
+
+It's important to note that The New Menu Library relies on The New Item Library as a dependency, so developers should confirm that their target platform is compatible with both libraries. By leveraging this library, developers can efficiently manage and implement custom menus, enhancing their Minecraft projects with ease and flexibility.
 
 ## Documentation
 
