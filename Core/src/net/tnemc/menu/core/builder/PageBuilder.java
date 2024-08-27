@@ -22,11 +22,14 @@ import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.Icon;
+import net.tnemc.menu.core.utils.SlotPos;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
 
 /**
  * Builder class for creating instances of the {@link Page} class.
@@ -46,6 +49,63 @@ public class PageBuilder {
 
   public PageBuilder(int pageNumber) {
     this.pageNumber = pageNumber;
+  }
+
+  /**
+   * Adds the specified {@link IconBuilder} to the specified row.
+   *
+   * @param row The row index where the icons will be set. Rows are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   */
+  public PageBuilder withRow(final int row, final IconBuilder iconBuilder) {
+    for(int i = 1; i <= ROW_SIZE; i++) {
+      final Icon icon = iconBuilder.withSlot(new SlotPos(row, i)).build();
+      this.icons.put(icon.slot(), icon);
+    }
+    return this;
+  }
+
+  /**
+   * Adds the specified {@link IconBuilder} to the specified column.
+   *
+   * @param menuRows The number of rows that the menu has.
+   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   */
+  public PageBuilder withColumn(final int menuRows, final int column, final IconBuilder iconBuilder) {
+
+    return withColumn(menuRows, 1, menuRows, column, iconBuilder);
+  }
+
+  /**
+   * Adds the specified {@link IconBuilder} to the specified column.
+   *
+   * @param menuRows The number of rows that the menu has.
+   * @param startingRow The row that the icons should start at, inclusive.
+   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   */
+  public PageBuilder withColumn(final int menuRows, final int startingRow, final int column, final IconBuilder iconBuilder) {
+
+    return withColumn(menuRows, startingRow, menuRows, column, iconBuilder);
+  }
+
+  /**
+   * Adds the specified {@link IconBuilder} to the specified column.
+   *
+   * @param menuRows The number of rows that the menu has.
+   * @param startingRow The row that the icons should start at, inclusive.
+   * @param endingRow The row that the icons should end at, inclusive.
+   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   */
+  public PageBuilder withColumn(final int menuRows, final int startingRow, final int endingRow, final int column, final IconBuilder iconBuilder) {
+
+    for(int i = startingRow; i <= endingRow; i++) {
+      final Icon icon = iconBuilder.withSlot(new SlotPos(i, column)).build();
+      this.icons.put(icon.slot(), icon);
+    }
+    return this;
   }
 
   /**

@@ -19,14 +19,18 @@ package net.tnemc.menu.core.viewer;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.PlayerInstancePage;
 import net.tnemc.menu.core.callbacks.ChatCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.manager.MenuManager;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Predicate;
 
 /**
@@ -38,6 +42,13 @@ import java.util.function.Predicate;
 public class MenuViewer {
 
   private final Map<String, Object> data = new ConcurrentHashMap<>();
+
+  /**
+   * Represents a collection that contains all of {@link net.tnemc.menu.core.PlayerInstancePage PlayerPages}
+   * that this viewer has an instance in. This will let use remove them from the memory so we are holding
+   * them forever.
+   */
+  private final Queue<String> menuInstances = new ConcurrentLinkedQueue<>();
 
   private final UUID uuid;
 
@@ -85,6 +96,26 @@ public class MenuViewer {
     this.data.put(identifier, data);
   }
 
+  public void addInstance(final String identifier) {
+    this.menuInstances.add(identifier);
+  }
+
+  public void removeInstances() {
+    for(final String menu : menuInstances) {
+
+      final Optional<Menu> menuObj = MenuManager.instance().findMenu(menu);
+      if(menuObj.isPresent()) {
+
+        for(Page page : menuObj.get().pages.values()) {
+
+          if(page instanceof PlayerInstancePage playerPage) {
+            playerPage.removeInstance(uuid);
+          }
+        }
+      }
+    }
+  }
+
   public Optional<Object> findData(final String identifier) {
     return Optional.ofNullable(data.get(identifier));
   }
@@ -102,6 +133,8 @@ public class MenuViewer {
 
     final Optional<Menu> menuObj = MenuManager.instance().findMenu(menu);
     menuObj.ifPresent(value->value.onClose(player));
+
+    removeInstances();
 
     MenuManager.instance().removeViewer(uuid);
   }
