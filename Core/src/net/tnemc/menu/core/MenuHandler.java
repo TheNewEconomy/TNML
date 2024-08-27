@@ -28,7 +28,16 @@ import net.tnemc.item.AbstractItemStack;
  */
 public interface MenuHandler {
 
+  /**
+   * Used to register the listeners automatically without having to manually register each TNML Listener.
+   */
   void registerListeners();
 
+  /**
+   * This method is used to get an empty {@link AbstractItemStack item stack} object for the platform
+   * to help build a new item stack for an icon.
+   *
+   * @return an instance of AbstractItemStack representing an in-progress item builder for the platform.
+   */
   AbstractItemStack<?> stackBuilder();
 }

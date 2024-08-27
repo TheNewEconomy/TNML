@@ -12,7 +12,7 @@ there too.
 
 [Wiki](https://github.com/TheNewEconomy/TNML/wiki/)
 
-[JavaDoc]() - coming soon
+[JavaDoc](https://tnemc.net/jd/tnml)
 
 ## Maven
 The New Menu Library uses maven for dependency management.

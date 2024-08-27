@@ -16,7 +16,7 @@
         <module>Bukkit</module>
         <module>Paper</module>
         <module>Folia</module>
-        <module>Sponge7</module>
+        <!--<module>Sponge7</module>-->
         <module>Sponge8</module>
         <module>Examples</module>
     </modules>
