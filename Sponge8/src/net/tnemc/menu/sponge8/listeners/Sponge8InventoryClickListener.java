@@ -41,12 +41,14 @@ public class Sponge8InventoryClickListener {
 
   private final PluginContainer container;
 
-  public Sponge8InventoryClickListener(PluginContainer container) {
+  public Sponge8InventoryClickListener(final PluginContainer container) {
+
     this.container = container;
   }
 
   @Listener
-  public void onClick(ClickContainerEvent event, @First ServerPlayer player) {
+  public void onClick(final ClickContainerEvent event, @First final ServerPlayer player) {
+
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
@@ -60,8 +62,8 @@ public class Sponge8InventoryClickListener {
 
         if(slotIndex > -1) {
           final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(slotIndex),
-                  sPlayer, menu.get(), data.get().page(),
-                  convertClick(event)));
+                                                                         sPlayer, menu.get(), data.get().page(),
+                                                                         convertClick(event)));
 
           if(cancel) {
             event.setCancelled(true);
@@ -71,8 +73,9 @@ public class Sponge8InventoryClickListener {
     }
   }
 
-  private ActionType convertClick(ClickContainerEvent event) {
-    if (event instanceof ClickContainerEvent.Shift.Primary) {
+  private ActionType convertClick(final ClickContainerEvent event) {
+
+    if(event instanceof ClickContainerEvent.Shift.Primary) {
       return ActionType.LEFT_SHIFT;
     } else if(event instanceof ClickContainerEvent.Shift.Secondary) {
       return ActionType.RIGHT_SHIFT;

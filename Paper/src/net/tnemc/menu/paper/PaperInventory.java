@@ -41,7 +41,8 @@ public class PaperInventory implements PlayerInventory<Inventory> {
   protected final UUID id;
   protected final JavaPlugin plugin;
 
-  public PaperInventory(UUID id, JavaPlugin plugin) {
+  public PaperInventory(final UUID id, final JavaPlugin plugin) {
+
     this.id = id;
     this.plugin = plugin;
   }
@@ -53,6 +54,7 @@ public class PaperInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public UUID player() {
+
     return id;
   }
 
@@ -65,7 +67,8 @@ public class PaperInventory implements PlayerInventory<Inventory> {
    * @return The built inventory.
    */
   @Override
-  public Inventory build(final MenuPlayer player, Menu menu, int page) {
+  public Inventory build(final MenuPlayer player, final Menu menu, final int page) {
+
     final Inventory inventory = Bukkit.createInventory(null, menu.getRows() * 9, menu.getTitle());
 
     if(menu.pages.containsKey(page)) {
@@ -75,7 +78,7 @@ public class PaperInventory implements PlayerInventory<Inventory> {
         pageObj.getOpen().accept(new PageOpenCallback(pageObj, player));
       }
 
-      for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
+      for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
         inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
       }
@@ -91,11 +94,12 @@ public class PaperInventory implements PlayerInventory<Inventory> {
    * @param inventory The inventory to open.
    */
   @Override
-  public void openInventory(Inventory inventory) {
+  public void openInventory(final Inventory inventory) {
+
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
       Bukkit.getScheduler().runTask(plugin, ()->{
-          player.getPlayer().openInventory(inventory);
+        player.getPlayer().openInventory(inventory);
       });
     }
   }
@@ -107,7 +111,8 @@ public class PaperInventory implements PlayerInventory<Inventory> {
    * @param item The item to update the specified slot with.
    */
   @Override
-  public void updateInventory(int slot, AbstractItemStack<?> item) {
+  public void updateInventory(final int slot, final AbstractItemStack<?> item) {
+
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
       Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().getOpenInventory().setItem(slot, (ItemStack)item.locale()));
@@ -119,6 +124,7 @@ public class PaperInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public void close() {
+
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
       Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().closeInventory());

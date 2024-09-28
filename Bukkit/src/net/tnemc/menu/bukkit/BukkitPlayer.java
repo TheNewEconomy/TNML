@@ -32,7 +32,8 @@ public class BukkitPlayer implements MenuPlayer {
   protected OfflinePlayer player;
   protected final JavaPlugin plugin;
 
-  public BukkitPlayer(OfflinePlayer player, JavaPlugin plugin) {
+  public BukkitPlayer(final OfflinePlayer player, final JavaPlugin plugin) {
+
     this.player = player;
     this.plugin = plugin;
   }
@@ -44,6 +45,7 @@ public class BukkitPlayer implements MenuPlayer {
    */
   @Override
   public UUID identifier() {
+
     return player.getUniqueId();
   }
 
@@ -54,6 +56,7 @@ public class BukkitPlayer implements MenuPlayer {
    */
   @Override
   public BukkitInventory inventory() {
+
     return new BukkitInventory(identifier(), plugin);
   }
 
@@ -65,7 +68,8 @@ public class BukkitPlayer implements MenuPlayer {
    * @return True if the player has the permission, otherwise false.
    */
   @Override
-  public boolean hasPermission(String permission) {
+  public boolean hasPermission(final String permission) {
+
     if(player.getPlayer() != null) {
       return player.getPlayer().hasPermission(permission);
     }
@@ -78,7 +82,8 @@ public class BukkitPlayer implements MenuPlayer {
    * @param message The message.
    */
   @Override
-  public void message(String message) {
+  public void message(final String message) {
+
     if(player.getPlayer() != null) {
       player.getPlayer().sendMessage(message);
     }

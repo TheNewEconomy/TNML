@@ -37,12 +37,13 @@ public class Sponge8InteractInventoryListener {
 
   private final PluginContainer container;
 
-  public Sponge8InteractInventoryListener(PluginContainer container) {
+  public Sponge8InteractInventoryListener(final PluginContainer container) {
+
     this.container = container;
   }
 
   @Listener
-  public void onClose(ChangeInventoryEvent event, @First ServerPlayer player) {
+  public void onClose(final ChangeInventoryEvent event, @First final ServerPlayer player) {
 
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(sPlayer.identifier());

@@ -36,8 +36,8 @@ import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
  * Builder class for creating instances of the {@link PlayerInstancePage} class.
  *
  * @author creatorfromhell
- * @since 1.6.0.0
  * @see PlayerInstancePage
+ * @since 1.6.0.0
  */
 public class PlayerPageBuilder {
 
@@ -48,43 +48,52 @@ public class PlayerPageBuilder {
 
   private final int pageNumber;
 
-  public PlayerPageBuilder(int pageNumber) {
+  public PlayerPageBuilder(final int pageNumber) {
+
     this.pageNumber = pageNumber;
   }
 
   /**
    * Adds the specified {@link IconBuilder} to the specified row for a player.
    *
-   * @param player The UUID of the player.
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1.
+   * @param player      The UUID of the player.
+   * @param row         The row index where the icons will be set. Rows are indexed starting from
+   *                    1.
    * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
    */
   public PlayerPageBuilder withRow(final UUID player, final int row, final IconBuilder iconBuilder) {
+
     return withRow(player, row, 1, ROW_SIZE, iconBuilder);
   }
 
   /**
    * Adds the specified {@link IconBuilder} to the specified row for a player.
    *
-   * @param player The UUID of the player.
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1.
+   * @param player         The UUID of the player.
+   * @param row            The row index where the icons will be set. Rows are indexed starting from
+   *                       1.
    * @param startingColumn The column to start applying the icons on, inclusive.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   * @param iconBuilder    The {@link IconBuilder} used to construct the icons for the specified
+   *                       row.
    */
   public PlayerPageBuilder withRow(final UUID player, final int row, final int startingColumn, final IconBuilder iconBuilder) {
+
     return withRow(player, row, startingColumn, ROW_SIZE, iconBuilder);
   }
 
   /**
    * Adds the specified {@link IconBuilder} to the specified row for a player.
    *
-   * @param player The UUID of the player.
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1.
+   * @param player         The UUID of the player.
+   * @param row            The row index where the icons will be set. Rows are indexed starting from
+   *                       1.
    * @param startingColumn The column to start applying the icons on, inclusive.
-   * @param endingColumn The column to stop applying the icons on, inclusive.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   * @param endingColumn   The column to stop applying the icons on, inclusive.
+   * @param iconBuilder    The {@link IconBuilder} used to construct the icons for the specified
+   *                       row.
    */
   public PlayerPageBuilder withRow(final UUID player, final int row, final int startingColumn, final int endingColumn, final IconBuilder iconBuilder) {
+
     for(int i = startingColumn; i <= endingColumn; i++) {
       final Icon icon = iconBuilder.withSlot(new SlotPos(row, i)).build();
       this.getPlayerIcons(player).put(icon.slot(), icon);
@@ -95,39 +104,48 @@ public class PlayerPageBuilder {
   /**
    * Adds the specified {@link IconBuilder} to the specified column for a player.
    *
-   * @param player The UUID of the player.
-   * @param menuRows The number of rows that the menu has.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param player      The UUID of the player.
+   * @param menuRows    The number of rows that the menu has.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public PlayerPageBuilder withColumn(final UUID player, final int menuRows, final int column, final IconBuilder iconBuilder) {
+
     return withColumn(player, menuRows, 1, menuRows, column, iconBuilder);
   }
 
   /**
    * Adds the specified {@link IconBuilder} to the specified column for a player.
    *
-   * @param player The UUID of the player.
-   * @param menuRows The number of rows that the menu has.
+   * @param player      The UUID of the player.
+   * @param menuRows    The number of rows that the menu has.
    * @param startingRow The row that the icons should start at, inclusive.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public PlayerPageBuilder withColumn(final UUID player, final int menuRows, final int startingRow, final int column, final IconBuilder iconBuilder) {
+
     return withColumn(player, menuRows, startingRow, menuRows, column, iconBuilder);
   }
 
   /**
    * Adds the specified {@link IconBuilder} to the specified column for a player.
    *
-   * @param player The UUID of the player.
-   * @param menuRows The number of rows that the menu has.
+   * @param player      The UUID of the player.
+   * @param menuRows    The number of rows that the menu has.
    * @param startingRow The row that the icons should start at, inclusive.
-   * @param endingRow The row that the icons should end at, inclusive.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param endingRow   The row that the icons should end at, inclusive.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public PlayerPageBuilder withColumn(final UUID player, final int menuRows, final int startingRow, final int endingRow, final int column, final IconBuilder iconBuilder) {
+
     for(int i = startingRow; i <= endingRow; i++) {
       final Icon icon = iconBuilder.withSlot(new SlotPos(i, column)).build();
       this.getPlayerIcons(player).put(icon.slot(), icon);
@@ -139,11 +157,13 @@ public class PlayerPageBuilder {
    * Adds icons to the page for a player.
    *
    * @param player The UUID of the player.
-   * @param icons The {@link Icon icons} to be added to the page.
+   * @param icons  The {@link Icon icons} to be added to the page.
+   *
    * @return This {@code PlayerPageBuilder} instance for method chaining.
    */
-  public PlayerPageBuilder withIcons(UUID player, Icon... icons) {
-    for(Icon icon : icons) {
+  public PlayerPageBuilder withIcons(final UUID player, final Icon... icons) {
+
+    for(final Icon icon : icons) {
       this.getPlayerIcons(player).put(icon.slot(), icon);
     }
     return this;
@@ -153,9 +173,11 @@ public class PlayerPageBuilder {
    * Sets the click handler for the page.
    *
    * @param clickHandler The click handler to be set for the page.
+   *
    * @return This {@code PlayerPageBuilder} instance for method chaining.
    */
-  public PlayerPageBuilder withClickHandler(Function<MenuClickHandler, Boolean> clickHandler) {
+  public PlayerPageBuilder withClickHandler(final Function<MenuClickHandler, Boolean> clickHandler) {
+
     this.clickHandler = clickHandler;
     return this;
   }
@@ -164,22 +186,26 @@ public class PlayerPageBuilder {
    * Sets the open handler for the page.
    *
    * @param open The open handler to be set for the page.
+   *
    * @return This {@code PlayerPageBuilder} instance for method chaining.
    */
-  public PlayerPageBuilder withOpenHandler(Consumer<PageOpenCallback> open) {
+  public PlayerPageBuilder withOpenHandler(final Consumer<PageOpenCallback> open) {
+
     this.open = open;
     return this;
   }
 
   /**
-   * Builds and returns the {@link PlayerInstancePage} instance based on the provided configuration.
+   * Builds and returns the {@link PlayerInstancePage} instance based on the provided
+   * configuration.
    *
    * @return The constructed {@code PlayerInstancePage} instance.
    */
   public PlayerInstancePage build() {
+
     final PlayerInstancePage page = new PlayerInstancePage(pageNumber);
 
-    for (UUID player : playerIcons.keySet()) {
+    for(final UUID player : playerIcons.keySet()) {
       page.getIcons(player).putAll(playerIcons.get(player));
     }
     page.setClickHandler(clickHandler);
@@ -192,12 +218,14 @@ public class PlayerPageBuilder {
    * Retrieves the icons for a given player.
    *
    * @param player The UUID of the player.
+   *
    * @return A map of icon slots to Icon objects.
    */
   private Map<Integer, Icon> getPlayerIcons(final UUID player) {
+
     if(playerIcons.containsKey(player)) {
       return playerIcons.get(player);
     }
-    return playerIcons.computeIfAbsent(player, k -> new HashMap<>());
+    return playerIcons.computeIfAbsent(player, k->new HashMap<>());
   }
 }

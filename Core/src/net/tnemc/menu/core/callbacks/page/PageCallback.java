@@ -29,15 +29,18 @@ public class PageCallback {
 
   protected Page page;
 
-  public PageCallback(Page page) {
+  public PageCallback(final Page page) {
+
     this.page = page;
   }
 
   public Page getPage() {
+
     return page;
   }
 
-  public void setPage(Page page) {
+  public void setPage(final Page page) {
+
     this.page = page;
   }
 }

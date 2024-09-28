@@ -30,16 +30,19 @@ public class PageOpenCallback extends PageCallback {
 
   protected final MenuPlayer player;
 
-  public PageOpenCallback(Page page, MenuPlayer player) {
+  public PageOpenCallback(final Page page, final MenuPlayer player) {
+
     super(page);
     this.player = player;
   }
 
   public Page getPage() {
+
     return page;
   }
 
   public MenuPlayer getPlayer() {
+
     return player;
   }
 }

@@ -35,15 +35,18 @@ public class PlayerInstance {
 
   final UUID player;
 
-  public PlayerInstance(UUID player) {
+  public PlayerInstance(final UUID player) {
+
     this.player = player;
   }
 
   public Map<Integer, Icon> getIcons() {
+
     return icons;
   }
 
   public void addIcon(final Icon icon) {
+
     icons.put(icon.slot(), icon);
   }
 }

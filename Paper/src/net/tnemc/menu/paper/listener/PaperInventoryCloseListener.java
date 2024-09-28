@@ -37,7 +37,8 @@ public class PaperInventoryCloseListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public PaperInventoryCloseListener(JavaPlugin plugin) {
+  public PaperInventoryCloseListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 

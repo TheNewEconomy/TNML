@@ -38,12 +38,14 @@ public class ChatAction extends IconAction {
 
   private final Predicate<ChatCallback> chatCallback;
 
-  public ChatAction(Predicate<ChatCallback> chatCallback) {
+  public ChatAction(final Predicate<ChatCallback> chatCallback) {
+
     super(ActionType.ANY);
     this.chatCallback = chatCallback;
   }
 
-  public ChatAction(Predicate<ChatCallback> chatCallback, final ActionType type) {
+  public ChatAction(final Predicate<ChatCallback> chatCallback, final ActionType type) {
+
     super(type);
     this.chatCallback = chatCallback;
   }
@@ -57,7 +59,7 @@ public class ChatAction extends IconAction {
    * {@code false}.
    */
   @Override
-  public boolean onClick(MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(handler.player().identifier());
     if(viewer.isPresent()) {

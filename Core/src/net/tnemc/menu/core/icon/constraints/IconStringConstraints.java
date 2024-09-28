@@ -27,8 +27,8 @@ import net.tnemc.menu.core.icon.Icon;
 /**
  * Represents the String constraints for an {@link Icon}
  *
- * @see ConstraintHolder
  * @author creatorfromhell
+ * @see ConstraintHolder
  * @since 1.0.0.0
  */
 public enum IconStringConstraints implements StringConstraint {
@@ -36,24 +36,27 @@ public enum IconStringConstraints implements StringConstraint {
   ICON_PERMISSION {
     @Override
     public String identifier() {
+
       return "ICON_PERMISSION";
     }
 
     @Override
     public String defaultValue() {
+
       return "";
     }
   },
 
   ICON_MESSAGE {
-
     @Override
     public String identifier() {
+
       return "ICON_MESSAGE";
     }
 
     @Override
     public String defaultValue() {
+
       return "";
     }
   }

@@ -41,12 +41,14 @@ public class Sponge7InventoryClickListener {
 
   private final Plugin plugin;
 
-  public Sponge7InventoryClickListener(Plugin plugin) {
+  public Sponge7InventoryClickListener(final Plugin plugin) {
+
     this.plugin = plugin;
   }
 
   @Listener
-  public void onDouble(ClickInventoryEvent event, @First Player player) {
+  public void onDouble(final ClickInventoryEvent event, @First final Player player) {
+
     final SpongePlayer sPlayer = new SpongePlayer(player, plugin);
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
@@ -60,8 +62,8 @@ public class Sponge7InventoryClickListener {
 
         if(property.isPresent()) {
           final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(property.get().getValue()),
-                  sPlayer, menu.get(), data.get().page(),
-                  convertClick(event)));
+                                                                         sPlayer, menu.get(), data.get().page(),
+                                                                         convertClick(event)));
 
           if(cancel) {
             event.setCancelled(true);
@@ -88,9 +90,9 @@ public class Sponge7InventoryClickListener {
   }
 
 
+  private ActionType convertClick(final ClickInventoryEvent event) {
 
-  private ActionType convertClick(ClickInventoryEvent event) {
-    if (event instanceof ClickInventoryEvent.Shift.Primary) {
+    if(event instanceof ClickInventoryEvent.Shift.Primary) {
       return ActionType.LEFT_SHIFT;
     } else if(event instanceof ClickInventoryEvent.Shift.Secondary) {
       return ActionType.RIGHT_SHIFT;

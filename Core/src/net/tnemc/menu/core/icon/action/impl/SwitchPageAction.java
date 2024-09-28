@@ -33,13 +33,15 @@ public class SwitchPageAction extends IconAction {
   private final String menu;
   private final int page;
 
-  public SwitchPageAction(String menu, int page) {
+  public SwitchPageAction(final String menu, final int page) {
+
     super(ActionType.ANY);
     this.menu = menu;
     this.page = page;
   }
 
-  public SwitchPageAction(String menu, int page, ActionType type) {
+  public SwitchPageAction(final String menu, final int page, final ActionType type) {
+
     super(type);
     this.menu = menu;
     this.page = page;
@@ -54,7 +56,7 @@ public class SwitchPageAction extends IconAction {
    * {@code false}.
    */
   @Override
-  public boolean onClick(MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
 
     handler.player().status(CoreStatus.SWITCHING);
     handler.player().inventory().openMenu(handler.player(), menu, page);

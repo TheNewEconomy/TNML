@@ -31,8 +31,8 @@ import java.util.function.Consumer;
  * Builder class for creating instances of the {@link Menu} class.
  *
  * @author creatorfromhell
- * @since 1.5.0.0
  * @see Menu
+ * @since 1.5.0.0
  */
 public class MenuBuilder {
 
@@ -43,7 +43,8 @@ public class MenuBuilder {
   private Consumer<MenuOpenCallback> open;
   private Consumer<MenuCloseCallback> close;
 
-  public MenuBuilder(String name) {
+  public MenuBuilder(final String name) {
+
     this.name = name;
   }
 
@@ -51,9 +52,11 @@ public class MenuBuilder {
    * Sets the title for the menu.
    *
    * @param title The title to be set for the menu.
+   *
    * @return This {@link MenuBuilder} instance for method chaining.
    */
-  public MenuBuilder withTitle(String title) {
+  public MenuBuilder withTitle(final String title) {
+
     this.title = title;
     return this;
   }
@@ -62,9 +65,11 @@ public class MenuBuilder {
    * Sets the number of rows for the menu.
    *
    * @param rows The number of rows to be set for the menu.
+   *
    * @return This {@link MenuBuilder} instance for method chaining.
    */
-  public MenuBuilder withRows(int rows) {
+  public MenuBuilder withRows(final int rows) {
+
     this.rows = rows;
     return this;
   }
@@ -73,9 +78,11 @@ public class MenuBuilder {
    * Sets the open callback for the menu.
    *
    * @param open The open callback to be set for the menu.
+   *
    * @return This {@link MenuBuilder} instance for method chaining.
    */
-  public MenuBuilder withOpenCallback(Consumer<MenuOpenCallback> open) {
+  public MenuBuilder withOpenCallback(final Consumer<MenuOpenCallback> open) {
+
     this.open = open;
     return this;
   }
@@ -84,9 +91,11 @@ public class MenuBuilder {
    * Sets the close callback for the menu.
    *
    * @param close The close callback to be set for the menu.
+   *
    * @return This {@link MenuBuilder} instance for method chaining.
    */
-  public MenuBuilder withCloseCallback(Consumer<MenuCloseCallback> close) {
+  public MenuBuilder withCloseCallback(final Consumer<MenuCloseCallback> close) {
+
     this.close = close;
     return this;
   }
@@ -95,10 +104,12 @@ public class MenuBuilder {
    * Adds pages to the menu using varargs.
    *
    * @param pages The pages to be added to the menu.
+   *
    * @return This {@link MenuBuilder} instance for method chaining.
    */
-  public MenuBuilder withPages(Page... pages) {
-    for (Page page : pages) {
+  public MenuBuilder withPages(final Page... pages) {
+
+    for(final Page page : pages) {
       this.pages.put(page.number(), page);
     }
     return this;
@@ -110,6 +121,7 @@ public class MenuBuilder {
    * @return The constructed {@link Menu} instance.
    */
   public Menu build() {
+
     final Menu menu = new Menu();
 
     menu.getPages().putAll(pages);

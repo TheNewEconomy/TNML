@@ -32,12 +32,14 @@ public class SwitchMenuAction extends IconAction {
 
   private final String menu;
 
-  public SwitchMenuAction(String menu) {
+  public SwitchMenuAction(final String menu) {
+
     super(ActionType.ANY);
     this.menu = menu;
   }
 
-  public SwitchMenuAction(String menu, ActionType type) {
+  public SwitchMenuAction(final String menu, final ActionType type) {
+
     super(type);
     this.menu = menu;
   }
@@ -51,7 +53,7 @@ public class SwitchMenuAction extends IconAction {
    * {@code false}.
    */
   @Override
-  public boolean onClick(MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
 
     handler.player().status(CoreStatus.SWITCHING);
     handler.player().inventory().openMenu(handler.player(), menu);

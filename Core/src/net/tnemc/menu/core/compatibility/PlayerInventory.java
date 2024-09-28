@@ -26,9 +26,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * A class that acts as a bridge between various inventory objects on different server software providers.
+ * A class that acts as a bridge between various inventory objects on different server software
+ * providers.
  *
  * @param <I> Represents the platform's Inventory object.
+ *
  * @author creatorfromhell
  * @since 1.0.0
  */
@@ -36,6 +38,7 @@ public interface PlayerInventory<I> {
 
   /**
    * The player associated with this inventory provider.
+   *
    * @return The {@link UUID} for the player for this {@link PlayerInventory}
    */
   UUID player();
@@ -48,6 +51,7 @@ public interface PlayerInventory<I> {
    * @return The built inventory.
    */
   default I build(final MenuPlayer player, final Menu menu) {
+
     return build(player, menu, 1);
   }
 
@@ -55,8 +59,8 @@ public interface PlayerInventory<I> {
    * Builds an inventory object from a menu.
    *
    * @param player The player that is opening the menu.
-   * @param menu The menu to build.
-   * @param page The page to use during the build.
+   * @param menu   The menu to build.
+   * @param page   The page to use during the build.
    *
    * @return The built inventory.
    */
@@ -75,23 +79,27 @@ public interface PlayerInventory<I> {
    * @return True if this player is inside the specified menu, otherwise false.
    */
   default boolean inMenu() {
+
     return MenuManager.instance().inMenu(player());
   }
 
   /**
    * Used to open the provided menu for this player.
+   *
    * @param player The menu player.
-   * @param menu The menu to open.
+   * @param menu   The menu to open.
    */
   default void openMenu(final MenuPlayer player, final Menu menu) {
+
     openMenu(player, menu, 1);
   }
 
   /**
    * Used to open the provided menu for this player on the specified page.
+   *
    * @param player The menu player.
-   * @param menu The menu to open.
-   * @param page The page to open.
+   * @param menu   The menu to open.
+   * @param page   The page to open.
    */
   default void openMenu(final MenuPlayer player, final Menu menu, final int page) {
 
@@ -102,18 +110,21 @@ public interface PlayerInventory<I> {
 
   /**
    * Used to open the provided menu for this player.
+   *
    * @param player The menu player.
-   * @param menu The menu to open.
+   * @param menu   The menu to open.
    */
   default void openMenu(final MenuPlayer player, final String menu) {
+
     openMenu(player, menu, 1);
   }
 
   /**
    * Used to open the provided menu for this player on the specified page.
+   *
    * @param player The menu player.
-   * @param menu The menu to open.
-   * @param page The page to open.
+   * @param menu   The menu to open.
+   * @param page   The page to open.
    */
   default void openMenu(final MenuPlayer player, final String menu, final int page) {
 

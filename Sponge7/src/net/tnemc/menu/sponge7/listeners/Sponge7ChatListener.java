@@ -39,12 +39,13 @@ public class Sponge7ChatListener {
 
   private final Plugin plugin;
 
-  public Sponge7ChatListener(Plugin plugin) {
+  public Sponge7ChatListener(final Plugin plugin) {
+
     this.plugin = plugin;
   }
 
   @Listener
-  public void onClose(MessageChannelEvent.Chat event) {
+  public void onClose(final MessageChannelEvent.Chat event) {
 
     if(event.getSource() instanceof Player) {
       final SpongePlayer sPlayer = new SpongePlayer((Player)event.getSource(), plugin);
@@ -55,8 +56,8 @@ public class Sponge7ChatListener {
         event.setCancelled(true);
 
         final ChatCallback callback = new ChatCallback(sPlayer, event.getRawMessage().toPlain(),
-                viewer.get().menu(),
-                viewer.get().page());
+                                                       viewer.get().menu(),
+                                                       viewer.get().page());
 
         if(viewer.get().chat(callback)) {
 

@@ -32,15 +32,18 @@ public interface ConstraintHolder {
 
   Map<String, String> constraints();
 
-  default <T> void addConstraint(Constraint<T> constraint, T value) {
+  default <T> void addConstraint(final Constraint<T> constraint, final T value) {
+
     constraints().put(constraint.identifier(), constraint.asString(value));
   }
 
-  default <T> T getConstraint(Constraint<T> constraint) {
+  default <T> T getConstraint(final Constraint<T> constraint) {
+
     return constraint.convert(constraints().get(constraint.identifier()));
   }
 
-  default void removeConstraint(Constraint<?> constraint) {
+  default void removeConstraint(final Constraint<?> constraint) {
+
     constraints().remove(constraint.identifier());
   }
 }

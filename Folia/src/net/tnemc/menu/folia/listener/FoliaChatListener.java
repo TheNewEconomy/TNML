@@ -35,7 +35,8 @@ public class FoliaChatListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public FoliaChatListener(JavaPlugin plugin) {
+  public FoliaChatListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 
@@ -49,8 +50,8 @@ public class FoliaChatListener implements Listener {
       event.setCancelled(true);
 
       final ChatCallback callback = new ChatCallback(player, event.getMessage(),
-              viewer.get().menu(),
-              viewer.get().page());
+                                                     viewer.get().menu(),
+                                                     viewer.get().page());
 
       if(viewer.get().chat(callback)) {
 

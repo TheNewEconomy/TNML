@@ -39,6 +39,7 @@ public class Sponge8MenuHandler implements MenuHandler {
   protected final PluginContainer container;
 
   public Sponge8MenuHandler(final PluginContainer container, final boolean registerListeners) {
+
     this.container = container;
     MenuManager.instance().setHelper(new SpongeHelper());
 
@@ -48,6 +49,7 @@ public class Sponge8MenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
+
     Sponge.eventManager().registerListeners(container, new Sponge8ChatListener(container));
     Sponge.eventManager().registerListeners(container, new Sponge8InteractInventoryListener(container));
     Sponge.eventManager().registerListeners(container, new Sponge8InventoryClickListener(container));
@@ -55,10 +57,12 @@ public class Sponge8MenuHandler implements MenuHandler {
 
   @Override
   public AbstractItemStack<?> stackBuilder() {
+
     return new SpongeItemStack();
   }
 
   public MenuManager getManager() {
+
     return MenuManager.instance();
   }
 }

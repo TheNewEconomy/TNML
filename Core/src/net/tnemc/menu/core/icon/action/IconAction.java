@@ -21,8 +21,8 @@ package net.tnemc.menu.core.icon.action;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 
 /**
- * Represents an action that is performed on an icon within a menu.
- * This class provides a common structure for different types of icon actions.
+ * Represents an action that is performed on an icon within a menu. This class provides a common
+ * structure for different types of icon actions.
  *
  * @author creatorfromhell
  * @since 1.5.0.0
@@ -31,11 +31,13 @@ public abstract class IconAction {
 
   protected final ActionType type;
 
-  public IconAction(ActionType type) {
+  public IconAction(final ActionType type) {
+
     this.type = type;
   }
 
   public ActionType getType() {
+
     return type;
   }
 
@@ -45,6 +47,7 @@ public abstract class IconAction {
    * @return {@code true} if other actions should be performed, otherwise {@code false}.
    */
   public boolean continueOther() {
+
     return true;
   }
 
@@ -52,7 +55,9 @@ public abstract class IconAction {
    * Handles the click action for the icon using the provided {@link MenuClickHandler}.
    *
    * @param handler The {@link MenuClickHandler} to be executed upon the click action.
-   * @return {@code true} if the click action is blocked or has special behavior, otherwise {@code false}.
+   *
+   * @return {@code true} if the click action is blocked or has special behavior, otherwise
+   * {@code false}.
    */
   public abstract boolean onClick(final MenuClickHandler handler);
 }

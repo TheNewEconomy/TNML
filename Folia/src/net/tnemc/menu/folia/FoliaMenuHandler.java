@@ -40,6 +40,7 @@ public class FoliaMenuHandler implements MenuHandler {
   private final JavaPlugin plugin;
 
   public FoliaMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
+
     this.plugin = plugin;
     MenuManager.instance().setHelper(new PaperHelper());
 
@@ -49,6 +50,7 @@ public class FoliaMenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
+
     Bukkit.getPluginManager().registerEvents(new FoliaChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new FoliaInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new FoliaInventoryCloseListener(plugin), plugin);
@@ -56,10 +58,12 @@ public class FoliaMenuHandler implements MenuHandler {
 
   @Override
   public AbstractItemStack<?> stackBuilder() {
+
     return new PaperItemStack();
   }
 
   public MenuManager getManager() {
+
     return MenuManager.instance();
   }
 }

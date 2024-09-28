@@ -40,6 +40,7 @@ public class PaperMenuHandler implements MenuHandler {
   private final JavaPlugin plugin;
 
   public PaperMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
+
     this.plugin = plugin;
     MenuManager.instance().setHelper(new PaperHelper());
 
@@ -49,6 +50,7 @@ public class PaperMenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
+
     Bukkit.getPluginManager().registerEvents(new PaperChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new PaperInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new PaperInventoryCloseListener(plugin), plugin);
@@ -56,10 +58,12 @@ public class PaperMenuHandler implements MenuHandler {
 
   @Override
   public AbstractItemStack<?> stackBuilder() {
+
     return new PaperItemStack();
   }
 
   public MenuManager getManager() {
+
     return MenuManager.instance();
   }
 }

@@ -55,16 +55,19 @@ public class Icon implements ConstraintHolder {
   protected final Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
   protected Consumer<MenuClickHandler> click;
 
-  public Icon(@NotNull final AbstractItemStack<?> item, @Nullable Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {
+  public Icon(@NotNull final AbstractItemStack<?> item, @Nullable final Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {
+
     this.item = item;
     this.itemProvider = itemProvider;
   }
 
   public List<IconAction> getActions() {
+
     return actions;
   }
 
   public void addAction(final IconAction action) {
+
     actions.add(action);
   }
 
@@ -82,7 +85,7 @@ public class Icon implements ConstraintHolder {
     }
 
     //run our actions
-    for(IconAction action : actions) {
+    for(final IconAction action : actions) {
       if(!action.getType().equals(ActionType.ANY) && !action.getType().equals(handler.action())) {
         continue;
       }
@@ -102,33 +105,40 @@ public class Icon implements ConstraintHolder {
     return true;
   }
 
-  public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
+  public AbstractItemStack<?> getItem(@Nullable final MenuPlayer player) {
+
     if(player != null && itemProvider != null) return itemProvider.apply(player);
     return item;
   }
 
   public int slot() {
+
     return slot;
   }
 
-  public void setSlot(int slot) {
+  public void setSlot(final int slot) {
+
     this.slot = slot;
   }
 
   public void setSlot(final SlotPos slotPos) {
+
     this.slot = slotPos.slot();
   }
 
   @Override
   public Map<String, String> constraints() {
+
     return constraints;
   }
 
   public Consumer<MenuClickHandler> getClick() {
+
     return click;
   }
 
-  public void setClick(Consumer<MenuClickHandler> click) {
+  public void setClick(final Consumer<MenuClickHandler> click) {
+
     this.click = click;
   }
 }

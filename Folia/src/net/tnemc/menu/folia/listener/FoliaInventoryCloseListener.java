@@ -37,7 +37,8 @@ public class FoliaInventoryCloseListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public FoliaInventoryCloseListener(JavaPlugin plugin) {
+  public FoliaInventoryCloseListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 

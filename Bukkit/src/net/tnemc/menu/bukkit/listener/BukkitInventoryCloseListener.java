@@ -37,7 +37,8 @@ public class BukkitInventoryCloseListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public BukkitInventoryCloseListener(JavaPlugin plugin) {
+  public BukkitInventoryCloseListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 

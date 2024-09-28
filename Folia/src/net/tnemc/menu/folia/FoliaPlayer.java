@@ -6,12 +6,15 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FoliaPlayer extends PaperPlayer {
-  public FoliaPlayer(OfflinePlayer player, JavaPlugin plugin) {
+
+  public FoliaPlayer(final OfflinePlayer player, final JavaPlugin plugin) {
+
     super(player, plugin);
   }
 
   @Override
   public PaperInventory inventory() {
+
     return new FoliaInventory(identifier(), plugin);
   }
 }

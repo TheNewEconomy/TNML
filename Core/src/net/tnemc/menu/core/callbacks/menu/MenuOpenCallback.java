@@ -34,21 +34,25 @@ public class MenuOpenCallback extends MenuCallback {
 
   protected final MenuPlayer player;
 
-  public MenuOpenCallback(Menu menu, Page page, MenuPlayer player) {
+  public MenuOpenCallback(final Menu menu, final Page page, final MenuPlayer player) {
+
     super(menu);
     this.page = page;
     this.player = player;
   }
 
   public Menu getMenu() {
+
     return menu;
   }
 
   public Page getPage() {
+
     return page;
   }
 
   public MenuPlayer getPlayer() {
+
     return player;
   }
 }

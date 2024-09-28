@@ -33,12 +33,14 @@ public class RunnableAction extends IconAction {
 
   private final Consumer<MenuClickHandler> consumer;
 
-  public RunnableAction(Consumer<MenuClickHandler> consumer) {
+  public RunnableAction(final Consumer<MenuClickHandler> consumer) {
+
     super(ActionType.ANY);
     this.consumer = consumer;
   }
 
-  public RunnableAction(Consumer<MenuClickHandler> consumer, ActionType type) {
+  public RunnableAction(final Consumer<MenuClickHandler> consumer, final ActionType type) {
+
     super(type);
     this.consumer = consumer;
   }
@@ -52,7 +54,7 @@ public class RunnableAction extends IconAction {
    * {@code false}.
    */
   @Override
-  public boolean onClick(MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
 
     if(consumer != null) {
       consumer.accept(handler);

@@ -48,44 +48,54 @@ public class Page {
 
   protected Consumer<PageOpenCallback> open;
 
-  public Page(int pageNumber) {
+  public Page(final int pageNumber) {
+
     this.pageNumber = pageNumber;
   }
 
   public int number() {
+
     return pageNumber;
   }
 
   /**
    * Sets the specified {@link IconBuilder} to the specified row.
    *
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1, through {@link MenuManager#ROW_SIZE}.
+   * @param row         The row index where the icons will be set. Rows are indexed starting from 1,
+   *                    through {@link MenuManager#ROW_SIZE}.
    * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
    */
   public void setRow(final int row, final IconBuilder iconBuilder) {
+
     setRow(row, 1, ROW_SIZE, iconBuilder);
   }
 
   /**
    * Sets the specified {@link IconBuilder} to the specified row.
    *
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1, through {@link MenuManager#ROW_SIZE}.
+   * @param row            The row index where the icons will be set. Rows are indexed starting from
+   *                       1, through {@link MenuManager#ROW_SIZE}.
    * @param startingColumn The column to start applying the icons on, inclusive.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   * @param iconBuilder    The {@link IconBuilder} used to construct the icons for the specified
+   *                       row.
    */
   public void setRow(final int row, final int startingColumn, final IconBuilder iconBuilder) {
+
     setRow(row, startingColumn, ROW_SIZE, iconBuilder);
   }
 
   /**
    * Sets the specified {@link IconBuilder} to the specified row.
    *
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1, through {@link MenuManager#ROW_SIZE}.
+   * @param row            The row index where the icons will be set. Rows are indexed starting from
+   *                       1, through {@link MenuManager#ROW_SIZE}.
    * @param startingColumn The column to start applying the icons on, inclusive.
-   * @param endingColumn The column to stop applying the icons on, inclusive.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   * @param endingColumn   The column to stop applying the icons on, inclusive.
+   * @param iconBuilder    The {@link IconBuilder} used to construct the icons for the specified
+   *                       row.
    */
   public void setRow(final int row, final int startingColumn, final int endingColumn, final IconBuilder iconBuilder) {
+
     for(int i = startingColumn; i <= endingColumn; i++) {
       addIcon(iconBuilder.withSlot(new SlotPos(row, i)).build());
     }
@@ -94,9 +104,11 @@ public class Page {
   /**
    * Sets the specified {@link IconBuilder} to the specified column.
    *
-   * @param menuRows The number of rows that the menu has.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param menuRows    The number of rows that the menu has.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public void setColumn(final int menuRows, final int column, final IconBuilder iconBuilder) {
 
@@ -106,10 +118,12 @@ public class Page {
   /**
    * Sets the specified {@link IconBuilder} to the specified column.
    *
-   * @param menuRows The number of rows that the menu has.
+   * @param menuRows    The number of rows that the menu has.
    * @param startingRow The row that the icons should start at, inclusive.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public void setColumn(final int menuRows, final int startingRow, final int column, final IconBuilder iconBuilder) {
 
@@ -119,11 +133,13 @@ public class Page {
   /**
    * Sets the specified {@link IconBuilder} to the specified column.
    *
-   * @param menuRows The number of rows that the menu has.
+   * @param menuRows    The number of rows that the menu has.
    * @param startingRow The row that the icons should start at, inclusive.
-   * @param endingRow The row that the icons should end at, inclusive.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param endingRow   The row that the icons should end at, inclusive.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public void setColumn(final int menuRows, final int startingRow, final int endingRow, final int column, final IconBuilder iconBuilder) {
 
@@ -136,10 +152,12 @@ public class Page {
    * Handles a click action for a specific viewer identified by its UUID.
    *
    * @param handler The {@link  MenuClickHandler} for the click.
+   *
    * @return {@code true} if the click action is blocked, indicating that it should be prevented,
-   *         {@code false} if the click action is allowed to proceed.
+   * {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final MenuClickHandler handler) {
+
     if(icons.containsKey(handler.slot().slot())) {
       if(!icons.get(handler.slot().slot()).onClick(handler)) {
         return true;
@@ -155,26 +173,32 @@ public class Page {
   }
 
   public void addIcon(final Icon icon) {
+
     icons.put(icon.slot(), icon);
   }
 
   public Map<Integer, Icon> getIcons() {
+
     return icons;
   }
 
   public Consumer<PageOpenCallback> getOpen() {
+
     return open;
   }
 
-  public void setOpen(Consumer<PageOpenCallback> open) {
+  public void setOpen(final Consumer<PageOpenCallback> open) {
+
     this.open = open;
   }
 
   public Function<MenuClickHandler, Boolean> getClickHandler() {
+
     return clickHandler;
   }
 
-  public void setClickHandler(Function<MenuClickHandler, Boolean> clickHandler) {
+  public void setClickHandler(final Function<MenuClickHandler, Boolean> clickHandler) {
+
     this.clickHandler = clickHandler;
   }
 }

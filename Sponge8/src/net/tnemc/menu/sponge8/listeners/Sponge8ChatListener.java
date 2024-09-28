@@ -40,12 +40,13 @@ public class Sponge8ChatListener {
 
   private final PluginContainer container;
 
-  public Sponge8ChatListener(PluginContainer container) {
+  public Sponge8ChatListener(final PluginContainer container) {
+
     this.container = container;
   }
 
   @Listener
-  public void onClose(PlayerChatEvent event, @First ServerPlayer player) {
+  public void onClose(final PlayerChatEvent event, @First final ServerPlayer player) {
 
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(sPlayer.identifier());
@@ -54,8 +55,8 @@ public class Sponge8ChatListener {
       event.setCancelled(true);
 
       final ChatCallback callback = new ChatCallback(sPlayer, event.message().toString(),
-              viewer.get().menu(),
-              viewer.get().page());
+                                                     viewer.get().menu(),
+                                                     viewer.get().page());
 
       if(viewer.get().chat(callback)) {
 

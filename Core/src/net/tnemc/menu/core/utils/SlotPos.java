@@ -21,9 +21,9 @@ package net.tnemc.menu.core.utils;
 import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
 
 /**
- * Represents a slot as a position in a grid of slots with rows and columns.
- * The class provides methods for creating a position with row and column values, creating a position from a slot number,
- * retrieving the slot number, as well as getting the row and column values.
+ * Represents a slot as a position in a grid of slots with rows and columns. The class provides
+ * methods for creating a position with row and column values, creating a position from a slot
+ * number, retrieving the slot number, as well as getting the row and column values.
  *
  * @author creatorfromhell
  * @since 1.5.0.0
@@ -43,10 +43,11 @@ public class SlotPos {
   /**
    * Constructs a {@link SlotPos} with specified row and column values.
    *
-   * @param row The row index.
+   * @param row    The row index.
    * @param column The column index.
    */
   public SlotPos(final int row, final int column) {
+
     this.row = row;
     this.column = column;
   }
@@ -57,6 +58,7 @@ public class SlotPos {
    * @param slot The slot number.
    */
   public SlotPos(final int slot) {
+
     this.row = slot / ROW_SIZE + 1;
     this.column = (slot % ROW_SIZE) + 1;
   }
@@ -67,22 +69,26 @@ public class SlotPos {
    * @return The slot number.
    */
   public int slot() {
+
     return (row - 1) * ROW_SIZE + (column - 1);
   }
 
   public int getRow() {
+
     return row;
   }
 
   public int getColumn() {
+
     return column;
   }
 
   @Override
   public String toString() {
+
     return "SlotPos{" +
-            "row=" + row +
-            ", column=" + column +
-            '}';
+           "row=" + row +
+           ", column=" + column +
+           '}';
   }
 }

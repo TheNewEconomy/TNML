@@ -36,13 +36,15 @@ public class DataAction extends IconAction {
   private final String identifier;
   private final Object data;
 
-  public DataAction(String identifier, Object data) {
+  public DataAction(final String identifier, final Object data) {
+
     super(ActionType.ANY);
     this.identifier = identifier;
     this.data = data;
   }
 
-  public DataAction(ActionType type, String identifier, Object data) {
+  public DataAction(final ActionType type, final String identifier, final Object data) {
+
     super(type);
     this.identifier = identifier;
     this.data = data;
@@ -57,7 +59,7 @@ public class DataAction extends IconAction {
    * {@code false}.
    */
   @Override
-  public boolean onClick(MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(handler.player().identifier());
     viewer.ifPresent(menuViewer->menuViewer.addData(identifier, data));

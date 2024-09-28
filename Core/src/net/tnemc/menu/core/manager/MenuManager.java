@@ -38,7 +38,8 @@ public class MenuManager {
   public static final int ROW_SIZE = 9;
 
   /**
-   * The collection to store menus, where the key is the menu name and the value is the menu itself.
+   * The collection to store menus, where the key is the menu name and the value is the menu
+   * itself.
    */
   private final Map<String, Menu> menus = new HashMap<>();
 
@@ -69,9 +70,11 @@ public class MenuManager {
    * Finds a menu by its name and returns it as an Optional.
    *
    * @param name The name of the menu to find.
+   *
    * @return An Optional containing the found menu, or an empty Optional if not found.
    */
   public Optional<Menu> findMenu(final String name) {
+
     return Optional.ofNullable(menus.get(name));
   }
 
@@ -81,10 +84,12 @@ public class MenuManager {
    * @param menu The menu to be added.
    */
   public void addMenu(final Menu menu) {
+
     menus.put(menu.getName(), menu);
   }
 
   public boolean inMenu(final UUID id) {
+
     return findViewer(id).isPresent();
   }
 
@@ -92,9 +97,11 @@ public class MenuManager {
    * Finds a MenuViewer by its UUID and returns it as an Optional.
    *
    * @param id The UUID of the MenuViewer to find.
+   *
    * @return An Optional containing the found MenuViewer, or an empty Optional if not found.
    */
   public Optional<MenuViewer> findViewer(final UUID id) {
+
     return Optional.ofNullable(viewers.get(id));
   }
 
@@ -119,13 +126,13 @@ public class MenuManager {
    * Updates the menu and page for a MenuViewer identified by the given UUID.
    *
    * @param identifier The UUID identifying the player associated with the MenuViewer.
-   * @param menu    The new menu to set for the MenuViewer.
-   * @param page    The new page to set for the MenuViewer.
+   * @param menu       The new menu to set for the MenuViewer.
+   * @param page       The new page to set for the MenuViewer.
    */
   public void updateViewer(final UUID identifier, final String menu, final int page) {
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(identifier);
-    if (viewer.isPresent()) {
+    if(viewer.isPresent()) {
 
       viewer.get().setMenu(menu);
       viewer.get().setPage(page);
@@ -149,9 +156,11 @@ public class MenuManager {
   /**
    * Removes a MenuViewer associated with the given UUID from the viewers map.
    *
-   * @param identifier The UUID identifying the player whose {@link MenuViewer viewer data} should be removed.
+   * @param identifier The UUID identifying the player whose {@link MenuViewer viewer data} should
+   *                   be removed.
    */
   public void removeViewer(final UUID identifier) {
+
     viewers.remove(identifier);
   }
 
@@ -161,6 +170,7 @@ public class MenuManager {
    * @return The HelperMethods object associated with this MenuManager.
    */
   public HelperMethods getHelper() {
+
     return helper;
   }
 
@@ -169,7 +179,8 @@ public class MenuManager {
    *
    * @param helper The HelperMethods object to be set.
    */
-  public void setHelper(HelperMethods helper) {
+  public void setHelper(final HelperMethods helper) {
+
     this.helper = helper;
   }
 
@@ -179,6 +190,7 @@ public class MenuManager {
    * @return The singleton instance of the MenuManager.
    */
   public static MenuManager instance() {
+
     return instance;
   }
 }

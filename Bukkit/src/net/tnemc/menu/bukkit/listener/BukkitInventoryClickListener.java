@@ -41,12 +41,14 @@ public class BukkitInventoryClickListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public BukkitInventoryClickListener(JavaPlugin plugin) {
+  public BukkitInventoryClickListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onClick(final InventoryClickEvent event) {
+
     final BukkitPlayer player = new BukkitPlayer((OfflinePlayer)event.getWhoClicked(), plugin);
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(player.identifier());
@@ -66,7 +68,8 @@ public class BukkitInventoryClickListener implements Listener {
     }
   }
 
-  private ActionType convertClick(ClickType click) {
+  private ActionType convertClick(final ClickType click) {
+
     return switch(click) {
       case SHIFT_LEFT -> ActionType.LEFT_SHIFT;
       case RIGHT -> ActionType.RIGHT_CLICK;

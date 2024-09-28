@@ -36,12 +36,14 @@ public interface MenuPlayer {
 
   /**
    * The {@link UUID unique identifier} for this player.
+   *
    * @return The {@link UUID} for the player.
    */
   UUID identifier();
 
   /**
    * The {@link PlayerInventory} for this player.
+   *
    * @return The {@link PlayerInventory} for this player.
    */
   PlayerInventory<?> inventory();
@@ -50,28 +52,33 @@ public interface MenuPlayer {
    * Used to determine if this player has the specified permission node.
    *
    * @param permission The node to check for.
+   *
    * @return True if the player has the permission, otherwise false.
    */
   boolean hasPermission(String permission);
 
   /**
    * Used to send a message to this player.
+   *
    * @param message The message.
    */
   void message(final String message);
 
   default void status(final ViewerStatus status) {
+
     MenuManager.instance().updateViewer(identifier(), status);
   }
 
   /**
    * Retrieves the {@link MenuViewer} associated with the identifier.
    *
-   * @return An {@link Optional} containing the found {@link MenuViewer} based on the identifier,
-   *         or an empty {@code Optional} if the viewer is not found.
+   * @return An {@link Optional} containing the found {@link MenuViewer} based on the identifier, or
+   * an empty {@code Optional} if the viewer is not found.
+   *
    * @see MenuManager#findViewer(UUID)
    */
   default Optional<MenuViewer> viewer() {
+
     return MenuManager.instance().findViewer(identifier());
   }
 }

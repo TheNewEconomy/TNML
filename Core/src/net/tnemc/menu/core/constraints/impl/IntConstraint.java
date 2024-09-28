@@ -32,6 +32,7 @@ public interface IntConstraint extends Constraint<Integer> {
 
   @Override
   default Integer convert(final String value) {
+
     if(value == null) return defaultValue();
     try {
       return Integer.parseInt(value);
@@ -42,6 +43,7 @@ public interface IntConstraint extends Constraint<Integer> {
 
   @Override
   default boolean validate(final String value) {
+
     try {
       Integer.parseInt(value);
       return true;

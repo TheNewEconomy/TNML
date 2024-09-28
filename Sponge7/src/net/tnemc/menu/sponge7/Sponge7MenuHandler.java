@@ -38,6 +38,7 @@ public class Sponge7MenuHandler implements MenuHandler {
   protected final Plugin plugin;
 
   public Sponge7MenuHandler(final Plugin plugin, final boolean registerListeners) {
+
     this.plugin = plugin;
     //TODO: TNIL for sponge 7
     //MenuManager.instance().setHelper(new SpongeHelper());
@@ -48,6 +49,7 @@ public class Sponge7MenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
+
     Sponge.getEventManager().registerListeners(plugin, new Sponge7ChatListener(plugin));
     Sponge.getEventManager().registerListeners(plugin, new Sponge7InteractInventoryListener(plugin));
     Sponge.getEventManager().registerListeners(plugin, new Sponge7InventoryClickListener(plugin));
@@ -60,6 +62,7 @@ public class Sponge7MenuHandler implements MenuHandler {
   }
 
   public MenuManager getManager() {
+
     return MenuManager.instance();
   }
 }

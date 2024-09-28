@@ -34,17 +34,20 @@ public class MenuCloseCallback extends MenuCallback {
 
   protected final MenuPlayer player;
 
-  public MenuCloseCallback(Menu menu, Page page, MenuPlayer player) {
+  public MenuCloseCallback(final Menu menu, final Page page, final MenuPlayer player) {
+
     super(menu);
     this.page = page;
     this.player = player;
   }
 
   public Page getPage() {
+
     return page;
   }
 
   public MenuPlayer getPlayer() {
+
     return player;
   }
 }

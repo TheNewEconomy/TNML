@@ -33,7 +33,8 @@ public class SpongePlayer implements MenuPlayer {
   protected final User user;
   protected final Plugin plugin;//because sponge requires this for a lot of useless things.
 
-  public SpongePlayer(User user, Plugin plugin) {
+  public SpongePlayer(final User user, final Plugin plugin) {
+
     this.user = user;
     this.plugin = plugin;
   }
@@ -45,6 +46,7 @@ public class SpongePlayer implements MenuPlayer {
    */
   @Override
   public UUID identifier() {
+
     return user.getUniqueId();
   }
 
@@ -55,6 +57,7 @@ public class SpongePlayer implements MenuPlayer {
    */
   @Override
   public SpongeInventory inventory() {
+
     return new SpongeInventory(user.getUniqueId(), plugin);
   }
 
@@ -66,7 +69,8 @@ public class SpongePlayer implements MenuPlayer {
    * @return True if the player has the permission, otherwise false.
    */
   @Override
-  public boolean hasPermission(String permission) {
+  public boolean hasPermission(final String permission) {
+
     return user.hasPermission(permission);
   }
 
@@ -76,7 +80,8 @@ public class SpongePlayer implements MenuPlayer {
    * @param message The message.
    */
   @Override
-  public void message(String message) {
+  public void message(final String message) {
+
     if(user.getPlayer().isPresent()) {
       user.getPlayer().get().sendMessage(Text.of(message));
     }

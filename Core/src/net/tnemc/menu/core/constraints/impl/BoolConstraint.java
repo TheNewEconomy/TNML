@@ -32,6 +32,7 @@ public interface BoolConstraint extends Constraint<Boolean> {
 
   @Override
   default Boolean convert(final String value) {
+
     if(value == null) return defaultValue();
     try {
       return Boolean.parseBoolean(value);
@@ -42,6 +43,7 @@ public interface BoolConstraint extends Constraint<Boolean> {
 
   @Override
   default boolean validate(final String value) {
+
     try {
       Boolean.parseBoolean(value);
       return true;

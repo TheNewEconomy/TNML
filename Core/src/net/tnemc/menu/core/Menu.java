@@ -48,8 +48,9 @@ public class Menu {
    * Handles a click action for a specific viewer identified by its UUID.
    *
    * @param handler The {@link  MenuClickHandler} for the click.
+   *
    * @return {@code true} if the click action is blocked, indicating that it should be prevented,
-   *         {@code false} if the click action is allowed to proceed.
+   * {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final MenuClickHandler handler) {
 
@@ -80,50 +81,62 @@ public class Menu {
   }
 
   public void addPage(final Page page) {
+
     pages.put(page.number(), page);
   }
 
   public Map<Integer, Page> getPages() {
+
     return pages;
   }
 
   public Consumer<MenuOpenCallback> getOpen() {
+
     return open;
   }
 
-  public void setOpen(Consumer<MenuOpenCallback> open) {
+  public void setOpen(final Consumer<MenuOpenCallback> open) {
+
     this.open = open;
   }
 
   public Consumer<MenuCloseCallback> getClose() {
+
     return close;
   }
 
-  public void setClose(Consumer<MenuCloseCallback> close) {
+  public void setClose(final Consumer<MenuCloseCallback> close) {
+
     this.close = close;
   }
 
   public String getName() {
+
     return name;
   }
 
-  public void setName(String name) {
+  public void setName(final String name) {
+
     this.name = name;
   }
 
   public String getTitle() {
+
     return title;
   }
 
-  public void setTitle(String title) {
+  public void setTitle(final String title) {
+
     this.title = title;
   }
 
   public int getRows() {
+
     return rows;
   }
 
-  public void setRows(int rows) {
+  public void setRows(final int rows) {
+
     this.rows = rows;
   }
 }

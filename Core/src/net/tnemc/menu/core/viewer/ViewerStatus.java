@@ -32,6 +32,7 @@ public interface ViewerStatus {
    * @return {@code true} if the viewer is awaiting chat input, {@code false} otherwise.
    */
   default boolean awaitingChatInput() {
+
     return false;
   }
 
@@ -41,15 +42,18 @@ public interface ViewerStatus {
    * @return {@code true} if the viewer wants to close the menu, {@code false} otherwise.
    */
   default boolean closeMenu() {
+
     return true;
   }
 
   /**
    * Checks whether the viewer wants to change to a different menu.
    *
-   * @return {@code true} if the viewer wants to change to a different menu, {@code false} otherwise.
+   * @return {@code true} if the viewer wants to change to a different menu, {@code false}
+   * otherwise.
    */
   default boolean changing() {
+
     return false;
   }
 }

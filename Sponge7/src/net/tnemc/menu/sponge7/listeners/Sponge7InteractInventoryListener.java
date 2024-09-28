@@ -36,12 +36,14 @@ public class Sponge7InteractInventoryListener {
 
   private final Plugin plugin;
 
-  public Sponge7InteractInventoryListener(Plugin plugin) {
+  public Sponge7InteractInventoryListener(final Plugin plugin) {
+
     this.plugin = plugin;
   }
 
   @Listener
-  public void onClose(InteractInventoryEvent.Close event, @First Player player) {
+  public void onClose(final InteractInventoryEvent.Close event, @First final Player player) {
+
     final SpongePlayer sPlayer = new SpongePlayer(player, plugin);
 
     final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(sPlayer.identifier());

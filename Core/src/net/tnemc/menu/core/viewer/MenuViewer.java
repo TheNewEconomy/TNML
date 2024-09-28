@@ -44,9 +44,9 @@ public class MenuViewer {
   private final Map<String, Object> data = new ConcurrentHashMap<>();
 
   /**
-   * Represents a collection that contains all of {@link net.tnemc.menu.core.PlayerInstancePage PlayerPages}
-   * that this viewer has an instance in. This will let use remove them from the memory so we are holding
-   * them forever.
+   * Represents a collection that contains all of
+   * {@link net.tnemc.menu.core.PlayerInstancePage PlayerPages} that this viewer has an instance in.
+   * This will let use remove them from the memory so we are holding them forever.
    */
   private final Queue<String> menuInstances = new ConcurrentLinkedQueue<>();
 
@@ -59,7 +59,8 @@ public class MenuViewer {
 
   private ViewerStatus status = CoreStatus.IN_MENU;
 
-  public MenuViewer(UUID uuid) {
+  public MenuViewer(final UUID uuid) {
+
     this.uuid = uuid;
   }
 
@@ -68,45 +69,49 @@ public class MenuViewer {
    *
    * @param viewer The MenuViewer to merge into this MenuViewer.
    */
-  public void merge(MenuViewer viewer) {
-    if (viewer == null || !uuid.equals(viewer.uuid)) {
+  public void merge(final MenuViewer viewer) {
+
+    if(viewer == null || !uuid.equals(viewer.uuid)) {
       return;
     }
 
     // Update variables if they are different in the otherMenuViewer
 
-    if (!menu.equals(viewer.menu)) {
+    if(!menu.equals(viewer.menu)) {
       menu = viewer.menu;
     }
 
-    if (page != viewer.page) {
+    if(page != viewer.page) {
       page = viewer.page;
     }
 
-    if (status != viewer.status) {
+    if(status != viewer.status) {
       status = viewer.status;
     }
 
-    if (chatHandler != viewer.chatHandler) {
+    if(chatHandler != viewer.chatHandler) {
       chatHandler = viewer.chatHandler;
     }
   }
 
   public void addData(final String identifier, final Object data) {
+
     this.data.put(identifier, data);
   }
 
   public void addInstance(final String identifier) {
+
     this.menuInstances.add(identifier);
   }
 
   public void removeInstances() {
+
     for(final String menu : menuInstances) {
 
       final Optional<Menu> menuObj = MenuManager.instance().findMenu(menu);
       if(menuObj.isPresent()) {
 
-        for(Page page : menuObj.get().pages.values()) {
+        for(final Page page : menuObj.get().pages.values()) {
 
           if(page instanceof PlayerInstancePage playerPage) {
             playerPage.removeInstance(uuid);
@@ -117,15 +122,18 @@ public class MenuViewer {
   }
 
   public Optional<Object> findData(final String identifier) {
+
     return Optional.ofNullable(data.get(identifier));
   }
 
   public Object dataOrDefault(final String identifier, final Object defaultData) {
+
     return data.getOrDefault(identifier, defaultData);
   }
 
   /**
-   * Closes the menu for a specific player and removes the associated {@link MenuViewer viewer data}.
+   * Closes the menu for a specific player and removes the associated
+   * {@link MenuViewer viewer data}.
    *
    * @param player The {@link MenuPlayer} for whom the menu should be closed.
    */
@@ -140,42 +148,52 @@ public class MenuViewer {
   }
 
   public UUID uuid() {
+
     return uuid;
   }
 
   public String menu() {
+
     return menu;
   }
 
-  public void setMenu(String menu) {
+  public void setMenu(final String menu) {
+
     this.menu = menu;
   }
 
   public int page() {
+
     return page;
   }
 
-  public void setPage(int page) {
+  public void setPage(final int page) {
+
     this.page = page;
   }
 
   public ViewerStatus status() {
+
     return status;
   }
 
-  public void setStatus(ViewerStatus status) {
+  public void setStatus(final ViewerStatus status) {
+
     this.status = status;
   }
 
-  public boolean chat(ChatCallback callback) {
+  public boolean chat(final ChatCallback callback) {
+
     return chatHandler.test(callback);
   }
 
   public Predicate<ChatCallback> getChatHandler() {
+
     return chatHandler;
   }
 
-  public void setChatHandler(Predicate<ChatCallback> chatHandler) {
+  public void setChatHandler(final Predicate<ChatCallback> chatHandler) {
+
     this.chatHandler = chatHandler;
   }
 }

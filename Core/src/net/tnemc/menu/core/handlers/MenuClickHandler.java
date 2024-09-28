@@ -44,8 +44,9 @@ public class MenuClickHandler {
   private final ActionType actionType;
 
 
-  public MenuClickHandler(@NotNull SlotPos slot, @NotNull MenuPlayer player, @NotNull Menu menu,
-                          @Nullable Integer page, @NotNull ActionType actionType) {
+  public MenuClickHandler(@NotNull final SlotPos slot, @NotNull final MenuPlayer player, @NotNull final Menu menu,
+                          @Nullable final Integer page, @NotNull final ActionType actionType) {
+
     this.slot = slot;
     this.player = player;
     this.menu = menu;
@@ -54,32 +55,38 @@ public class MenuClickHandler {
   }
 
   public SlotPos slot() {
+
     return slot;
   }
 
   public MenuPlayer player() {
+
     return player;
   }
 
   public Menu menu() {
+
     return menu;
   }
 
   public Integer page() {
+
     return page;
   }
 
   public ActionType action() {
+
     return actionType;
   }
 
   @Override
   public String toString() {
+
     return "MenuClickHandler{" +
-            "slot=" + slot +
-            ", menu=" + menu.getName() +
-            ", page=" + page +
-            ", actionType=" + actionType.name() +
-            '}';
+           "slot=" + slot +
+           ", menu=" + menu.getName() +
+           ", page=" + page +
+           ", actionType=" + actionType.name() +
+           '}';
   }
 }

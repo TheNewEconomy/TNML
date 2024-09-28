@@ -36,7 +36,8 @@ public class BukkitChatListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public BukkitChatListener(JavaPlugin plugin) {
+  public BukkitChatListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 
@@ -50,8 +51,8 @@ public class BukkitChatListener implements Listener {
       event.setCancelled(true);
 
       final ChatCallback callback = new ChatCallback(player, event.getMessage(),
-              viewer.get().menu(),
-              viewer.get().page());
+                                                     viewer.get().menu(),
+                                                     viewer.get().page());
 
       if(viewer.get().chat(callback)) {
 

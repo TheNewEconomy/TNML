@@ -41,7 +41,8 @@ public class FoliaInventoryClickListener implements Listener {
 
   private final JavaPlugin plugin;
 
-  public FoliaInventoryClickListener(JavaPlugin plugin) {
+  public FoliaInventoryClickListener(final JavaPlugin plugin) {
+
     this.plugin = plugin;
   }
 
@@ -57,8 +58,8 @@ public class FoliaInventoryClickListener implements Listener {
       if(menu.isPresent()) {
 
         final boolean cancel = menu.get().onClick(new MenuClickHandler(new SlotPos(event.getRawSlot()),
-                player, menu.get(), data.get().page(),
-                convertClick(event.getClick())));
+                                                                       player, menu.get(), data.get().page(),
+                                                                       convertClick(event.getClick())));
 
         if(cancel) {
           event.setCancelled(true);
@@ -67,7 +68,8 @@ public class FoliaInventoryClickListener implements Listener {
     }
   }
 
-  private ActionType convertClick(ClickType click) {
+  private ActionType convertClick(final ClickType click) {
+
     return switch(click) {
       case SHIFT_LEFT -> ActionType.LEFT_SHIFT;
       case RIGHT -> ActionType.RIGHT_CLICK;

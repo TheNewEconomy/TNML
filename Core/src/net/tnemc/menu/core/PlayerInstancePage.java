@@ -40,43 +40,52 @@ public class PlayerInstancePage extends Page {
 
   protected final Map<UUID, PlayerInstance> players = new HashMap<>();
 
-  public PlayerInstancePage(int pageNumber) {
+  public PlayerInstancePage(final int pageNumber) {
+
     super(pageNumber);
   }
 
   /**
    * Sets the specified {@link IconBuilder} to the specified row.
    *
-   * @param player The UUID of the player.
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1, through {@link MenuManager#ROW_SIZE}.
+   * @param player      The UUID of the player.
+   * @param row         The row index where the icons will be set. Rows are indexed starting from 1,
+   *                    through {@link MenuManager#ROW_SIZE}.
    * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
    */
   public void setRow(final UUID player, final int row, final IconBuilder iconBuilder) {
+
     setRow(player, row, 1, ROW_SIZE, iconBuilder);
   }
 
   /**
    * Sets the specified {@link IconBuilder} to the specified row.
    *
-   * @param player The UUID of the player.
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1, through {@link MenuManager#ROW_SIZE}.
+   * @param player         The UUID of the player.
+   * @param row            The row index where the icons will be set. Rows are indexed starting from
+   *                       1, through {@link MenuManager#ROW_SIZE}.
    * @param startingColumn The column to start applying the icons on, inclusive.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   * @param iconBuilder    The {@link IconBuilder} used to construct the icons for the specified
+   *                       row.
    */
   public void setRow(final UUID player, final int row, final int startingColumn, final IconBuilder iconBuilder) {
+
     setRow(player, row, startingColumn, ROW_SIZE, iconBuilder);
   }
 
   /**
    * Sets the specified {@link IconBuilder} to the specified row.
    *
-   * @param player The UUID of the player.
-   * @param row The row index where the icons will be set. Rows are indexed starting from 1, through {@link MenuManager#ROW_SIZE}.
+   * @param player         The UUID of the player.
+   * @param row            The row index where the icons will be set. Rows are indexed starting from
+   *                       1, through {@link MenuManager#ROW_SIZE}.
    * @param startingColumn The column to start applying the icons on, inclusive.
-   * @param endingColumn The column to stop applying the icons on, inclusive.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified row.
+   * @param endingColumn   The column to stop applying the icons on, inclusive.
+   * @param iconBuilder    The {@link IconBuilder} used to construct the icons for the specified
+   *                       row.
    */
   public void setRow(final UUID player, final int row, final int startingColumn, final int endingColumn, final IconBuilder iconBuilder) {
+
     for(int i = startingColumn; i <= endingColumn; i++) {
       addIcon(player, iconBuilder.withSlot(new SlotPos(row, i)).build());
     }
@@ -85,10 +94,12 @@ public class PlayerInstancePage extends Page {
   /**
    * Sets the specified {@link IconBuilder} to the specified column.
    *
-   * @param player The UUID of the player.
-   * @param menuRows The number of rows that the menu has.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param player      The UUID of the player.
+   * @param menuRows    The number of rows that the menu has.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public void setColumn(final UUID player, final int menuRows, final int column, final IconBuilder iconBuilder) {
 
@@ -98,11 +109,13 @@ public class PlayerInstancePage extends Page {
   /**
    * Sets the specified {@link IconBuilder} to the specified column.
    *
-   * @param player The UUID of the player.
-   * @param menuRows The number of rows that the menu has.
+   * @param player      The UUID of the player.
+   * @param menuRows    The number of rows that the menu has.
    * @param startingRow The row that the icons should start at, inclusive.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public void setColumn(final UUID player, final int menuRows, final int startingRow, final int column, final IconBuilder iconBuilder) {
 
@@ -112,12 +125,14 @@ public class PlayerInstancePage extends Page {
   /**
    * Sets the specified {@link IconBuilder} to the specified column.
    *
-   * @param player The UUID of the player.
-   * @param menuRows The number of rows that the menu has.
+   * @param player      The UUID of the player.
+   * @param menuRows    The number of rows that the menu has.
    * @param startingRow The row that the icons should start at, inclusive.
-   * @param endingRow The row that the icons should end at, inclusive.
-   * @param column The column index where the icons will be set. Columns are indexed starting from 1.
-   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified column.
+   * @param endingRow   The row that the icons should end at, inclusive.
+   * @param column      The column index where the icons will be set. Columns are indexed starting
+   *                    from 1.
+   * @param iconBuilder The {@link IconBuilder} used to construct the icons for the specified
+   *                    column.
    */
   public void setColumn(final UUID player, final int menuRows, final int startingRow, final int endingRow, final int column, final IconBuilder iconBuilder) {
 
@@ -129,12 +144,14 @@ public class PlayerInstancePage extends Page {
   /**
    * Handles a click action for a specific viewer identified by its UUID.
    *
-   * @param player The UUID of the player.
+   * @param player  The UUID of the player.
    * @param handler The {@link  MenuClickHandler} for the click.
+   *
    * @return {@code true} if the click action is blocked, indicating that it should be prevented,
-   *         {@code false} if the click action is allowed to proceed.
+   * {@code false} if the click action is allowed to proceed.
    */
   public boolean onClick(final UUID player, final MenuClickHandler handler) {
+
     if(getIcons(player).containsKey(handler.slot().slot())) {
       if(!getIcons(player).get(handler.slot().slot()).onClick(handler)) {
         return true;
@@ -155,6 +172,7 @@ public class PlayerInstancePage extends Page {
    * @param icon   The {@link Icon} to be added.
    */
   public void addIcon(final UUID player, final Icon icon) {
+
     if(players.containsKey(player)) {
       players.get(player).addIcon(icon);
     }
@@ -169,9 +187,11 @@ public class PlayerInstancePage extends Page {
    * Retrieves the icons for a given player.
    *
    * @param player The UUID of the player.
+   *
    * @return A map of icon slots to Icon objects.
    */
   public Map<Integer, Icon> getIcons(final UUID player) {
+
     if(players.containsKey(player)) {
       return players.get(player).getIcons();
     }
@@ -183,7 +203,8 @@ public class PlayerInstancePage extends Page {
    *
    * @param uuid The UUID of the player instance to be removed.
    */
-  public void removeInstance(UUID uuid) {
+  public void removeInstance(final UUID uuid) {
+
     players.remove(uuid);
   }
 }

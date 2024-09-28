@@ -37,6 +37,7 @@ public enum CoreStatus implements ViewerStatus {
      */
     @Override
     public boolean awaitingChatInput() {
+
       return true;
     }
 
@@ -47,12 +48,12 @@ public enum CoreStatus implements ViewerStatus {
      */
     @Override
     public boolean closeMenu() {
+
       return false;
     }
   },
 
   SWITCHING {
-
     /**
      * Checks whether the viewer wants to close the menu.
      *
@@ -60,6 +61,7 @@ public enum CoreStatus implements ViewerStatus {
      */
     @Override
     public boolean closeMenu() {
+
       return false;
     }
 
@@ -71,6 +73,7 @@ public enum CoreStatus implements ViewerStatus {
      */
     @Override
     public boolean changing() {
+
       return true;
     }
   },
@@ -83,6 +86,7 @@ public enum CoreStatus implements ViewerStatus {
      */
     @Override
     public boolean closeMenu() {
+
       return true;
     }
   }

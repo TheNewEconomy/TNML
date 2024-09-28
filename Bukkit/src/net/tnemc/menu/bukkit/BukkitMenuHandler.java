@@ -40,6 +40,7 @@ public class BukkitMenuHandler implements MenuHandler {
   private final JavaPlugin plugin;
 
   public BukkitMenuHandler(final JavaPlugin plugin, final boolean registerListeners) {
+
     this.plugin = plugin;
     MenuManager.instance().setHelper(new BukkitHelper());
 
@@ -49,6 +50,7 @@ public class BukkitMenuHandler implements MenuHandler {
   }
 
   public void registerListeners() {
+
     Bukkit.getPluginManager().registerEvents(new BukkitChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(plugin), plugin);
@@ -56,10 +58,12 @@ public class BukkitMenuHandler implements MenuHandler {
 
   @Override
   public AbstractItemStack<?> stackBuilder() {
+
     return new BukkitItemStack();
   }
 
   public MenuManager getManager() {
+
     return MenuManager.instance();
   }
 }

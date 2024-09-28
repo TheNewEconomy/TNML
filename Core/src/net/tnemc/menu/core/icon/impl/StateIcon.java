@@ -32,11 +32,12 @@ import java.util.Optional;
 import java.util.function.Function;
 
 /**
- * The {@link StateIcon} class represents an icon with a dynamic state that is determined by a state handler.
+ * The {@link StateIcon} class represents an icon with a dynamic state that is determined by a state
+ * handler.
  *
  * @author creatorfromhell
- * @since 1.5.0.0
  * @see Icon
+ * @since 1.5.0.0
  */
 public class StateIcon extends Icon {
 
@@ -51,9 +52,10 @@ public class StateIcon extends Icon {
    */
   protected final Function<String, String> stateHandler;
 
-  public StateIcon(@NotNull AbstractItemStack<?> item, @Nullable Function<MenuPlayer,
-          AbstractItemStack<?>> itemProvider, String stateID, String defaultState,
-                   @NotNull Function<String, String> stateHandler) {
+  public StateIcon(@NotNull final AbstractItemStack<?> item, @Nullable final Function<MenuPlayer,
+          AbstractItemStack<?>> itemProvider, final String stateID, final String defaultState,
+                   @NotNull final Function<String, String> stateHandler) {
+
     super(item, itemProvider);
     this.stateID = stateID;
     this.defaultState = defaultState;
@@ -61,15 +63,18 @@ public class StateIcon extends Icon {
   }
 
   public Map<String, AbstractItemStack<?>> getStates() {
+
     return states;
   }
 
   public void addState(final String stateID, final AbstractItemStack<?> item) {
+
     states.put(stateID, item);
   }
 
   @Override
-  public boolean onClick(MenuClickHandler handler) {
+  public boolean onClick(final MenuClickHandler handler) {
+
     if(super.onClick(handler)) {
 
       final Optional<MenuViewer> viewer = handler.player().viewer();
@@ -85,14 +90,15 @@ public class StateIcon extends Icon {
   }
 
   /**
-   * Retrieves the current {@link AbstractItemStack item} of the icon by applying the state handler.
+   * Retrieves the current {@link AbstractItemStack item} of the icon by applying the state
+   * handler.
    *
    * @param player The player that is viewing the menu.
    *
    * @return The {@link AbstractItemStack item} representing the current state of the icon.
    */
   @Override
-  public AbstractItemStack<?> getItem(@Nullable MenuPlayer player) {
+  public AbstractItemStack<?> getItem(@Nullable final MenuPlayer player) {
 
     if(player != null) {
 

@@ -30,15 +30,18 @@ public class MenuCallback {
 
   protected Menu menu;
 
-  public MenuCallback(Menu menu) {
+  public MenuCallback(final Menu menu) {
+
     this.menu = menu;
   }
 
   public Menu getMenu() {
+
     return menu;
   }
 
-  public void setMenu(Menu menu) {
+  public void setMenu(final Menu menu) {
+
     this.menu = menu;
   }
 }

@@ -41,9 +41,9 @@ import java.util.function.Function;
  * Builder class for creating instances of the {@link Icon} and {@link StateIcon} classes.
  *
  * @author creatorfromhell
- * @since 1.5.0.0
  * @see Icon
  * @see StateIcon
+ * @since 1.5.0.0
  */
 public class IconBuilder {
 
@@ -65,16 +65,20 @@ public class IconBuilder {
    * @param item The {@link AbstractItemStack} to be used in the icon.
    */
   public IconBuilder(@NotNull final AbstractItemStack<?> item) {
+
     this.item = item;
   }
 
   /**
    * Sets the item provider function for the icon.
    *
-   * @param itemProvider The function providing the item for the icon based on the {@link MenuPlayer}.
+   * @param itemProvider The function providing the item for the icon based on the
+   *                     {@link MenuPlayer}.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withItemProvider(@Nullable Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {
+  public IconBuilder withItemProvider(@Nullable final Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {
+
     this.itemProvider = itemProvider;
     return this;
   }
@@ -83,9 +87,11 @@ public class IconBuilder {
    * Sets the slot for the icon.
    *
    * @param slot The slot position for the icon.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withSlot(int slot) {
+  public IconBuilder withSlot(final int slot) {
+
     this.slot = slot;
     return this;
   }
@@ -94,9 +100,11 @@ public class IconBuilder {
    * Sets the slot for the icon using a {@link SlotPos} object.
    *
    * @param slotPos The {@link SlotPos} representing the slot position for the icon.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withSlot(SlotPos slotPos) {
+  public IconBuilder withSlot(final SlotPos slotPos) {
+
     this.slot = slotPos.slot();
     return this;
   }
@@ -105,9 +113,11 @@ public class IconBuilder {
    * Sets the click handler for the icon.
    *
    * @param click The click handler to be executed when the icon is clicked.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withClick(Consumer<MenuClickHandler> click) {
+  public IconBuilder withClick(final Consumer<MenuClickHandler> click) {
+
     this.click = click;
     return this;
   }
@@ -117,9 +127,11 @@ public class IconBuilder {
    *
    * @param key   The key of the constraint.
    * @param value The value of the constraint.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withConstraint(Constraint<?> key, String value) {
+  public IconBuilder withConstraint(final Constraint<?> key, final String value) {
+
     this.constraints.put(key.identifier(), value);
     return this;
   }
@@ -128,9 +140,11 @@ public class IconBuilder {
    * Adds actions to the list of actions for the icon.
    *
    * @param actions The {@link IconAction actions} to be added to the icon.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withActions(IconAction... actions) {
+  public IconBuilder withActions(final IconAction... actions) {
+
     this.actions.addAll(Arrays.asList(actions));
     return this;
   }
@@ -139,9 +153,11 @@ public class IconBuilder {
    * Sets the state ID for the StateIcon.
    *
    * @param stateID The state ID for the StateIcon.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withStateID(String stateID) {
+  public IconBuilder withStateID(final String stateID) {
+
     this.stateID = stateID;
     return this;
   }
@@ -150,9 +166,11 @@ public class IconBuilder {
    * Sets the default state for the StateIcon.
    *
    * @param defaultState The default state for the StateIcon.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withDefaultState(String defaultState) {
+  public IconBuilder withDefaultState(final String defaultState) {
+
     this.defaultState = defaultState;
     return this;
   }
@@ -161,9 +179,11 @@ public class IconBuilder {
    * Sets the state handler for the StateIcon.
    *
    * @param stateHandler The state handler for the StateIcon.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withStateHandler(Function<String, String> stateHandler) {
+  public IconBuilder withStateHandler(final Function<String, String> stateHandler) {
+
     this.stateHandler = stateHandler;
     return this;
   }
@@ -172,23 +192,27 @@ public class IconBuilder {
    * Adds a state to the StateIcon.
    *
    * @param stateID The state ID.
-   * @param item The item associated with the state.
+   * @param item    The item associated with the state.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
-  public IconBuilder withState(String stateID, AbstractItemStack<?> item) {
+  public IconBuilder withState(final String stateID, final AbstractItemStack<?> item) {
+
     this.states.put(stateID, item);
     return this;
   }
 
   /**
-   * Builds and returns the {@link Icon} or {@link StateIcon} instance based on the provided configuration.
+   * Builds and returns the {@link Icon} or {@link StateIcon} instance based on the provided
+   * configuration.
    *
    * @return The constructed {@code Icon} or {@code StateIcon} instance.
    */
   public Icon build() {
+
     final Icon icon = (stateID != null && defaultState != null && stateHandler != null)?
-            new StateIcon(item, itemProvider, stateID, defaultState, stateHandler) :
-            new Icon(item, itemProvider);
+                      new StateIcon(item, itemProvider, stateID, defaultState, stateHandler) :
+                      new Icon(item, itemProvider);
 
     if(icon instanceof StateIcon stateIcon) {
       stateIcon.getStates().putAll(states);

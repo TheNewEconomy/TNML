@@ -42,7 +42,8 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
   protected final UUID id;
   protected final PluginContainer container;
 
-  public SpongeInventory(UUID id, PluginContainer container) {
+  public SpongeInventory(final UUID id, final PluginContainer container) {
+
     this.id = id;
     this.container = container;
   }
@@ -54,6 +55,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public UUID player() {
+
     return id;
   }
 
@@ -66,7 +68,8 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    * @return The built inventory.
    */
   @Override
-  public Inventory build(final MenuPlayer player, Menu menu, int page) {
+  public Inventory build(final MenuPlayer player, final Menu menu, final int page) {
+
     final Inventory inventory = Inventory.builder().grid(9, menu.getRows()).completeStructure().plugin(container).build();
 
     if(menu.pages.containsKey(page)) {
@@ -76,7 +79,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
         pageObj.getOpen().accept(new PageOpenCallback(pageObj, player));
       }
 
-      for(Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
+      for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
         inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
       }
@@ -90,7 +93,8 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    * @param inventory The inventory to open.
    */
   @Override
-  public void openInventory(Inventory inventory) {
+  public void openInventory(final Inventory inventory) {
+
     final Optional<ServerPlayer> player = Sponge.server().player(id);
 
     player.ifPresent(value->value.openInventory(inventory));
@@ -103,9 +107,10 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    * @param item The item to update the specified slot with.
    */
   @Override
-  public void updateInventory(int slot, AbstractItemStack<?> item) {
+  public void updateInventory(final int slot, final AbstractItemStack<?> item) {
+
     final Optional<ServerPlayer> player = Sponge.server().player(id);
-    player.ifPresent(serverPlayer -> serverPlayer.inventory().set(slot, (ItemStack) item.locale()));
+    player.ifPresent(serverPlayer->serverPlayer.inventory().set(slot, (ItemStack)item.locale()));
   }
 
   /**
@@ -113,6 +118,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
    */
   @Override
   public void close() {
+
     final Optional<ServerPlayer> player = Sponge.server().player(id);
     player.ifPresent(ServerPlayer::closeInventory);
   }

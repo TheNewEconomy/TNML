@@ -165,7 +165,7 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                     new IconBuilder(menu.stackBuilder().display(Component.text("Example Icon2")).of("GREEN_WOOL", 1))
                                             .withSlot(new SlotPos(2, 6))
                                             .withConstraint(IconStringConstraints.ICON_MESSAGE, "Please type: hello")
-                                            .withActions(new ChatAction(callback -> {
+                                            .withActions(new ChatAction(callback->{
 
                                               if(!callback.getMessage().equalsIgnoreCase("hello")) {
                                                 //Make our user retype since they didn't say hello
@@ -174,14 +174,14 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                               }
 
                                               final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(callback.getPlayer().identifier());
-                                              if (viewer.isPresent()) {
+                                              if(viewer.isPresent()) {
                                                 viewer.get().addData("example-data", callback.getMessage());
                                               }
                                               return true;
                                             }))
                                             .build()
-                            ).build()
-            )
+                                      ).build()
+                      )
             .build();
 
     // Example Menu2
@@ -197,12 +197,12 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                             .withActions(new SwitchMenuAction("example"))
                                             .build(),
                                     new IconBuilder(menu.stackBuilder().display(Component.text("Dynamic Input-based Icon")).of("STONE", 1))
-                                            .withItemProvider(player -> {
-                                              Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
-                                              if (viewer.isPresent()) {
-                                                Optional<Object> display = viewer.get().findData("example-data");
-                                                if (display.isPresent()) {
-                                                  return menu.stackBuilder().display(Component.text((String) display.get())).of("GRASS", 1);
+                                            .withItemProvider(player->{
+                                              final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(player.identifier());
+                                              if(viewer.isPresent()) {
+                                                final Optional<Object> display = viewer.get().findData("example-data");
+                                                if(display.isPresent()) {
+                                                  return menu.stackBuilder().display(Component.text((String)display.get())).of("GRASS", 1);
                                                 }
                                               }
                                               return menu.stackBuilder().display(Component.text("Default Display")).of("STONE", 1);
@@ -213,8 +213,8 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                     new IconBuilder(menu.stackBuilder().display(Component.text("Default State")).of("BLACK_WOOL", 1))
                                             .withStateID("TEST-STATE")
                                             .withDefaultState("STATE-0")
-                                            .withStateHandler(currentState -> {
-                                              switch (currentState.toUpperCase(Locale.ROOT)) {
+                                            .withStateHandler(currentState->{
+                                              switch(currentState.toUpperCase(Locale.ROOT)) {
                                                 case "STATE-0":
                                                   return "STATE-1";
                                                 case "STATE-1":
@@ -229,8 +229,8 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                             .withState("STATE-2", menu.stackBuilder().display(Component.text("State 2")).of("BLUE_WOOL", 1))
                                             .withState("STATE-3", menu.stackBuilder().display(Component.text("State 3")).of("GREEN_WOOL", 1))
                                             .build()
-                            ).build()
-            ).build();
+                                      ).build()
+                      ).build();
 
     // Adding menus to the manager
     MenuManager.instance().addMenu(exampleMenu);
