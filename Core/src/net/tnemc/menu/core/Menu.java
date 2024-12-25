@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
+
 /**
  * Menu
  *
@@ -40,6 +42,8 @@ public class Menu {
   protected String name;
   protected String title;
   protected int rows;
+  protected boolean bottom = false;
+  public boolean nonIcon = false;
 
   protected Consumer<MenuOpenCallback> open;
   protected Consumer<MenuCloseCallback> close;
@@ -54,10 +58,16 @@ public class Menu {
    */
   public boolean onClick(final MenuClickHandler handler) {
 
+    if(handler.slot().slot() > maxSlot() && !bottom) {
+
+      return true;
+    }
+
     if(pages.containsKey(handler.page())) {
       return pages.get(handler.page()).onClick(handler);
     }
-    return false;
+
+    return !nonIcon;
   }
 
   public void onOpen(final MenuPlayer player, final int page) {
@@ -80,6 +90,10 @@ public class Menu {
     player.inventory().close();
   }
 
+  public int maxSlot() {
+    return rows * ROW_SIZE;
+  }
+
   public void addPage(final Page page) {
 
     pages.put(page.number(), page);
@@ -88,6 +102,26 @@ public class Menu {
   public Map<Integer, Page> getPages() {
 
     return pages;
+  }
+
+  public boolean isBottom() {
+
+    return bottom;
+  }
+
+  public void setBottom(final boolean bottom) {
+
+    this.bottom = bottom;
+  }
+
+  public boolean isNonIcon() {
+
+    return nonIcon;
+  }
+
+  public void setNonIcon(final boolean nonIcon) {
+
+    this.nonIcon = nonIcon;
   }
 
   public Consumer<MenuOpenCallback> getOpen() {

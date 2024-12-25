@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.6.0.0-SNAPSHOT-1</version>
+        <version>1.6.0.0-SNAPSHOT-2</version>
     </parent>
 
     <artifactId>TNML-Sponge-API-7</artifactId>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.6.0.0-SNAPSHOT-1</version>
+            <version>1.6.0.0-SNAPSHOT-2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -40,6 +40,8 @@ public class MenuBuilder {
   private final String name;
   private String title;
   private int rows;
+  private  boolean nonIcon = false;
+  private  boolean bottom = false;
   private Consumer<MenuOpenCallback> open;
   private Consumer<MenuCloseCallback> close;
 
@@ -71,6 +73,32 @@ public class MenuBuilder {
   public MenuBuilder withRows(final int rows) {
 
     this.rows = rows;
+    return this;
+  }
+
+  /**
+   * Sets if the player can still utilize the bottom inventory.
+   *
+   * @param bottom True if the player can use the bottom inventory, their inventory, when in the menu.
+   *
+   * @return This {@link MenuBuilder} instance for method chaining.
+   */
+  public MenuBuilder withBottom(final boolean bottom) {
+
+    this.bottom = bottom;
+    return this;
+  }
+
+  /**
+   * Sets if the player can still utilize the non icon slots in the menu.
+   *
+   * @param nonIcon True if the player can click slots in the menu that don't have an icon.
+   *
+   * @return This {@link MenuBuilder} instance for method chaining.
+   */
+  public MenuBuilder withNonIcon(final boolean nonIcon) {
+
+    this.nonIcon = nonIcon;
     return this;
   }
 
@@ -128,6 +156,7 @@ public class MenuBuilder {
     menu.setName(name);
     menu.setTitle(title);
     menu.setRows(rows);
+    menu.setBottom(bottom);
     menu.setOpen(open);
     menu.setClose(close);
 
