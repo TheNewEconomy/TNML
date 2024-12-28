@@ -29,7 +29,7 @@ Core Dependency:
 <dependency>
     <groupId>net.tnemc</groupId>
     <artifactId>TNML-CORE</artifactId>
-    <version>1.6.0.0-SNAPSHOT-2</version>
+    <version>1.6.0.0-SNAPSHOT-3</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -39,7 +39,7 @@ Bukkit Dependency:
 <dependency>
     <groupId>net.tnemc</groupId>
     <artifactId>TNML-Bukkit</artifactId>
-    <version>1.6.0.0-SNAPSHOT-2</version>
+    <version>1.6.0.0-SNAPSHOT-3</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +49,7 @@ Folia Dependency:
 <dependency>
     <groupId>net.tnemc</groupId>
     <artifactId>TNML-Folia</artifactId>
-    <version>1.6.0.0-SNAPSHOT-2</version>
+    <version>1.6.0.0-SNAPSHOT-3</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ Sponge API Version 7 Dependency:
 <dependency>
     <groupId>net.tnemc</groupId>
     <artifactId>TNML-Sponge-API-7</artifactId>
-    <version>1.6.0.0-SNAPSHOT-2</version>
+    <version>1.6.0.0-SNAPSHOT-3</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -73,7 +73,7 @@ Sponge API Version 8+ Dependency:
 <dependency>
     <groupId>net.tnemc</groupId>
     <artifactId>TNML-Sponge-API-8</artifactId>
-    <version>1.6.0.0-SNAPSHOT-2</version>
+    <version>1.6.0.0-SNAPSHOT-3</version>
     <scope>compile</scope>
 </dependency>
 ```
