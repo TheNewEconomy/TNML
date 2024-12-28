@@ -157,6 +157,7 @@ public class MenuBuilder {
     menu.setTitle(title);
     menu.setRows(rows);
     menu.setBottom(bottom);
+    menu.setNonIcon(nonIcon);
     menu.setOpen(open);
     menu.setClose(close);
 
