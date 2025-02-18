@@ -198,6 +198,11 @@ public class PlayerInstancePage extends Page {
     return icons;
   }
 
+  public boolean hasInstance(final UUID player) {
+
+    return players.containsKey(player);
+  }
+
   /**
    * Removes an instance of PlayerInstance identified by UUID from the players map.
    *

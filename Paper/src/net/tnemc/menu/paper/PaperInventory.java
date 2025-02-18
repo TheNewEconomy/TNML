@@ -23,6 +23,7 @@ package net.tnemc.menu.paper;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.Page;
+import net.tnemc.menu.core.PlayerInstancePage;
 import net.tnemc.menu.core.callbacks.page.PageOpenCallback;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
@@ -76,6 +77,16 @@ public class PaperInventory implements PlayerInventory<Inventory> {
       final Page pageObj = menu.pages.get(page);
       if(pageObj.getOpen() != null) {
         pageObj.getOpen().accept(new PageOpenCallback(pageObj, player));
+      }
+
+      if(pageObj instanceof final PlayerInstancePage playerPage && playerPage.hasInstance(player.identifier())) {
+
+        for(final Map.Entry<Integer, Icon> entry : playerPage.getIcons(player.identifier()).entrySet()) {
+
+          inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+        }
+
+        return inventory;
       }
 
       for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
