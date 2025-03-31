@@ -50,6 +50,7 @@ public class IconBuilder {
   private final AbstractItemStack<?> item;
   private Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
   private int slot;
+  private boolean pdcApplication = true;
   private Consumer<MenuClickHandler> click;
   private final List<IconAction> actions = new LinkedList<>();
 
@@ -106,6 +107,19 @@ public class IconBuilder {
   public IconBuilder withSlot(final SlotPos slotPos) {
 
     this.slot = slotPos.slot();
+    return this;
+  }
+
+  /**
+   * Sets whether the PDC application is enabled for this icon builder.
+   *
+   * This enables better protection against exploits.
+   *
+   * @param pdcApplication The boolean value indicating whether the PDC application is enabled.
+   * @return This {@code IconBuilder} instance for method chaining.
+   */
+  public IconBuilder withPdcApplication(final boolean pdcApplication) {
+    this.pdcApplication = pdcApplication;
     return this;
   }
 
@@ -214,12 +228,13 @@ public class IconBuilder {
                       new StateIcon(item, itemProvider, stateID, defaultState, stateHandler) :
                       new Icon(item, itemProvider);
 
-    if(icon instanceof StateIcon stateIcon) {
+    if(icon instanceof final StateIcon stateIcon) {
       stateIcon.getStates().putAll(states);
     }
 
     icon.constraints().putAll(constraints);
     icon.setSlot(slot);
+    icon.pdcApplicaton(pdcApplication);
     icon.setClick(click);
     actions.forEach(icon::addAction);
     return icon;

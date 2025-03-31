@@ -52,6 +52,8 @@ public class Icon implements ConstraintHolder {
 
   protected int slot;
 
+  protected boolean pdcApplicaton = true;
+
   protected final Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
   protected Consumer<MenuClickHandler> click;
 
@@ -124,6 +126,16 @@ public class Icon implements ConstraintHolder {
   public void setSlot(final SlotPos slotPos) {
 
     this.slot = slotPos.slot();
+  }
+
+  public boolean pdcApplicaton() {
+
+    return pdcApplicaton;
+  }
+
+  public void pdcApplicaton(final boolean pdcApplicaton) {
+
+    this.pdcApplicaton = pdcApplicaton;
   }
 
   @Override

@@ -43,6 +43,8 @@ public class MenuManager {
    */
   private final Map<String, Menu> menus = new HashMap<>();
 
+  private final Map<UUID, Long> recentlyClosed = new ConcurrentHashMap<>();
+
   /**
    * Represents a collection of MenuViewers associated with unique UUIDs.
    */
@@ -161,7 +163,13 @@ public class MenuManager {
    */
   public void removeViewer(final UUID identifier) {
 
+    recentlyClosed.put(identifier, System.currentTimeMillis());
     viewers.remove(identifier);
+  }
+
+  public Map<UUID, Long> recentlyClosed() {
+
+    return recentlyClosed;
   }
 
   /**

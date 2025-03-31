@@ -6,3 +6,7 @@ website: 'https://github.com/TheNewEconomy/TNML'
 
 main: 'net.tnemc.menu.example.bukkit.BukkitTNML'
 api-version: '1.13'
+commands:
+  shop:
+    description: Opens the shop.
+    usage: /shop

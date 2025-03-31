@@ -81,13 +81,13 @@ public class Menu {
 
   public void onClose(final MenuPlayer player) {
 
+    player.inventory().close();
+
     if(close != null) {
 
       final int page = (player.viewer().isPresent())? player.viewer().get().page() : 1;
       close.accept(new MenuCloseCallback(this, pages.get(page), player));
     }
-
-    player.inventory().close();
   }
 
   public int maxSlot() {

@@ -29,9 +29,12 @@ import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.compatibility.PlayerInventory;
 import net.tnemc.menu.core.icon.Icon;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
@@ -83,7 +86,13 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
         for(final Map.Entry<Integer, Icon> entry : playerPage.getIcons(player.identifier()).entrySet()) {
 
-          inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+          final ItemStack stack = (ItemStack)entry.getValue().getItem(player).locale();
+          if(entry.getValue().pdcApplicaton()) {
+
+            setNoGrab(stack, plugin);
+          }
+
+          inventory.setItem(entry.getKey(), stack);
         }
 
         return inventory;
@@ -91,12 +100,33 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
       for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
-        inventory.setItem(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+        final ItemStack stack = (ItemStack)entry.getValue().getItem(player).locale();
+        if(entry.getValue().pdcApplicaton()) {
+
+          setNoGrab(stack, plugin);
+        }
+
+        inventory.setItem(entry.getKey(), stack);
       }
 
     }
 
     return inventory;
+  }
+
+  protected void setNoGrab(final ItemStack item, final JavaPlugin plugin) {
+    if (item == null || !item.hasItemMeta()) {
+      return;
+    }
+
+    final ItemMeta meta = item.getItemMeta();
+    if (meta == null) {
+      return;
+    }
+
+    final NamespacedKey key = new NamespacedKey(plugin, "no-grab");
+    meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "no-grab");
+    item.setItemMeta(meta);
   }
 
   /**
@@ -126,7 +156,12 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
-      Bukkit.getScheduler().runTask(plugin, ()->player.getPlayer().getOpenInventory().setItem(slot, (ItemStack)item.locale()));
+      Bukkit.getScheduler().runTask(plugin, ()->{
+
+        final ItemStack stack = (ItemStack)item.locale();
+        setNoGrab(stack, plugin);
+        player.getPlayer().getOpenInventory().setItem(slot, stack);
+      });
     }
   }
 

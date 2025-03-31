@@ -45,7 +45,10 @@ public class FoliaInventory extends PaperInventory {
     final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
     if(player.getPlayer() != null) {
       Bukkit.getGlobalRegionScheduler().run(plugin, (scheduledTask)->{
-        player.getPlayer().getOpenInventory().setItem(slot, (ItemStack)item.locale());
+
+        final ItemStack stack = (ItemStack)item.locale();
+        setNoGrab(stack, plugin);
+        player.getPlayer().getOpenInventory().setItem(slot, stack);
       });
     }
   }

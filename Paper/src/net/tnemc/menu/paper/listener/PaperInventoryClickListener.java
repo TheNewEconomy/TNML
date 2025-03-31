@@ -27,15 +27,20 @@ import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.core.utils.SlotPos;
 import net.tnemc.menu.core.viewer.MenuViewer;
 import net.tnemc.menu.paper.PaperPlayer;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class PaperInventoryClickListener implements Listener {
 
@@ -48,6 +53,12 @@ public class PaperInventoryClickListener implements Listener {
 
   @EventHandler(priority = EventPriority.HIGHEST)
   public void onClick(final InventoryClickEvent event) {
+
+    if(isNoGrab(event.getCurrentItem(), plugin)) {
+      event.setCancelled(true);
+    }
+
+    final UUID id = event.getWhoClicked().getUniqueId();
 
     final PaperPlayer player = new PaperPlayer((OfflinePlayer)event.getWhoClicked(), plugin);
 
@@ -66,6 +77,29 @@ public class PaperInventoryClickListener implements Listener {
         }
       }
     }
+
+    if(MenuManager.instance().recentlyClosed().containsKey(id)) {
+
+      final Long time = System.currentTimeMillis();
+      final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
+
+      if(time - closedTime < 6000) {
+
+        event.setCancelled(true);
+      } else {
+        MenuManager.instance().recentlyClosed().remove(id);
+      }
+    }
+  }
+
+  private boolean isNoGrab(final ItemStack item, final JavaPlugin plugin) {
+    if (item == null || !item.hasItemMeta()) return false;
+
+    final ItemMeta meta = item.getItemMeta();
+    if (meta == null) return false;
+
+    final NamespacedKey key = new NamespacedKey(plugin, "no-grab");
+    return meta.getPersistentDataContainer().has(key, PersistentDataType.STRING);
   }
 
   private ActionType convertClick(final ClickType click) {

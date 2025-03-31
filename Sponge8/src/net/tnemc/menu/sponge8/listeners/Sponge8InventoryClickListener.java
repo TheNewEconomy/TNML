@@ -36,6 +36,7 @@ import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.plugin.PluginContainer;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class Sponge8InventoryClickListener {
 
@@ -50,6 +51,8 @@ public class Sponge8InventoryClickListener {
   public void onClick(final ClickContainerEvent event, @First final ServerPlayer player) {
 
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
+
+    final UUID id = player.uniqueId();
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
     final Optional<Slot> slot = event.slot();
@@ -69,6 +72,19 @@ public class Sponge8InventoryClickListener {
             event.setCancelled(true);
           }
         }
+      }
+    }
+
+    if(MenuManager.instance().recentlyClosed().containsKey(id)) {
+
+      final Long time = System.currentTimeMillis();
+      final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
+
+      if(time - closedTime < 3000) {
+
+        event.setCancelled(true);
+      } else {
+        MenuManager.instance().recentlyClosed().remove(id);
       }
     }
   }

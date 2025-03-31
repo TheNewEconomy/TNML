@@ -20,6 +20,9 @@ package net.tnemc.menu.example.bukkit;
 import net.kyori.adventure.text.Component;
 import net.tnemc.menu.bukkit.BukkitMenuHandler;
 import net.tnemc.menu.bukkit.BukkitPlayer;
+import net.tnemc.menu.bukkit.listener.BukkitChatListener;
+import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
+import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.builder.IconBuilder;
@@ -52,8 +55,13 @@ public class BukkitTNML extends JavaPlugin implements Listener {
 
   @Override
   public void onEnable() {
+    getCommand("shop").setExecutor(new ShopCommand(this));
 
     Bukkit.getPluginManager().registerEvents(this, this);
+
+    Bukkit.getPluginManager().registerEvents(new BukkitChatListener(this), this);
+    Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(this), this);
+    Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(this), this);
 
     this.menu = new BukkitMenuHandler(this, true);
 
@@ -165,20 +173,6 @@ public class BukkitTNML extends JavaPlugin implements Listener {
                                     new IconBuilder(menu.stackBuilder().display(Component.text("Example Icon2")).of("GREEN_WOOL", 1))
                                             .withSlot(new SlotPos(2, 6))
                                             .withConstraint(IconStringConstraints.ICON_MESSAGE, "Please type: hello")
-                                            .withActions(new ChatAction(callback->{
-
-                                              if(!callback.getMessage().equalsIgnoreCase("hello")) {
-                                                //Make our user retype since they didn't say hello
-                                                callback.getPlayer().message("Please type: hello");
-                                                return false;
-                                              }
-
-                                              final Optional<MenuViewer> viewer = MenuManager.instance().findViewer(callback.getPlayer().identifier());
-                                              if(viewer.isPresent()) {
-                                                viewer.get().addData("example-data", callback.getMessage());
-                                              }
-                                              return true;
-                                            }))
                                             .build()
                                       ).build()
                       )
