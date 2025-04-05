@@ -29,19 +29,6 @@
         </repository>
     </repositories>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <show>private</show>
-                    <source>17</source>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <dependencies>
         <dependency>
             <groupId>org.spongepowered</groupId>
@@ -99,10 +86,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.11.2</version>
                 <configuration>
                     <show>public</show>
+                    <windowtitle>The New Menu Library</windowtitle>
+                    <verbose>false</verbose>
+                    <author>true</author>
+                    <version>true</version>
+                    <linksource>true</linksource>
+                    <notimestamp>true</notimestamp>
                     <failOnError>false</failOnError>
+                    <failOnWarnings>false</failOnWarnings>
+                    <bottom><![CDATA[<b>TheNewEconomy, 2025</b>]]></bottom>
                 </configuration>
             </plugin>
             <plugin>
