@@ -11,7 +11,8 @@ It's important to note that The New Menu Library relies on The New Item Library 
 
 [Wiki](https://github.com/TheNewEconomy/TNML/wiki/)
 
-[JavaDoc](https://tnemc.net/jd/tnml)
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://theneweconomy.github.io/TNML/javadoc/)
+
 
 ## Maven
 The New Menu Library uses maven for dependency management.
