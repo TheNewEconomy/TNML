@@ -84,7 +84,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
 
         for(final Map.Entry<Integer, Icon> entry : playerPage.getIcons(player.identifier()).entrySet()) {
 
-          inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+          inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem(player).cacheLocale());
         }
 
         return inventory;
@@ -92,7 +92,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
 
       for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
-        inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem(player).locale());
+        inventory.set(entry.getKey(), (ItemStack)entry.getValue().getItem(player).cacheLocale());
       }
     }
     return inventory;
@@ -121,7 +121,7 @@ public class SpongeInventory implements PlayerInventory<Inventory> {
   public void updateInventory(final int slot, final AbstractItemStack<?> item) {
 
     final Optional<ServerPlayer> player = Sponge.server().player(id);
-    player.ifPresent(serverPlayer->serverPlayer.inventory().set(slot, (ItemStack)item.locale()));
+    player.ifPresent(serverPlayer->serverPlayer.inventory().set(slot, (ItemStack)item.cacheLocale()));
   }
 
   /**

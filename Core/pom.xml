@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.6.0.0-SNAPSHOT-15</version>
+        <version>1.7.0.0-SNAPSHOT-2</version>
     </parent>
 
     <artifactId>TNML-CORE</artifactId>
@@ -29,13 +29,7 @@
             <groupId>net.tnemc</groupId>
             <artifactId>TNIL-Core</artifactId>
             <version>${tnil.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>19.0.0</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
