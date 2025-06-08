@@ -19,8 +19,8 @@ package net.tnemc.menu.bukkit;
  */
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.item.bukkit.BukkitHelper;
 import net.tnemc.item.bukkit.BukkitItemStack;
+import net.tnemc.item.bukkit.platform.BukkitHelper;
 import net.tnemc.menu.bukkit.listener.BukkitChatListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;

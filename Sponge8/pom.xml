@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.6.0.0-SNAPSHOT-15</version>
+        <version>1.7.0.0-SNAPSHOT-2</version>
     </parent>
 
     <artifactId>TNML-Sponge-API-8</artifactId>
@@ -42,12 +42,12 @@
             <groupId>net.tnemc</groupId>
             <artifactId>TNIL-Sponge</artifactId>
             <version>${tnil.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.6.0.0-SNAPSHOT-15</version>
+            <version>1.7.0.0-SNAPSHOT-2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -115,5 +115,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -23,8 +23,8 @@ import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.sponge8.listeners.Sponge8ChatListener;
 import net.tnemc.menu.sponge8.listeners.Sponge8InteractInventoryListener;
 import net.tnemc.menu.sponge8.listeners.Sponge8InventoryClickListener;
-import net.tnemc.sponge.SpongeHelper;
 import net.tnemc.sponge.SpongeItemStack;
+import net.tnemc.sponge.platform.SpongeHelper;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.plugin.PluginContainer;
 

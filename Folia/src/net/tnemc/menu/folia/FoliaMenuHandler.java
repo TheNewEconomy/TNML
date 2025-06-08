@@ -19,8 +19,8 @@ package net.tnemc.menu.folia;
  */
 
 import net.tnemc.item.AbstractItemStack;
-import net.tnemc.item.paper.PaperHelper;
 import net.tnemc.item.paper.PaperItemStack;
+import net.tnemc.item.paper.platform.PaperHelper;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.folia.listener.FoliaChatListener;

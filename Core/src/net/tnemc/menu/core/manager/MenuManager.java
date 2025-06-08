@@ -18,7 +18,7 @@ package net.tnemc.menu.core.manager;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import net.tnemc.item.providers.HelperMethods;
+import net.tnemc.item.platform.registry.BaseHelper;
 import net.tnemc.menu.core.Menu;
 import net.tnemc.menu.core.compatibility.MenuPlayer;
 import net.tnemc.menu.core.viewer.MenuViewer;
@@ -55,7 +55,7 @@ public class MenuManager {
    */
   private static final MenuManager instance = new MenuManager();
 
-  private HelperMethods helper;
+  private BaseHelper helper;
 
   //private constructor for MenuManager.
   private MenuManager() {
@@ -177,7 +177,7 @@ public class MenuManager {
    *
    * @return The HelperMethods object associated with this MenuManager.
    */
-  public HelperMethods getHelper() {
+  public BaseHelper getHelper() {
 
     return helper;
   }
@@ -187,7 +187,7 @@ public class MenuManager {
    *
    * @param helper The HelperMethods object to be set.
    */
-  public void setHelper(final HelperMethods helper) {
+  public void setHelper(final BaseHelper helper) {
 
     this.helper = helper;
   }

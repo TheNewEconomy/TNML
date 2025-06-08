@@ -86,7 +86,7 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
         for(final Map.Entry<Integer, Icon> entry : playerPage.getIcons(player.identifier()).entrySet()) {
 
-          final ItemStack stack = (ItemStack)entry.getValue().getItem(player).locale();
+          final ItemStack stack = (ItemStack)entry.getValue().getItem(player).cacheLocale();
           if(entry.getValue().pdcApplicaton()) {
 
             setNoGrab(stack, plugin);
@@ -100,7 +100,7 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
       for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
-        final ItemStack stack = (ItemStack)entry.getValue().getItem(player).locale();
+        final ItemStack stack = (ItemStack)entry.getValue().getItem(player).cacheLocale();
         if(entry.getValue().pdcApplicaton()) {
 
           setNoGrab(stack, plugin);
@@ -158,7 +158,7 @@ public class PaperInventory implements PlayerInventory<Inventory> {
     if(player.getPlayer() != null) {
       Bukkit.getScheduler().runTask(plugin, ()->{
 
-        final ItemStack stack = (ItemStack)item.locale();
+        final ItemStack stack = (ItemStack)item.cacheLocale();
         setNoGrab(stack, plugin);
         player.getPlayer().getOpenInventory().setItem(slot, stack);
       });
