@@ -86,7 +86,9 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
         for(final Map.Entry<Integer, Icon> entry : playerPage.getIcons(player.identifier()).entrySet()) {
 
-          final ItemStack stack = (ItemStack)entry.getValue().getItem(player).cacheLocale();
+          final AbstractItemStack<ItemStack> abstractItemStack = (AbstractItemStack<ItemStack>)entry.getValue().getItem(player);
+
+          final ItemStack stack = abstractItemStack.provider().locale(abstractItemStack);
           if(entry.getValue().pdcApplicaton()) {
 
             setNoGrab(stack, plugin);
@@ -100,7 +102,9 @@ public class PaperInventory implements PlayerInventory<Inventory> {
 
       for(final Map.Entry<Integer, Icon> entry : menu.pages.get(page).getIcons().entrySet()) {
 
-        final ItemStack stack = (ItemStack)entry.getValue().getItem(player).cacheLocale();
+        final AbstractItemStack<ItemStack> abstractItemStack = (AbstractItemStack<ItemStack>)entry.getValue().getItem(player);
+
+        final ItemStack stack = abstractItemStack.provider().locale(abstractItemStack);
         if(entry.getValue().pdcApplicaton()) {
 
           setNoGrab(stack, plugin);

@@ -82,7 +82,6 @@ public class FoliaInventoryClickListener implements Listener {
 
       final Long time = System.currentTimeMillis();
       final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
-      System.out.println("Closetime: " + (time - closedTime));
 
       if(time - closedTime < 6000) {
 

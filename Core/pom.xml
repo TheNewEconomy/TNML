@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.7.0.0-SNAPSHOT-4</version>
+        <version>1.7.0.0-SNAPSHOT-5</version>
     </parent>
 
     <artifactId>TNML-CORE</artifactId>
@@ -21,6 +21,10 @@
         <repository>
             <id>codemc-releases</id>
             <url>https://repo.codemc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>codemc-creatorfromhell</id>
+            <url>https://repo.codemc.io/repository/creatorfromhell/</url>
         </repository>
     </repositories>
 
