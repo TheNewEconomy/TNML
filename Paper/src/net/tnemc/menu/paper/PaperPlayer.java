@@ -29,8 +29,8 @@ import java.util.UUID;
 
 public class PaperPlayer implements MenuPlayer {
 
-  protected OfflinePlayer player;
   protected final JavaPlugin plugin;
+  protected OfflinePlayer player;
 
   public PaperPlayer(final OfflinePlayer player, final JavaPlugin plugin) {
 

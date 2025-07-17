@@ -93,10 +93,11 @@ public class BukkitInventoryClickListener implements Listener {
   }
 
   private boolean isNoGrab(final ItemStack item, final JavaPlugin plugin) {
-    if (item == null || !item.hasItemMeta()) return false;
+
+    if(item == null || !item.hasItemMeta()) return false;
 
     final ItemMeta meta = item.getItemMeta();
-    if (meta == null) return false;
+    if(meta == null) return false;
 
     final NamespacedKey key = new NamespacedKey(plugin, "no-grab");
     return meta.getPersistentDataContainer().has(key, PersistentDataType.STRING);

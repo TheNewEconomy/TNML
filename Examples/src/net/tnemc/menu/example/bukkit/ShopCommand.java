@@ -42,12 +42,13 @@ public class ShopCommand implements CommandExecutor {
 
   @Override
   public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-    if (!(sender instanceof Player)) {
+
+    if(!(sender instanceof Player)) {
       sender.sendMessage("Only players can use this command.");
       return true;
     }
 
-    final Player player = (Player) sender;
+    final Player player = (Player)sender;
 
     final MenuViewer viewer = new MenuViewer(player.getUniqueId());
     viewer.setMenu("example");

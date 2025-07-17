@@ -40,8 +40,8 @@ public class MenuBuilder {
   private final String name;
   private String title;
   private int rows;
-  private  boolean nonIcon = false;
-  private  boolean bottom = false;
+  private boolean nonIcon = false;
+  private boolean bottom = false;
   private Consumer<MenuOpenCallback> open;
   private Consumer<MenuCloseCallback> close;
 
@@ -79,7 +79,8 @@ public class MenuBuilder {
   /**
    * Sets if the player can still utilize the bottom inventory.
    *
-   * @param bottom True if the player can use the bottom inventory, their inventory, when in the menu.
+   * @param bottom True if the player can use the bottom inventory, their inventory, when in the
+   *               menu.
    *
    * @return This {@link MenuBuilder} instance for method chaining.
    */

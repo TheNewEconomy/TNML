@@ -36,30 +36,35 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MenuManager {
 
   public static final int ROW_SIZE = 9;
-
+  /**
+   * Singleton instance of the MenuManager.
+   */
+  private static final MenuManager instance = new MenuManager();
   /**
    * The collection to store menus, where the key is the menu name and the value is the menu
    * itself.
    */
   private final Map<String, Menu> menus = new HashMap<>();
-
   private final Map<UUID, Long> recentlyClosed = new ConcurrentHashMap<>();
-
   /**
    * Represents a collection of MenuViewers associated with unique UUIDs.
    */
   private final Map<UUID, MenuViewer> viewers = new ConcurrentHashMap<>();
-
-  /**
-   * Singleton instance of the MenuManager.
-   */
-  private static final MenuManager instance = new MenuManager();
-
   private BaseHelper helper;
 
   //private constructor for MenuManager.
   private MenuManager() {
 
+  }
+
+  /**
+   * Returns the singleton instance of the MenuManager.
+   *
+   * @return The singleton instance of the MenuManager.
+   */
+  public static MenuManager instance() {
+
+    return instance;
   }
 
   public void open(final String menu, final int page, final MenuPlayer player) {
@@ -190,15 +195,5 @@ public class MenuManager {
   public void setHelper(final BaseHelper helper) {
 
     this.helper = helper;
-  }
-
-  /**
-   * Returns the singleton instance of the MenuManager.
-   *
-   * @return The singleton instance of the MenuManager.
-   */
-  public static MenuManager instance() {
-
-    return instance;
   }
 }

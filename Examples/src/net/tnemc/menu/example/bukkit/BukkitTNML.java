@@ -54,6 +54,7 @@ public class BukkitTNML extends JavaPlugin implements Listener {
 
   @Override
   public void onEnable() {
+
     getCommand("shop").setExecutor(new ShopCommand(this));
 
     Bukkit.getPluginManager().registerEvents(this, this);

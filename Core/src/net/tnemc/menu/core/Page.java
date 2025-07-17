@@ -40,10 +40,8 @@ import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
  */
 public class Page {
 
-  private final int pageNumber;
-
   protected final Map<Integer, Icon> icons = new HashMap<>();
-
+  private final int pageNumber;
   protected Function<MenuClickHandler, Boolean> clickHandler;
 
   protected Consumer<PageOpenCallback> open;

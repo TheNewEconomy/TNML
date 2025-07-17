@@ -49,12 +49,9 @@ public class Icon implements ConstraintHolder {
   protected final Map<String, String> constraints = new HashMap<>();
 
   protected final AbstractItemStack<?> item;
-
-  protected int slot;
-
-  protected boolean pdcApplicaton = true;
-
   protected final Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
+  protected int slot;
+  protected boolean pdcApplicaton = true;
   protected Consumer<MenuClickHandler> click;
 
   public Icon(@NotNull final AbstractItemStack<?> item, @Nullable final Function<MenuPlayer, AbstractItemStack<?>> itemProvider) {

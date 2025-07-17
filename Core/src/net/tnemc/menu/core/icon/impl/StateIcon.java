@@ -41,16 +41,13 @@ import java.util.function.Function;
  */
 public class StateIcon extends Icon {
 
-  private final Map<String, AbstractItemStack<?>> states = new HashMap<>();
-
-  private final String stateID;
-
-  private final String defaultState;
-
   /**
    * The function responsible for determining the state of the icon based on its current state.
    */
   protected final Function<String, String> stateHandler;
+  private final Map<String, AbstractItemStack<?>> states = new HashMap<>();
+  private final String stateID;
+  private final String defaultState;
 
   public StateIcon(@NotNull final AbstractItemStack<?> item, @Nullable final Function<MenuPlayer,
           AbstractItemStack<?>> itemProvider, final String stateID, final String defaultState,

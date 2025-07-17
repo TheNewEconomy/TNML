@@ -42,11 +42,9 @@ import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
 public class PlayerPageBuilder {
 
   private final Map<UUID, Map<Integer, Icon>> playerIcons = new HashMap<>();
-  private Function<MenuClickHandler, Boolean> clickHandler;
-
-  protected Consumer<PageOpenCallback> open;
-
   private final int pageNumber;
+  protected Consumer<PageOpenCallback> open;
+  private Function<MenuClickHandler, Boolean> clickHandler;
 
   public PlayerPageBuilder(final int pageNumber) {
 

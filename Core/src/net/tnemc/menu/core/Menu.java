@@ -38,13 +38,11 @@ import static net.tnemc.menu.core.manager.MenuManager.ROW_SIZE;
 public class Menu {
 
   public final Map<Integer, Page> pages = new HashMap<>();
-
+  public boolean nonIcon = false;
   protected String name;
   protected String title;
   protected int rows;
   protected boolean bottom = false;
-  public boolean nonIcon = false;
-
   protected Consumer<MenuOpenCallback> open;
   protected Consumer<MenuCloseCallback> close;
 
@@ -91,6 +89,7 @@ public class Menu {
   }
 
   public int maxSlot() {
+
     return rows * ROW_SIZE;
   }
 

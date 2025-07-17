@@ -119,12 +119,13 @@ public class PaperInventory implements PlayerInventory<Inventory> {
   }
 
   protected void setNoGrab(final ItemStack item, final JavaPlugin plugin) {
-    if (item == null || !item.hasItemMeta()) {
+
+    if(item == null || !item.hasItemMeta()) {
       return;
     }
 
     final ItemMeta meta = item.getItemMeta();
-    if (meta == null) {
+    if(meta == null) {
       return;
     }
 

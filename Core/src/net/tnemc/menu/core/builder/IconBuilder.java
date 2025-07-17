@@ -47,15 +47,14 @@ import java.util.function.Function;
  */
 public class IconBuilder {
 
+  protected final Map<String, String> constraints = new HashMap<>();
   private final AbstractItemStack<?> item;
+  private final List<IconAction> actions = new LinkedList<>();
+  private final Map<String, AbstractItemStack<?>> states = new HashMap<>();
   private Function<MenuPlayer, AbstractItemStack<?>> itemProvider;
   private int slot;
   private boolean pdcApplication = true;
   private Consumer<MenuClickHandler> click;
-  private final List<IconAction> actions = new LinkedList<>();
-
-  protected final Map<String, String> constraints = new HashMap<>();
-  private final Map<String, AbstractItemStack<?>> states = new HashMap<>();
   private String stateID;
   private String defaultState;
   private Function<String, String> stateHandler;
@@ -116,9 +115,11 @@ public class IconBuilder {
    * This enables better protection against exploits.
    *
    * @param pdcApplication The boolean value indicating whether the PDC application is enabled.
+   *
    * @return This {@code IconBuilder} instance for method chaining.
    */
   public IconBuilder withPdcApplication(final boolean pdcApplication) {
+
     this.pdcApplication = pdcApplication;
     return this;
   }
