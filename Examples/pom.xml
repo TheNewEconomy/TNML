@@ -6,7 +6,7 @@
     <parent>
         <groupId>net.tnemc</groupId>
         <artifactId>TNML</artifactId>
-        <version>1.7.0.0-SNAPSHOT-7</version>
+        <version>1.7.0.1-SNAPSHOT-1</version>
     </parent>
 
     <artifactId>TNML-Example</artifactId>
@@ -50,13 +50,13 @@
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-CORE</artifactId>
-            <version>1.7.0.0-SNAPSHOT-7</version>
+            <version>1.7.0.1-SNAPSHOT-1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.tnemc</groupId>
             <artifactId>TNML-Bukkit</artifactId>
-            <version>1.7.0.0-SNAPSHOT-7</version>
+            <version>1.7.0.1-SNAPSHOT-1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
