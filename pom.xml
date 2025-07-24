@@ -26,7 +26,7 @@
         <maven.source.version>3.2.0</maven.source.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <tnil.version>0.1.2.1-SNAPSHOT-2</tnil.version>
+        <tnil.version>0.1.2.1-SNAPSHOT-5</tnil.version>
         <depend.adventure>4.19.0</depend.adventure>
     </properties>
 
