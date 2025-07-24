@@ -168,7 +168,7 @@ public class MenuManager {
    */
   public void removeViewer(final UUID identifier) {
 
-    recentlyClosed.put(identifier, System.currentTimeMillis());
+    //recentlyClosed.put(identifier, System.currentTimeMillis());
     viewers.remove(identifier);
   }
 

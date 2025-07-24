@@ -75,7 +75,7 @@ public class Sponge8InventoryClickListener {
       }
     }
 
-    if(MenuManager.instance().recentlyClosed().containsKey(id)) {
+    /*if(MenuManager.instance().recentlyClosed().containsKey(id)) {
 
       final Long time = System.currentTimeMillis();
       final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
@@ -86,7 +86,7 @@ public class Sponge8InventoryClickListener {
       } else {
         MenuManager.instance().recentlyClosed().remove(id);
       }
-    }
+    }*/
   }
 
   private ActionType convertClick(final ClickContainerEvent event) {

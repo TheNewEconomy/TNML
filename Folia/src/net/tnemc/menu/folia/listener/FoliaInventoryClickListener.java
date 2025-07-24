@@ -78,7 +78,7 @@ public class FoliaInventoryClickListener implements Listener {
       }
     }
 
-    if(MenuManager.instance().recentlyClosed().containsKey(id)) {
+    /*if(MenuManager.instance().recentlyClosed().containsKey(id)) {
 
       final Long time = System.currentTimeMillis();
       final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
@@ -89,7 +89,7 @@ public class FoliaInventoryClickListener implements Listener {
       } else {
         MenuManager.instance().recentlyClosed().remove(id);
       }
-    }
+    }*/
   }
 
   private boolean isNoGrab(final ItemStack item, final JavaPlugin plugin) {
