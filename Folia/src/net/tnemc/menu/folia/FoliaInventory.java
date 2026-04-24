@@ -3,7 +3,7 @@ package net.tnemc.menu.folia;
 import net.tnemc.item.AbstractItemStack;
 import net.tnemc.menu.paper.PaperInventory;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,11 +25,11 @@ public class FoliaInventory extends PaperInventory {
   @Override
   public void openInventory(final Inventory inventory) {
 
-    final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
-    if(player.getPlayer() != null) {
-      Bukkit.getGlobalRegionScheduler().run(plugin, (scheduledTask)->{
-        player.getPlayer().openInventory(inventory);
-      });
+    final Player player = Bukkit.getPlayer(player());
+    if(player != null) {
+      player.getScheduler().run(plugin, task->{
+        player.openInventory(inventory);
+      }, null);
     }
   }
 
@@ -42,14 +42,13 @@ public class FoliaInventory extends PaperInventory {
   @Override
   public void updateInventory(final int slot, final AbstractItemStack<?> item) {
 
-    final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
-    if(player.getPlayer() != null) {
-      Bukkit.getGlobalRegionScheduler().run(plugin, (scheduledTask)->{
-
+    final Player player = Bukkit.getPlayer(player());
+    if(player != null) {
+      player.getScheduler().run(plugin, task->{
         final ItemStack stack = (ItemStack)item.cacheLocale();
         setNoGrab(stack, plugin);
-        player.getPlayer().getOpenInventory().setItem(slot, stack);
-      });
+        player.getOpenInventory().setItem(slot, stack);
+      }, null);
     }
   }
 
@@ -59,11 +58,11 @@ public class FoliaInventory extends PaperInventory {
   @Override
   public void close() {
 
-    final OfflinePlayer player = Bukkit.getOfflinePlayer(player());
-    if(player.getPlayer() != null) {
-      Bukkit.getGlobalRegionScheduler().run(plugin, (scheduledTask)->{
-        player.getPlayer().closeInventory();
-      });
+    final Player player = Bukkit.getPlayer(player());
+    if(player != null) {
+      player.getScheduler().run(plugin, task->{
+        player.closeInventory();
+      }, null);
     }
   }
 }
