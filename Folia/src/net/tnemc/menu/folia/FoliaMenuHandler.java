@@ -26,6 +26,7 @@ import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.folia.listener.FoliaChatListener;
 import net.tnemc.menu.folia.listener.FoliaInventoryClickListener;
 import net.tnemc.menu.folia.listener.FoliaInventoryCloseListener;
+import net.tnemc.menu.folia.listener.FoliaInventoryDragListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -54,6 +55,7 @@ public class FoliaMenuHandler implements MenuHandler {
     Bukkit.getPluginManager().registerEvents(new FoliaChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new FoliaInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new FoliaInventoryCloseListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new FoliaInventoryDragListener(plugin), plugin);
   }
 
   @Override

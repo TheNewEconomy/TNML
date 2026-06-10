@@ -21,6 +21,7 @@ package net.tnemc.menu.sponge7.listeners;
  */
 
 import net.tnemc.menu.core.Menu;
+import net.tnemc.menu.core.Page;
 import net.tnemc.menu.core.handlers.MenuClickHandler;
 import net.tnemc.menu.core.icon.action.ActionType;
 import net.tnemc.menu.core.manager.MenuManager;
@@ -33,6 +34,7 @@ import org.spongepowered.api.event.filter.cause.First;
 import org.spongepowered.api.event.item.inventory.ClickInventoryEvent;
 import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.api.item.inventory.property.SlotIndex;
+import org.spongepowered.api.item.inventory.transaction.SlotTransaction;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.util.Optional;
@@ -54,6 +56,33 @@ public class Sponge7InventoryClickListener {
     final UUID id = player.getUniqueId();
 
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
+
+    if(event instanceof ClickInventoryEvent.Drag) {
+
+      if(data.isPresent()) {
+
+        final Optional<Menu> menu = MenuManager.instance().findMenu(data.get().menu());
+        if(menu.isPresent()) {
+
+          final Page page = menu.get().getPages().get(data.get().page());
+          if(page != null && page.isLockEmptySlots()) {
+
+            for(final SlotTransaction transaction : event.getTransactions()) {
+
+              final Optional<SlotIndex> property = transaction.getSlot().getInventoryProperty(SlotIndex.class);
+              if(property.isPresent() && property.get().getValue() < menu.get().maxSlot()) {
+
+                event.setCancelled(true);
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      return;
+    }
+
     final Optional<Slot> slot = event.getSlot();
     if(data.isPresent()) {
 
