@@ -26,6 +26,7 @@ import net.tnemc.menu.core.manager.MenuManager;
 import net.tnemc.menu.paper.listener.PaperChatListener;
 import net.tnemc.menu.paper.listener.PaperInventoryClickListener;
 import net.tnemc.menu.paper.listener.PaperInventoryCloseListener;
+import net.tnemc.menu.paper.listener.PaperInventoryDragListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -54,6 +55,7 @@ public class PaperMenuHandler implements MenuHandler {
     Bukkit.getPluginManager().registerEvents(new PaperChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new PaperInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new PaperInventoryCloseListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new PaperInventoryDragListener(plugin), plugin);
   }
 
   @Override

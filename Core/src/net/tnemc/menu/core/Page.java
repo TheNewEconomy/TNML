@@ -43,6 +43,7 @@ public class Page {
   protected final Map<Integer, Icon> icons = new HashMap<>();
   private final int pageNumber;
   protected Function<MenuClickHandler, Boolean> clickHandler;
+  protected boolean lockEmptySlots = false;
 
   protected Consumer<PageOpenCallback> open;
 
@@ -167,7 +168,7 @@ public class Page {
       return clickHandler.apply(handler);
     }
 
-    return icons.containsKey(handler.slot().slot());
+    return lockEmptySlots || icons.containsKey(handler.slot().slot());
   }
 
   public void addIcon(final Icon icon) {
@@ -198,5 +199,15 @@ public class Page {
   public void setClickHandler(final Function<MenuClickHandler, Boolean> clickHandler) {
 
     this.clickHandler = clickHandler;
+  }
+
+  public boolean isLockEmptySlots() {
+
+    return lockEmptySlots;
+  }
+
+  public void setLockEmptySlots(final boolean lockEmptySlots) {
+
+    this.lockEmptySlots = lockEmptySlots;
   }
 }

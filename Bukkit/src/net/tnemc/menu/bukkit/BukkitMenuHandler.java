@@ -24,6 +24,7 @@ import net.tnemc.item.bukkit.platform.BukkitHelper;
 import net.tnemc.menu.bukkit.listener.BukkitChatListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryClickListener;
 import net.tnemc.menu.bukkit.listener.BukkitInventoryCloseListener;
+import net.tnemc.menu.bukkit.listener.BukkitInventoryDragListener;
 import net.tnemc.menu.core.MenuHandler;
 import net.tnemc.menu.core.manager.MenuManager;
 import org.bukkit.Bukkit;
@@ -54,6 +55,7 @@ public class BukkitMenuHandler implements MenuHandler {
     Bukkit.getPluginManager().registerEvents(new BukkitChatListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new BukkitInventoryClickListener(plugin), plugin);
     Bukkit.getPluginManager().registerEvents(new BukkitInventoryCloseListener(plugin), plugin);
+    Bukkit.getPluginManager().registerEvents(new BukkitInventoryDragListener(plugin), plugin);
   }
 
   @Override
