@@ -76,8 +76,7 @@ public class MenuViewer {
     }
 
     // Update variables if they are different in the otherMenuViewer
-
-    if(!menu.equals(viewer.menu)) {
+    if(this.menu == null || !menu.equals(viewer.menu)) {
       menu = viewer.menu;
     }
 
@@ -113,7 +112,7 @@ public class MenuViewer {
 
         for(final Page page : menuObj.get().pages.values()) {
 
-          if(page instanceof PlayerInstancePage playerPage) {
+          if(page instanceof final PlayerInstancePage playerPage) {
             playerPage.removeInstance(uuid);
           }
         }
