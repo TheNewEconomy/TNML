@@ -54,8 +54,6 @@ public class Sponge8InventoryClickListener {
 
     final SpongePlayer sPlayer = new SpongePlayer(player.user(), container);
 
-    final UUID id = player.uniqueId();
-
     final Optional<MenuViewer> data = MenuManager.instance().findViewer(sPlayer.identifier());
 
     if(event instanceof ClickContainerEvent.Drag) {
@@ -103,19 +101,6 @@ public class Sponge8InventoryClickListener {
         }
       }
     }
-
-    /*if(MenuManager.instance().recentlyClosed().containsKey(id)) {
-
-      final Long time = System.currentTimeMillis();
-      final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
-
-      if(time - closedTime < 3000) {
-
-        event.setCancelled(true);
-      } else {
-        MenuManager.instance().recentlyClosed().remove(id);
-      }
-    }*/
   }
 
   private ActionType convertClick(final ClickContainerEvent event) {

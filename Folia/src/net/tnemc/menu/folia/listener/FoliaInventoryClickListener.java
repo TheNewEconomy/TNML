@@ -34,6 +34,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -52,13 +53,19 @@ public class FoliaInventoryClickListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
+  public void onSwap(final PlayerSwapHandItemsEvent event) {
+
+    if(isNoGrab(event.getMainHandItem(), plugin)) {
+      event.setCancelled(true);
+    }
+  }
+
+  @EventHandler(priority = EventPriority.HIGHEST)
   public void onClick(final InventoryClickEvent event) {
 
     if(isNoGrab(event.getCurrentItem(), plugin)) {
       event.setCancelled(true);
     }
-
-    final UUID id = event.getWhoClicked().getUniqueId();
 
     final FoliaPlayer player = new FoliaPlayer((OfflinePlayer)event.getWhoClicked(), plugin);
 
@@ -77,19 +84,6 @@ public class FoliaInventoryClickListener implements Listener {
         }
       }
     }
-
-    /*if(MenuManager.instance().recentlyClosed().containsKey(id)) {
-
-      final Long time = System.currentTimeMillis();
-      final Long closedTime = MenuManager.instance().recentlyClosed().get(id);
-
-      if(time - closedTime < 6000) {
-
-        event.setCancelled(true);
-      } else {
-        MenuManager.instance().recentlyClosed().remove(id);
-      }
-    }*/
   }
 
   private boolean isNoGrab(final ItemStack item, final JavaPlugin plugin) {
